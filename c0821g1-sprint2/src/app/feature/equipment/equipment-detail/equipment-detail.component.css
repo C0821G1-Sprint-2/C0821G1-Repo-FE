@@ -1,0 +1,119 @@
+*, *:before ,*:after{
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+  font-family: "Roboto", sans-serif;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%
+}
+
+#custCarousel .carousel-indicators {
+  position: static;
+  margin-top: 20px
+}
+
+#custCarousel .carousel-indicators>li {
+  width: 100px
+}
+
+#custCarousel .carousel-indicators li img {
+  display: block;
+  opacity: 0.5
+}
+
+#custCarousel .carousel-indicators li.active img {
+  opacity: 1
+}
+
+#custCarousel .carousel-indicators li:hover img {
+  opacity: 0.75
+}
+
+.carousel-item img {
+  width: 100%
+}
+.container .row .col-4 .mid-title {
+  font-size: 25px;
+  line-height: 154.69%;
+  font-weight: 700;
+  color: #369f55;
+  text-transform: uppercase;
+}
+.container .row .col-4 .relative .bi{
+  border-radius: 50%;
+}
+.container .row .col-4 .relative .bi:hover{
+  color: #0a53be;
+}
+.container .row .col-8 .btn{
+  font-size: 20px;
+  line-height: 18px;
+  color: #fff;
+  background: #17a854;
+  padding: 15px 68px;
+  font-weight: bold;
+}
+.container .row .col-4 .mid-content ul li::marker {
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  text-indent: 0px !important;
+  text-align: start !important;
+  text-align-last: start !important;
+}
+.social-icons {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: .85em;
+  color: #999;
+}
+.relative {
+  position: relative!important;
+}
+.container .row .col-8 .single-product {
+  border: 1px solid #0001;
+  padding: 20px 40px;
+  font-size: 18px;
+  line-height: 200.1%;
+  color: #000;
+}
+p{
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  text-align: justify;
+}
+strong {
+  font-weight: 700;
+}
+.container .row .col-8 .btn-top {
+  border: 1px solid #0001;
+  border-bottom: 0;
+}
+.container .row .col-4 .right ul{
+  list-style: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+.container .row .col-4 .right ul li{
+  list-style: none;
+  padding: 10px 0 5px 75px;
+  min-height: 80px;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1.33;
+  text-align: left;
+  margin: 0;
+  display: list-item;
+}
