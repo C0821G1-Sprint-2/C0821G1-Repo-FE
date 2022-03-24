@@ -8,7 +8,6 @@ import {EquipmentService} from '../../../service/equipment.service';
   styleUrls: ['./equipment-detail.component.css']
 })
 export class EquipmentDetailComponent implements OnInit {
-
   equipment: Equipment;
   id: number;
 

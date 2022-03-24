@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto+Condensed:wght@300&display=swap');
+:root {
+  --blue: #2980b9;
+  --red: tomato;
+  --orange: orange;
+  --black: #333;
+  --white: #fff;
+  --bg-color: #eee;
+  --dark-bg: rgba(0, 0, 0, .7);
+  --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  --border: .1rem solid #999;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+section {
+  padding: 2rem;
+}
+
+.heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 4.5rem;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 2rem;
+}
+
+.btn,
+.option-btn,
+.delete-btn{
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 18px;
+  padding: 1.2rem 3rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+a:link {
+  text-decoration: none;
+}
+.btn:hover,
+.option-btn:hover,
+.delete-btn:hover{
+  background-color: var(--blue);
+  color: white;
+}
+
+.option-btn i,
+.delete-btn i,
+.paypal-btn-btn{
+  padding-right: .5rem;
+}
+
+.container .shopping-cart table .table-bottom .dropdown .option-btn{
+  background: var(--blue);
+  font-size: 18px;
+  /*height: 45px;*/
+  margin-top: 2px;
+}
+
+.container .shopping-cart table .table-bottom .dropdown-menu{
+  background-color: var(--blue);
+}
+.container .shopping-cart table .table-bottom .dropdown-menu .dropdown-item {
+  color: white;
+  font-size: 18px;
+}
+.container .shopping-cart table .table-bottom .dropdown-menu .dropdown-item:hover{
+  color: var(--red);
+}
+
+.option-btn {
+  background-color: var(--orange);
+}
+
+.delete-btn {
+  margin-top: 0;
+  background-color: var(--red);
+}
+
+.shopping-cart table {
+  text-align: center;
+  width: 100%;
+}
+
+.shopping-cart table thead th {
+  padding: 1.5rem;
+  /*font-size: 2rem;*/
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.shopping-cart table tr td {
+  border-bottom: var(--border);
+  padding: 1.5rem;
+  /*font-size: 2rem;*/
+  color: var(--black);
+}
+
+.shopping-cart table input[type="number"] {
+  border: var(--border);
+  padding: 1rem 2rem;
+  /*font-size: 2rem;*/
+  color: var(--black);
+  width: 10rem;
+}
+
+.shopping-cart table .table-bottom {
+  background-color: #eee;
+}
+
+
