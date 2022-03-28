@@ -4,7 +4,7 @@
 
     <table>
       <thead>
-      <th>Ảnh sản phẩm</th>
+<!--      <th>Ảnh sản phẩm</th>-->
       <th>Tên sản phẩm</th>
       <th>Giá sản phẩm</th>
       <th>Số lượng</th>
@@ -12,54 +12,60 @@
       <th>Chức năng</th>
       </thead>
       <tbody>
-      <tr>
-        <td><img
-          src="https://vcdn-giadinh.vnecdn.net/2021/10/28/455c01c474ea0561472a32ebe1bc4a-3436-3134-1635404012.jpg"
-          height="100px" width="100%" alt=""/></td>
-        <td>Khẩu Trang</td>
-        <td>50.000VNĐ</td>
+      <tr *ngFor="let supplies of cartList ; index as i">
+        <input type="hidden" value="{{supplies.id}}">
+<!--        <td><img-->
+<!--          src="{{supplies.equipment.image}}"-->
+<!--          height="100px" width="100px" alt=""/></td>-->
+        <td>{{supplies.code}}</td>
+        <td>{{supplies.totalMoney|number}}</td>
         <td>
           <label>
             <input type="number" name="update_quantity" min="1" value="2">
+            <input [min]="0" type="number" [(ngModel)]="supplies.quantity" class="form-control" (change)="getTotalMoney(supplies.id,supplies.quantity)" >
           </label>
         </td>
-        <td>100.000VNĐ</td>
-        <td><a href="#" class="delete-btn">Xóa</a></td>
-      </tr>
-      <tr>
-        <td><img
-          src="https://filebroker-cdn.lazada.vn/kf/S5d7f6bcf81f94b6f87777a41110429a9e.jpg"
-          height="100px" width="100%" alt=""/></td>
-        <td>Đồ bảo hộ</td>
-        <td>200.000VNĐ</td>
-        <td>
-          <label>
-            <input type="number" name="update_quantity" min="1" value="1">
-          </label>
-        </td>
-        <td>200.000VNĐ</td>
-        <td><a href="#" class="delete-btn">Xóa</a></td>
+        <td>{{supplies.quantity*supplies.totalMoney| number}}</td>
+        <td><a href="#" class="delete-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelId" (click)="addIdToDelete(supplies.id,supplies.code)">Xóa</a></td>
       </tr>
       <tr class="table-bottom">
         <td><a href="#" class="option-btn">Cửa hàng</a></td>
         <td colspan="3">Tổng hóa đơn</td>
-        <td>300.000VNĐ</td>
+        <td><span class="totalMoney" [(ngModel)]="totalMoney">{{totalMoney|number}}</span></td>
         <td>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle option-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
-              Thanh Toán
-            </button>
-            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Thanh Toán Tiền Mặt</a></li>
-              <li><a class="dropdown-item" href="#">Thanh Toán PAYPAL</a></li>
-              <li><a class="dropdown-item" href="#">Thanh Toán VNPAY</a></li>
-              <li><a class="dropdown-item" href="#">Thanh Toán ZALOPAY</a></li>
-              <li><a class="dropdown-item" href="#">Thanh Toán MOMO</a></li>
-            </ul>
+            <a class="dropbtn dropdown-toggle dropdown-toggle-split option-btn" style="color: white">Thanh Toán</a>
+            <div class="dropdown-content">
+              <a class="dropdown-item" href="#">Thanh Toán Tiền Mặt</a>
+              <a class="dropdown-item"  [routerLink]="['/payment',totalMoney]" (click)="moveToPaymentPage()" id="thanhToan" >Thanh Toán PAYPAL</a>
+              <a class="dropdown-item" href="#">Thanh Toán VNPAY</a>
+              <a class="dropdown-item" href="#">Thanh Toán ZALOPAY</a>
+              <a class="dropdown-item" href="#">Thanh Toán MOMO</a>
+            </div>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </section>
+</div>
+<!-- Modal delete cart -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5  class="text-danger modal-title">Xóa Sản Phẩm </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa sản phẩm <strong>{{nameDeleteCart}}</strong> ra khỏi đơn hàng không ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button (click)="deleteCart(this.idDeleteCart)" data-dismiss="modal" type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
 </div>
