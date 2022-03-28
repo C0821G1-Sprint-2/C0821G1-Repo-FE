@@ -20,8 +20,8 @@
       <div class="col-8">
         <div class="uk-margin" style="display: flex; justify-content: end">
           <form [formGroup]="keywordForm" class="uk-search uk-search-default" >
-            <input style="border-radius: 5px" class="uk-search-input" type="search" placeholder="Tìm kiếm" formControlName="keyword">
-            <button (click)="changeKW(keywordForm.controls.keyword.value)" type="button">Tìm kiếm</button>
+            <input style="border-radius: 5px" class="form-control" type="search" placeholder="Tìm kiếm" formControlName="keyword">
+            <button (click)="changeKW(keywordForm.controls.keyword.value)" type="button" class="btn btn-outline-secondary">Tìm kiếm</button>
           </form>
         </div>
       </div>
