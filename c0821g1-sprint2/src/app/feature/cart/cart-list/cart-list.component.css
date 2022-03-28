@@ -126,5 +126,37 @@ a:link {
 .shopping-cart table .table-bottom {
   background-color: #eee;
 }
+/* Dùng trong <div> để định vị nội dung thả xuống */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/*/ * Nội dung thả xuống (Ẩn theo mặc định) * /*/
+.dropdown-content {
+  padding: 10px 10px;
+  display: none;
+  position: absolute;
+  background-color: #2980b9;
+  font-size: 20px;
+  z-index: 1;
+}
+
+/*/ * Liên kết bên trong danh sách thả xuống * /*/
+.dropdown-content a {
+  color: white;
+  text-align: start;
+  text-decoration: none;
+  display: block;
+  margin: 6px;
+}
+.dropdown-content a:hover {
+   color: tomato;
+ }
+
+/*/ * Hiển thị menu thả xuống khi di chuột * /*/
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 
