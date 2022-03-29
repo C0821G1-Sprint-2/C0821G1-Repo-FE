@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Customer} from "../../../model/customer";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {CustomerService} from "../../../service/customer.service";
 
 @Component({
   selector: 'app-customer-delete',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerDeleteComponent implements OnInit {
 
-  constructor() { }
+  customer: Customer;
+
+  constructor(public  dialogRef: MatDialogRef<CustomerDeleteComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private customerService: CustomerService) { }
 
   ngOnInit(): void {
+    this.customer = this.data.contractData;
   }
+
+  deleteCustomer(){
+    console.log(this.customer.id);
+    this.customerService.delete(this.customer.id).subscribe(date => {
+      this.dialogRef.close('delete');
+    });
+  }
+
 
 }
