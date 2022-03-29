@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {CartService} from '../../../service/cart.service';
 import {CustomerTransfer} from '../../../model/customer-transfer';
 import {Address} from '../../../model/address';
+import {Payment} from '../../../model/payment';
 
 declare var paypal;
 
@@ -16,33 +17,14 @@ declare var paypal;
 })
 export class PaymentComponent implements OnInit {
 
-  constructor(private router: Router, private cartService: CartService, private activatedRoute: ActivatedRoute,) {
+  constructor(private router: Router, private cartService: CartService, private activatedRoute: ActivatedRoute) {
     this.cartList = this.cartService.getCartList();
     this.getTotalMoney();
-    this.cartService.getList().subscribe(
+    this.cartService.getListAddress().subscribe(
       value => {
         this.addressList = value;
-      },
-      error => {
-        console.log(error);
       }
     );
-  }
-
-  get name() {
-    return this.customerForm.get('name');
-  }
-
-  get email() {
-    return this.customerForm.get('email');
-  }
-
-  get address() {
-    return this.customerForm.get('address');
-  }
-
-  get phone() {
-    return this.customerForm.get('phone');
   }
 
   @ViewChild('paypal', {static: true}) paypalElement: ElementRef;
@@ -63,10 +45,7 @@ export class PaymentComponent implements OnInit {
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();
         this.paidFor = true;
-        // @ts-ignore
-        this.payment();
-        this.router.navigateByUrl('');
-        this.callToastFail();
+        this.paymentTs();
       },
       onError: err => {
       }
@@ -77,35 +56,25 @@ export class PaymentComponent implements OnInit {
   checkPaypal() {
     this.flag = !this.flag;
   }
-  payment() {
+  paymentTs() {
     this.customerTransfer = this.customerForm.value;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.addressList.length ; i++) {
-      // @ts-ignore
-      if ( this.addressList[i].name === this.customerTransfer.address ) {
-        this.customerTransfer.address = this.addressList[i];
-        console.log(this.customerTransfer);
-        break;
-      }
-    }
     // @ts-ignore
-    const pay = new Payment( this.cartList, this.customerTransfer );
+    const pay = new Payment(this.cartList, this.customerTransfer);
     this.cartService.payment(pay).subscribe(
       value => {
         localStorage.clear();
-        // tslint:disable-next-line:no-unused-expression
-        this.callToastEmail();
-        this.cartService.saveNewOrder(this.total);
-        this.cartService.save(this.total).subscribe();
-        this.callToastFail();
+        // this.router.navigateByUrl('/cart/list');
+        // this.callToastEmail();
+        alert('OK method');
+        // this.cartService.save(this.total).subscribe(value1 => {
+        //   this.callToastEmail();
+        // });
       },
       error => {
+        // this.callToastEmail();
+        alert('lỗi method');
       }
     );
-  }
-
-  clickTC() {
-  this.callToastFail();
   }
   getTotalMoney() {
     this.total = 0;
@@ -114,21 +83,26 @@ export class PaymentComponent implements OnInit {
       this.total += this.cartList[i].quantity * this.cartList[i].totalMoney;
     }
   }
-  private callToastFail() {
-    Swal.fire({
-      position: 'top',
-      icon: 'success',
-      title: 'Check email !',
-      showConfirmButton: false,
-      timer: 2000
-    });
-  }
-
+  // openDialog(floorId: number) {
+  //   this.floorService.findById(floorId).subscribe(value => {
+  //       const dialogRef = this.dialogDelete.open(FloorsDeleteComponent, {
+  //         width: '500px',
+  //         data: {value},
+  //         disableClose: true
+  //       });
+  //       dialogRef.afterClosed().subscribe(value1 => {
+  //         this.ngOnInit();
+  //       });
+  //     },
+  //     error => {
+  //       this.callToastFail();
+  //     });
+  // }
   private callToastEmail() {
     Swal.fire({
       position: 'top',
       icon: 'success',
-      title: 'Bạn đã đặt hàng thành công, Vui lòng kiểm tra email!',
+      title: 'Bạn đã thanh toán thành công. Vui lòng kiểm tra email để xem hóa đơn chi tiết !',
       showConfirmButton: false,
       timer: 2000
     });

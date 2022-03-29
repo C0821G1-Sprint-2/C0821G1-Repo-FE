@@ -1,0 +1,35 @@
+.btn:hover,
+.option-btn:hover,
+.delete-btn:hover{
+  background-color: var(--blue);
+  color: white;
+}
+
+.option-btn i,
+.delete-btn i,
+.paypal-btn-btn{
+  padding-right: .5rem;
+}
+
+.container .shopping-cart table .table-bottom .dropdown .option-btn{
+  background: var(--blue);
+  font-size: 18px;
+  /*height: 45px;*/
+  margin-top: 2px;
+}
+.option-btn {
+  background-color: var(--orange);
+}
+
+.delete-btn {
+  margin-top: 0;
+  background-color: var(--blue);
+}
+.heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 2rem;
+}
