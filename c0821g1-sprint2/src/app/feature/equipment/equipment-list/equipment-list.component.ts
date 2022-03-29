@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Equipment} from '../../../model/equipment';
+import {EquipmentService} from '../../../service/equipment.service';
 
 @Component({
   selector: 'app-equipment-list',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equipment-list.component.css']
 })
 export class EquipmentListComponent implements OnInit {
-
-  constructor() { }
+  equipmentList: Equipment[];
+  constructor(private equipmentService: EquipmentService ) {
+    this.equipmentService.findAll().subscribe(value => {
+      this.equipmentList = value;
+      console.log(value);
+    });
+  }
 
   ngOnInit(): void {
   }
