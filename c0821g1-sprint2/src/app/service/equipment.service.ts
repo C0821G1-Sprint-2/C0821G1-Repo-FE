@@ -14,4 +14,16 @@ export class EquipmentService {
   findById(id: number): Observable<Equipment> {
     return this.httpClient.get<Equipment>(this.API_URL + '/equipment/find-by-id/' + id);
   }
+
+  findAllEquipment(page, equipment): Observable<any> {
+    return this.httpClient.get(this.API_URL + '/equipment/equipment-list/?page=' + page + '&keyword=' + equipment);
+  }
+
+  getEquipmentById(equipmentId): Observable<any> {
+    return this.httpClient.get(this.API_URL + '/equipment/find/' + equipmentId);
+  }
+
+  deleteEquipment(equipmentId): Observable<any> {
+    return this.httpClient.delete(this.API_URL + '/equipment/delete-equipment/' + equipmentId);
+  }
 }
