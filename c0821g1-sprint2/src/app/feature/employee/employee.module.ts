@@ -7,10 +7,12 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
 import { EmployeeCreateAcountComponent } from './employee-create-acount/employee-create-acount.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EmployeeChangePasswordComponent } from './employee-change-password/employee-change-password.component';
 
 
 @NgModule({
-  declarations: [EmployeeCreateComponent, EmployeeEditComponent, EmployeeListComponent, EmployeeDeleteComponent, EmployeeCreateAcountComponent],
+  declarations: [EmployeeCreateComponent, EmployeeEditComponent, EmployeeListComponent, EmployeeDeleteComponent, EmployeeCreateAcountComponent, ChangePasswordComponent, EmployeeChangePasswordComponent],
   imports: [
     CommonModule,
     EmployeeRoutingModule
