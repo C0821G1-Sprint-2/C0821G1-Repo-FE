@@ -17,6 +17,14 @@ const routes: Routes = [
     path: 'payment/:total',
     loadChildren: () => import('./feature/payment/payment.module').then(module => module.PaymentModule)
   },
+  {
+    path: 'financial',
+    loadChildren: () => import('./feature/financial/financial.module').then(module => module.FinancialModule)
+  },
+  {
+    path: 'supplies',
+    loadChildren: () => import('./feature/supplies/supplies.module').then(module => module.SuppliesModule)
+  }
 ];
 
 @NgModule({
