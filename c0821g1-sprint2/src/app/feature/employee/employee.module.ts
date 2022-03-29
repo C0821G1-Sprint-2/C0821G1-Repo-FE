@@ -10,6 +10,7 @@ import { EmployeeCreateAcountComponent } from './employee-create-acount/employee
 
 
 @NgModule({
+  // tslint:disable-next-line:max-line-length
   declarations: [EmployeeCreateComponent, EmployeeEditComponent, EmployeeListComponent, EmployeeDeleteComponent, EmployeeCreateAcountComponent],
   imports: [
     CommonModule,
