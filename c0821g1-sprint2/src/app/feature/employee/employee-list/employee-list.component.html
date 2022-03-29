@@ -1,1 +1,107 @@
-<p>employee-list works!</p>
+<section class="main-content">
+  <div class="container-fluid">
+    <h1 class="title-page">Quản lý nhân viên</h1>
+    <div class="row">
+      <div class="col-3 float-left">
+        <button type="button" class="add-button btn btn-success me-lg-1"
+                style="height: 34px!important;vertical-align: middle!important;margin-bottom: 50px" ư><i
+          class="fa-solid fa-plus"></i> Tạo mới
+        </button>
+
+      </div>
+      <div class="col-9">
+        <div class="search row justify-content-around align-items-center mb-4 text-right float-right"
+             style="padding-right: 100px">
+          <form class="uk-search uk-search-default">
+            <a uk-search-icon></a>
+            <input style="border-radius: 5px; width: 300px" class="uk-search-input" type="search"
+                   placeholder="Nhập thông tin tìm kiếm">
+          </form>
+        </div>
+      </div>
+      <div class="tbl-header" style="width:100%">
+        <table class="table px-4">
+          <thead>
+          <tr>
+            <th>Mã nhân viên</th>
+            <th>Họ và tên</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Tên tài khoản</th>
+            <th>Chức vụ</th>
+            <th>Chức năng</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="user-info">
+                <div class="user-info__img">
+                  <img src="list-employee/img/user1.jpg" alt="User Img">
+                </div>
+                <div class="user-info__basic">
+                  <p class="mb-0">NV-001</p>
+                </div>
+              </div>
+            </td>
+            <td class="uk-text-left">
+              <div class="user-info">
+                <div class="user-info__basic">
+                  <p class="mb-0">Nguyễn Văn A</p>
+                </div>
+              </div>
+            </td>
+            <td class="uk-text-center" >
+              <p class="mb-0">01/01/1991</p>
+            </td>
+            <td class="uk-text-center">
+              Nam
+            </td>
+            <td class="uk-text-left" >
+              <p class="mb-0">Quảng Nam</p>
+            </td>
+            <td class="uk-text-left" >
+              <p class="mb-0">+919876543215</p>
+            </td>
+            <td class="uk-text-left" >
+              <p class="mb-0">a123</p>
+            </td>
+            <td class="uk-text-left">
+              <p class="mb-0">Giám đốc</p>
+            </td>
+            <td>
+              <div class="dropdown open">
+                <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="triggerId1">
+                  <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Sửa</a>
+                  <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i>
+                    Xoá</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <ul class="uk-pagination uk-flex-center" style="font-size: 25px; " uk-margin>
+          <li><a href="#"><span uk-pagination-previous></span></a></li>
+          <li class="uk-active"><a href="#">1</a></li>
+          <li class="uk-disabled"><span>2</span></li>
+          <li class="uk-disabled"><a href="#">3</a></li>
+          <li class="uk-disabled"><a href="#">4</a></li>
+          <li class="uk-disabled"><span>7</span></li>
+          <li class="uk-disabled"><a href="#">5</a></li>
+          <li><a href="#"><span uk-pagination-next></span></a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
