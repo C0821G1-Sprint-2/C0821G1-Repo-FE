@@ -1,4 +1,4 @@
-<section class="main-content">
+<section class="main-content body-img">
   <div class="container-fluid">
     <h1 class="title-page">Quản lý nhân viên</h1>
     <div class="row">
@@ -35,41 +35,41 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr *ngFor="let employee of employees">
             <td>
               <div class="user-info">
                 <div class="user-info__img">
-                  <img src="list-employee/img/user1.jpg" alt="User Img">
+                  <img src="" alt="User Img">
                 </div>
                 <div class="user-info__basic">
-                  <p class="mb-0">NV-001</p>
+                  <p class="mb-0">{{employee.code}}</p>
                 </div>
               </div>
             </td>
             <td class="uk-text-left">
               <div class="user-info">
                 <div class="user-info__basic">
-                  <p class="mb-0">Nguyễn Văn A</p>
+                  <p class="mb-0">{{employee.name}}</p>
                 </div>
               </div>
             </td>
             <td class="uk-text-center" >
-              <p class="mb-0">01/01/1991</p>
+              <p class="mb-0">{{employee.dateOfBirth}}</p>
             </td>
             <td class="uk-text-center">
               Nam
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">Quảng Nam</p>
+              <p class="mb-0">{{employee.address}}</p>
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">+919876543215</p>
+              <p class="mb-0">{{employee.phone}}</p>
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">a123</p>
+              <p class="mb-0">{{employee.appUser.username}}</p>
             </td>
             <td class="uk-text-left">
-              <p class="mb-0">Giám đốc</p>
+              <p class="mb-0">{{employee.employeePosition.name}}</p>
             </td>
             <td>
               <div class="dropdown open">
@@ -78,25 +78,24 @@
                   <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="triggerId1">
-                  <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Sửa</a>
-                  <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i>
-                    Xoá</a>
+                  <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i>Sửa</a>
+                  <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i>Xoá</a>
                 </div>
               </div>
             </td>
           </tr>
           </tbody>
         </table>
-        <ul class="uk-pagination uk-flex-center" style="font-size: 25px; " uk-margin>
-          <li><a href="#"><span uk-pagination-previous></span></a></li>
-          <li class="uk-active"><a href="#">1</a></li>
-          <li class="uk-disabled"><span>2</span></li>
-          <li class="uk-disabled"><a href="#">3</a></li>
-          <li class="uk-disabled"><a href="#">4</a></li>
-          <li class="uk-disabled"><span>7</span></li>
-          <li class="uk-disabled"><a href="#">5</a></li>
-          <li><a href="#"><span uk-pagination-next></span></a></li>
-        </ul>
+<!--        <ul class="uk-pagination uk-flex-center" style="font-size: 25px; " uk-margin>-->
+<!--          <li><a href="#"><span uk-pagination-previous></span></a></li>-->
+<!--          <li class="uk-active"><a href="#">1</a></li>-->
+<!--          <li class="uk-disabled"><span>2</span></li>-->
+<!--          <li class="uk-disabled"><a href="#">3</a></li>-->
+<!--          <li class="uk-disabled"><a href="#">4</a></li>-->
+<!--          <li class="uk-disabled"><span>7</span></li>-->
+<!--          <li class="uk-disabled"><a href="#">5</a></li>-->
+<!--          <li><a href="#"><span uk-pagination-next></span></a></li>-->
+<!--        </ul>-->
 
       </div>
     </div>
