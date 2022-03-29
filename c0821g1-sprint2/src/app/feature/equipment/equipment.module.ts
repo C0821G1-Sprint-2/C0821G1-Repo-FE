@@ -7,13 +7,16 @@ import { EquipmentEditComponent } from './equipment-edit/equipment-edit.componen
 import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.component';
 import { EquipmentDeleteComponent } from './equipment-delete/equipment-delete.component';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
+import { EquipmentListBodyComponent } from './equipment-list-body/equipment-list-body.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
-  declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent],
-  imports: [
-    CommonModule,
-    EquipmentRoutingModule
-  ]
+  declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent, EquipmentListBodyComponent],
+    imports: [
+        CommonModule,
+        EquipmentRoutingModule,
+        FormsModule
+    ]
 })
 export class EquipmentModule { }

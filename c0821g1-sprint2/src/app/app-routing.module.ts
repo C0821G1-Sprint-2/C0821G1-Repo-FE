@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {EquipmentListBodyComponent} from './feature/equipment/equipment-list-body/equipment-list-body.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'payment/:total',
     loadChildren: () => import('./feature/payment/payment.module').then(module => module.PaymentModule)
   },
+  {
+    path: '',
+    component: EquipmentListBodyComponent
+  }
 ];
 
 @NgModule({
