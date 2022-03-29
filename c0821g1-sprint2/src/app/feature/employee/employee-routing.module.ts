@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
+import {EmployeeChangePasswordComponent} from './employee-change-password/employee-change-password.component';
 
 
 const routes: Routes = [
@@ -8,7 +9,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    declarations: [
+        EmployeeChangePasswordComponent
+    ],
+    exports: [RouterModule, EmployeeChangePasswordComponent]
 })
 export class EmployeeRoutingModule { }

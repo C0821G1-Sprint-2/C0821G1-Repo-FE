@@ -9,7 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {EmployeeModule} from "./feature/employee/employee.module";
+import {EmployeeModule} from './feature/employee/employee.module';
+import {EmployeeRoutingModule} from './feature/employee/employee-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {EmployeeModule} from "./feature/employee/employee.module";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    EmployeeModule
+    EmployeeModule,
+    EmployeeRoutingModule
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [],

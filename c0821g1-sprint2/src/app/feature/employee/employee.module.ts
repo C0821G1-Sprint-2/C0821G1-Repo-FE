@@ -7,12 +7,16 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
 import { EmployeeCreateAcountComponent } from './employee-create-acount/employee-create-acount.component';
+import { EmployeeEditPersonalComponent } from './employee-edit-personal/employee-edit-personal.component';
 
 
 @NgModule({
 
   // tslint:disable-next-line:max-line-length
-  declarations: [EmployeeCreateComponent, EmployeeEditComponent, EmployeeListComponent, EmployeeDeleteComponent, EmployeeCreateAcountComponent],
+  declarations: [EmployeeCreateComponent, EmployeeEditComponent, EmployeeListComponent, EmployeeDeleteComponent, EmployeeCreateAcountComponent, EmployeeEditPersonalComponent],
+  exports: [
+    EmployeeEditPersonalComponent
+  ],
 
   imports: [
     CommonModule,

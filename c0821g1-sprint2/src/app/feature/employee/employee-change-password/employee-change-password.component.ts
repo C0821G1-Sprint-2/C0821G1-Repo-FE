@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {Employee} from '../../../model/employee';
+import {ActivatedRoute, Router} from '@angular/router';
+import {EmployeeService} from '../../../service/employee.service';
+import {UserService} from '../../../service/user.service';
 
 @Component({
   selector: 'app-employee-change-password',
@@ -9,9 +13,12 @@ import {FormGroup} from '@angular/forms';
 export class EmployeeChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   id: number;
-  // employeeEdit: Employee;
+  employeeEdit: Employee;
 
-  constructor() { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private employeeService: EmployeeService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
