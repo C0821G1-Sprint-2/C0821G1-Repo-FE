@@ -96,7 +96,7 @@ body {
   overflow: hidden;
   padding: 0px;
   top: 180px;
-  transition: all .3s;
+  transition: all .2s;
 }
 .dropdown:hover .dropdown-menu1
 {
