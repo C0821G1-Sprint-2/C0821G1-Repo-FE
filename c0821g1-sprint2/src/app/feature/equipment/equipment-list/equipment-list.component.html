@@ -6,7 +6,7 @@
   <div class="container1 ">
   </div>
   <div class="container">
-    <div class="row">
+    <div class="row" style="margin-bottom: 50px">
       <div class="col-12">
         <h1 style="text-align: center" class="title-page">Thông tin vật tư</h1>
       </div>
@@ -19,13 +19,18 @@
       </div>
       <div class="col-8">
         <div class="uk-margin" style="display: flex; justify-content: end">
-          <form [formGroup]="keywordForm" class="uk-search uk-search-default" >
-            <input style="border-radius: 5px" class="form-control" type="search" placeholder="Tìm kiếm" formControlName="keyword">
-            <button (click)="changeKW(keywordForm.controls.keyword.value)" type="button" class="btn btn-outline-secondary">Tìm kiếm</button>
+          <!--          <form [formGroup]="keywordForm" class="uk-search uk-search-default">-->
+          <!--            <input style="border-radius: 5px" class="form-control" type="search" placeholder="Tìm kiếm" formControlName="keyword">-->
+          <!--            <button (click)="changeKW(keywordForm.controls.keyword.value)" type="button" class="btn btn-outline-secondary">Tìm kiếm</button>-->
+          <!--          </form>-->
+          <form>
+            <input type="search" (ngModelChange)="searchEquipment(key.value)" #key="ngModel" ngModel
+                   name="key" id="searchName" class="form-control mr-sm-2" placeholder="Tìm kiếm...">
           </form>
         </div>
       </div>
     </div>
+
 
     <ng-container *ngIf="message !== '';else elseBlock">
       <h1 style="color: red; text-align: center; width: 100%; margin-top: 50px">{{message}}</h1>
@@ -50,92 +55,58 @@
         <tr *ngFor="let s of equipment; index as i ">
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
-                <h5 class="mb-0">{{i +1}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
+                <h5 class="mb-0">{{i + 1}}</h5>
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.code}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.name}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.equipmentType.name}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.price}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.expired}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
-              <!--								<div class="user-info__img">-->
-              <!--									<img src="img/user1.jpg" alt="User Img">-->
-              <!--								</div>-->
               <div class="user-info__basic">
                 <h5 class="mb-0">{{s.supplier.name}}</h5>
-                <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
               <div class="user-info__img">
-                <!--              <img src="https://ykhoathammyquangminh.com/image/catalog/8b89413979869bd8c297.jpg"-->
-                <!--                   alt="User Img">-->
                 <img [src]="s.image">
               </div>
-              <!--								<div class="user-info__basic">-->
-              <!--									<h5 class="mb-0">Kiran Acharya</h5>-->
-              <!--									<p class="text-muted mb-0">@kiranacharyaa</p>-->
-              <!--								</div>-->
             </div>
           </td>
           <td *ngIf="s.status == 1">
@@ -148,9 +119,29 @@
           <td *ngIf="s.status == 3">
             <span class="active-circle bg-danger"></span> Hết hàng
           </td>
-          <td><a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> </a> <span>
-          <a  (click)="openDialog(s.id)" class="dropdown-item text-danger" ><i class="fa fa-trash mr-1"></i> </a></span>
+<!--          <td><a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> </a>-->
+<!--          <a (click)="openDialog(s.id)" class="dropdown-item text-danger"><i class="fa fa-trash mr-1"></i> </a>-->
+<!--          </td>-->
+          <td>
+
+              <li class="dropdown"  style="list-style-type: none">
+                <!--              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+                <!--                <i class="fa fa-ellipsis-v"></i>-->
+                <!--            </a>-->
+
+                <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu1">
+                  <li><a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Chỉnh sửa </a> </li>
+                  <li> <a style="cursor: pointer" (click)="openDialog(s.id)" class="dropdown-item text-danger"><i class="fa fa-trash mr-1"></i> Xóa </a></li>
+                </ul>
+              </li>
+
+
           </td>
+
         </tr>
 
         </tbody>
@@ -192,7 +183,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 

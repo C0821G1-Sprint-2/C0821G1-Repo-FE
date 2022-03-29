@@ -48,18 +48,6 @@ export class EquipmentListComponent implements OnInit {
         this.size = data.size;
         this.page = data.pageable.pageNumber;
         this.message = '';
-        for (const contract1 of this.equipment) {
-          // // @ts-ignore
-          // const dateEnd = new Date(contract1.contractDateEnd);
-          // // @ts-ignore
-          // const today = new Date();
-          // // @ts-ignore
-          // const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getDate(), dateEnd.getMonth());
-          // // @ts-ignore
-          // const check = endDate1 - today;
-          // contract1.checkFlag = Math.round(check);
-          // console.log(this.message);
-        }
       }
     })
   }
@@ -77,6 +65,9 @@ export class EquipmentListComponent implements OnInit {
           this.ngOnInit()
         }
       });
+    }, error => {
+      alert('Vật tư không tồn tại !');
+      this.ngOnInit()
     });
   }
 
@@ -98,66 +89,42 @@ export class EquipmentListComponent implements OnInit {
     this.ngOnInit();
   }
 
-  changeKW(value){
 
-      this.keywordForm.controls.keyword.patchValue(value);
-
+  searchEquipment(value: any) {
+    console.log('hello    '+value);
+    this.keywordForm.controls.keyword.patchValue(value);
     if (this.keywordForm.controls.keyword.value){
-      this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
-        console.log(data);
-        if (data === null) {
-          this.message = 'Not found !!!';
-          console.log(this.message);
-        } else {
-          this.equipment = data.content;
-          this.totalPages = data.totalPages;
-          this.pageNumber = data.pageable.pageNumber;
-          this.size = data.size;
-          this.page = data.pageable.pageNumber;
-          this.message = '';
-          for (const contract1 of this.equipment) {
-            // // @ts-ignore
-            // const dateEnd = new Date(contract1.contractDateEnd);
-            // // @ts-ignore
-            // const today = new Date();
-            // // @ts-ignore
-            // const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getDate(), dateEnd.getMonth());
-            // // @ts-ignore
-            // const check = endDate1 - today;
-            // contract1.checkFlag = Math.round(check);
-            // console.log(this.message);
-          }
-        }
-      })
+      this.ngOnInit()
+      // this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
+      //   console.log(data);
+      //   if (data === null) {
+      //     this.message = 'Not found !!!';
+      //     console.log(this.message);
+      //   } else {
+      //     this.equipment = data.content;
+      //     this.totalPages = data.totalPages;
+      //     this.pageNumber = data.pageable.pageNumber;
+      //     this.size = data.size;
+      //     this.page = data.pageable.pageNumber;
+      //     this.message = '';
+      //   }
+      // })
     } else {
-      this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
-        console.log(data);
-        if (data === null) {
-          this.message = 'Not found !!!';
-          console.log(this.message);
-        } else {
-          this.equipment = data.content;
-          this.totalPages = data.totalPages;
-          this.pageNumber = data.pageable.pageNumber;
-          this.size = data.size;
-          this.page = data.pageable.pageNumber;
-          this.message = '';
-          for (const contract1 of this.equipment) {
-            // // @ts-ignore
-            // const dateEnd = new Date(contract1.contractDateEnd);
-            // // @ts-ignore
-            // const today = new Date();
-            // // @ts-ignore
-            // const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getDate(), dateEnd.getMonth());
-            // // @ts-ignore
-            // const check = endDate1 - today;
-            // contract1.checkFlag = Math.round(check);
-            // console.log(this.message);
-          }
-        }
-      })
+      this.ngOnInit()
+      // this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
+      //   console.log(data);
+      //   if (data === null) {
+      //     this.message = 'Not found !!!';
+      //     console.log(this.message);
+      //   } else {
+      //     this.equipment = data.content;
+      //     this.totalPages = data.totalPages;
+      //     this.pageNumber = data.pageable.pageNumber;
+      //     this.size = data.size;
+      //     this.page = data.pageable.pageNumber;
+      //     this.message = '';
+      //   }
+      // })
     }
   }
-
-
 }

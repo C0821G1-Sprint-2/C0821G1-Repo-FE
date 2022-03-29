@@ -23,9 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
+    MatButtonModule
   ],
-  // providers: [authInterceptorProviders, CookieService],
   providers: [],
   bootstrap: [AppComponent]
 })
