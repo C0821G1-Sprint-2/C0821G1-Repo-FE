@@ -3,6 +3,7 @@ import {Cart} from '../../../model/cart';
 import {Router} from '@angular/router';
 import {EquipmentService} from '../../../service/equipment.service';
 import {CartService} from '../../../service/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart-list',
@@ -23,8 +24,8 @@ export class CartListComponent implements OnInit {
   getCartList() {
     this.suppliesIdList = Object.keys(localStorage);
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 1; i < this.suppliesIdList.length; i++) {
-      this.equipmentService.findById(1).subscribe(
+    for (let i = 0; i < this.suppliesIdList.length; i++) {
+      this.equipmentService.findById(Number(1)).subscribe(
         value => {
           const cart = new Cart();
           cart.id = value.id;
@@ -56,16 +57,24 @@ export class CartListComponent implements OnInit {
   addIdToDelete(id: number, code: string) {
     this.idDeleteCart = id;
     this.nameDeleteCart = code;
-    this.deleteCart(id);
   }
 
   deleteCart(id: number) {
     localStorage.removeItem(String(id));
-    this.router.navigateByUrl('/home/list').then(e => {
+    this.router.navigateByUrl('').then(e => {
       if (e) {
         this.router.navigateByUrl('/cart/list');
+        this.callToastDelete();
       }
-      alert('xóa thành công');
+    });
+  }
+  private callToastDelete() {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Xóa đơn hàng thành công !',
+      showConfirmButton: false,
+      timer: 2000
     });
   }
 }

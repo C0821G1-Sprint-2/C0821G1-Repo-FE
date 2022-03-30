@@ -17,9 +17,6 @@ export class CartService {
     console.log(payment);
     return this.httpClient.post<any>(this.API_URL + '/cart/home/payment', payment);
   }
-  save(totalMoney: number): Observable<void> {
-    return this.httpClient.get<void>(this.API_URL + '/cart/save' + totalMoney);
-  }
   saveCartListTemp(cartList: Cart[]) {
     this.cartList = cartList;
   }
@@ -30,4 +27,7 @@ export class CartService {
     return this.httpClient.get<Address[]>(this.API_URL + '/cart/address');
   }
 
+  save(cart: Cart) {
+    return this.httpClient.post<any>(this.API_URL + '/cart/create', cart);
+  }
 }
