@@ -20,22 +20,30 @@
         <td>{{cart.totalMoney|number}}</td>
         <td>
           <label>
-            <input [min]="0" type="number" [(ngModel)]="cart.quantity" class="form-control"  >
+            <input [min]="0" type="number" [(ngModel)]="cart.quantity" class="form-control">
           </label>
         </td>
-        <td>{{cart.quantity*cart.totalMoney|number}}</td>
-        <td><a href="#" class="delete-btn" type="button" (click)="addIdToDelete(cart.id,cart.code)">Xóa</a></td>
+        <td>{{cart.quantity * cart.totalMoney|number}}</td>
+
+        <td>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn delete-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                  (click)="addIdToDelete(cart.id,cart.code)">
+            Xóa
+          </button>
+        </td>
       </tr>
       <tr class="table-bottom">
         <td><a href="#" class="option-btn">Cửa hàng</a></td>
         <td colspan="3">Tổng hóa đơn</td>
-        <td ><span>{{totalMoneyAll|number}}</span></td>
+        <td><span>{{totalMoneyAll|number}}</span></td>
         <td>
           <div class="dropdown">
             <a class="dropbtn dropdown-toggle dropdown-toggle-split option-btn" style="color: white">Thanh Toán</a>
             <div class="dropdown-content">
               <a class="dropdown-item" href="#">Thanh Toán Tiền Mặt</a>
-              <a class="dropdown-item"  [routerLink]="['/payment',totalMoneyAll]" (click)="moveToPaymentPage()">Thanh Toán PAYPAL</a>
+              <a class="dropdown-item" [routerLink]="['/payment',totalMoneyAll]" (click)="moveToPaymentPage()">Thanh
+                Toán PAYPAL</a>
               <a class="dropdown-item" href="#">Thanh Toán VNPAY</a>
               <a class="dropdown-item" href="#">Thanh Toán ZALOPAY</a>
               <a class="dropdown-item" href="#">Thanh Toán MOMO</a>
@@ -47,4 +55,37 @@
     </table>
   </section>
 </div>
+<!-- Modal -->
+<div class="row">
+  <div class="col-12 text-center">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content row">
+          <div class="col-12">
+            <br>
+            <h1 class="text-danger text-center">Xóa Sản Phẩm </h1>
+            <br>
+            <br>
+            <p class="text-start">
+              Bạn có muốn xóa sản phẩm <strong>{{nameDeleteCart}}</strong> ra khỏi đơn hàng không ?
+            </p>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-4">
+              <button type="button" style="margin-top: 1px" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+            <div class="col-4 ms-1">
+              <button type="button" style="margin-top: 1px" class="btn delete-btn" (click)="deleteCart(this.idDeleteCart)">Xóa</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 

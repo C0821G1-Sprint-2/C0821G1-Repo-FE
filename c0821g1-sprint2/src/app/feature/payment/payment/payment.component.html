@@ -14,6 +14,11 @@
             <td><h4 style="display: inline">Họ và tên<span style="color: red">(*)</span></h4>
             </td>
             <td><input type="text" class="form-control" formControlName="name">
+              <div *ngIf="!name.valid && (name.dirty ||name.touched)">
+                <div style="color:red" [hidden]="!name.errors.required">Tên không được để trống</div>
+                <div style="color:red" [hidden]="!name.hasError('errorName')">Họ và tên phải đúng định dạng (Không chứa chữ số)</div>
+                <div style="color:red" [hidden]="!name.errors.maxlength">Họ và tên phải nhỏ hơn 50 kí tự</div>
+              </div>
             </td>
 
           </tr>
@@ -25,18 +30,31 @@
               <datalist id="address">
                 <option *ngFor="let address of addressList" [ngValue]="address">{{address.name}}</option>
               </datalist>
+              <div *ngIf="!address.valid && (address.dirty ||address.touched)">
+                <div style="color:red" [hidden]="!address.errors.required">Vui lòng nhập địa chỉ</div>
+              </div>
             </td>
           </tr>
           <tr>
             <td><h4 style="display: inline">Số điện thoại<span style="color: red">(*)</span></h4>
             </td>
             <td><input  type="text" class="form-control" formControlName="phone">
+              <div *ngIf="!phone.valid && (phone.dirty || phone.touched)">
+                <div style="color:red" [hidden]="!phone.errors.required">Số điện thoại không được để trống</div>
+                <div style="color:red" [hidden]="!phone.errors.pattern">Số điện thoại phải đúng định dạng ( 10 chữ số)
+                </div>
+              </div>
             </td>
           </tr>
           <tr>
             <td><h4 style="display: inline">Email<span style="color: red">(*)</span></h4>
             </td>
             <td><input type="text" class="form-control" formControlName="email">
+              <div *ngIf="!email.valid && (email.dirty ||email.touched)">
+                <div style="color:red" [hidden]="!email.errors.required">Email không được để trống</div>
+                <div style="color:red" [hidden]="!email.errors.pattern">Sai định dạng email ( Ví dụ: abcxye@gmail.com,...)</div>
+                <div style="color:red" [hidden]="!email.errors.maxlength">Email phải nhỏ hơn 50 kí tự</div>
+              </div>
             </td>
           </tr>
           <tr [hidden]="!flag">
@@ -44,9 +62,9 @@
             <td ><div #paypal></div></td>
           </tr>
         </table>
-        <h1 class="font-weight-bold">Tổng tiền: <span>{{total|number}}</span></h1>
+        <h1 class="font-weight-bold" style="color: var(--blue);">Tổng Hóa Đơn: <span>{{total|number}} VNĐ</span></h1>
         <button  type="button" class="btn btn-secondary btn-lg option-btn" routerLink="/cart/list">Giỏ Hàng</button>
-        <button   style="margin-left: 15px" type="button" class="btn btn-success btn-lg delete-btn" (click)="checkPaypal()" id="thanhtoan">Thanh Toán</button>
+        <button [disabled]="!customerForm.valid"  style="margin-left: 15px" type="button" class="btn btn-success btn-lg delete-btn" (click)="checkPaypal()">Thanh Toán</button>
         <br><br><br><br>
       </form>
 
