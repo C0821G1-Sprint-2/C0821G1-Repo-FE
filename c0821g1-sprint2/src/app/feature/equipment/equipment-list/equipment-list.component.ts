@@ -95,4 +95,6 @@ export class EquipmentListComponent implements OnInit {
     this.keywordForm.controls.keyword.patchValue(value);
     this.ngOnInit()
   }
+
+  //Lanh
 }
