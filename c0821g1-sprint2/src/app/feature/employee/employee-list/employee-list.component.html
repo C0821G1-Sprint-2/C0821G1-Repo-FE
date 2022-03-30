@@ -1,10 +1,13 @@
-<section class="main-content">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<section class="main-content body-img">
   <div class="container-fluid">
     <h1 class="title-page">Quản lý nhân viên</h1>
     <div class="row">
       <div class="col-3 float-left">
-        <button type="button" class="add-button btn btn-success me-lg-1"
-                style="height: 34px!important;vertical-align: middle!important;margin-bottom: 50px" ư><i
+        <button type="button" routerLink="/employee/create" class="add-button btn btn-success me-lg-1"
+                style="height: 34px!important;vertical-align: middle!important;margin-bottom: 50px" ><i
           class="fa-solid fa-plus"></i> Tạo mới
         </button>
 
@@ -14,7 +17,7 @@
              style="padding-right: 100px">
           <form class="uk-search uk-search-default">
             <a uk-search-icon></a>
-            <input style="border-radius: 5px; width: 300px" class="uk-search-input" type="search"
+            <input [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" style="border-radius: 5px; width: 300px" class="uk-search-input" type="search"
                    placeholder="Nhập thông tin tìm kiếm">
           </form>
         </div>
@@ -35,41 +38,41 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr *ngFor="let employee of employees">
             <td>
               <div class="user-info">
                 <div class="user-info__img">
-                  <img src="list-employee/img/user1.jpg" alt="User Img">
+                  <img src="" alt="User Img">
                 </div>
                 <div class="user-info__basic">
-                  <p class="mb-0">NV-001</p>
+                  <p class="mb-0">{{employee.code}}</p>
                 </div>
               </div>
             </td>
             <td class="uk-text-left">
               <div class="user-info">
                 <div class="user-info__basic">
-                  <p class="mb-0">Nguyễn Văn A</p>
+                  <p class="mb-0">{{employee.name}}</p>
                 </div>
               </div>
             </td>
             <td class="uk-text-center" >
-              <p class="mb-0">01/01/1991</p>
+              <p class="mb-0">{{employee.dateOfBirth}}</p>
             </td>
             <td class="uk-text-center">
               Nam
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">Quảng Nam</p>
+              <p class="mb-0">{{employee.address}}</p>
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">+919876543215</p>
+              <p class="mb-0">{{employee.phone}}</p>
             </td>
             <td class="uk-text-left" >
-              <p class="mb-0">a123</p>
+              <p class="mb-0">{{employee.appUser.username}}</p>
             </td>
             <td class="uk-text-left">
-              <p class="mb-0">Giám đốc</p>
+              <p class="mb-0">{{employee.employeePosition.name}}</p>
             </td>
             <td>
               <div class="dropdown open">
@@ -78,26 +81,42 @@
                   <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="triggerId1">
-                  <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Sửa</a>
-                  <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i>
-                    Xoá</a>
+                  <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i>Sửa</a>
+                  <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i>Xoá</a>
                 </div>
               </div>
             </td>
           </tr>
           </tbody>
         </table>
-        <ul class="uk-pagination uk-flex-center" style="font-size: 25px; " uk-margin>
-          <li><a href="#"><span uk-pagination-previous></span></a></li>
-          <li class="uk-active"><a href="#">1</a></li>
-          <li class="uk-disabled"><span>2</span></li>
-          <li class="uk-disabled"><a href="#">3</a></li>
-          <li class="uk-disabled"><a href="#">4</a></li>
-          <li class="uk-disabled"><span>7</span></li>
-          <li class="uk-disabled"><a href="#">5</a></li>
-          <li><a href="#"><span uk-pagination-next></span></a></li>
+      </div>
+<!--PAGINATION-->
+      <div class="me-5 pe-4 ">
+        <ul class="pagination pagination-sm justify-content-end  pagination-lg" style="margin:20px 0">
+          <div *ngIf="this.page > 0 then previous"></div>
+          <ng-template #previous>
+            <li class="page-item">
+              <button
+                (click)="previousClick(1)" class="page-link" type="button">Trang trước
+              </button>
+            </li>
+          </ng-template>
+          <li class="page-item">
+            <input class="page-link" type="number" value="1" min="1" [max]="totalPages"
+                   placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
+                   aria-describedby="basic-addon1"
+                   (change)="findPaginnation($event.target.value)">
+          </li>
+          <li class="page-item ">
+            <span class="input-group-text page-link">{{page + 1}}/{{totalPages}}</span>
+          </li>
+          <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+          <ng-template #nexts>
+            <li class="page-item">
+              <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
+            </li>
+          </ng-template>
         </ul>
-
       </div>
     </div>
   </div>
@@ -105,3 +124,6 @@
 
 
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

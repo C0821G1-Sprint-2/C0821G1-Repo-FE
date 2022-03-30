@@ -1,2 +1,4 @@
-export interface EmployeePosition {
-}
+  export interface EmployeePosition {
+    id: number;
+    name: string;
+  }

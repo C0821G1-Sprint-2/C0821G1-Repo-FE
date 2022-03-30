@@ -14,4 +14,7 @@ export class EmployeeService {
   findAllEmployee(): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(this.API_URL + '/list');
   }
+  findAllEmployeeByKeyword(page, keyword): Observable<any> {
+    return this.httpClient.get(this.API_URL + '/-list/?page=' + page + '&keyword=' + keyword);
+  }
 }
