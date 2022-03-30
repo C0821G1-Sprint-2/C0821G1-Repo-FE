@@ -61,36 +61,23 @@ export class LoginComponent implements OnInit {
         console.log('token: ' + this.tokenStorageService.getUser().jwtToken);
 
         this.loginFrom.reset();
-        if (this.role.indexOf('ROLE_ADMIN') !== -1) {
-          this.router.navigate(['/employee/list']);
-          this.shareService.sendClickEvent();
-
-        } else {
-          this.router.navigate(['/customer/list']);
-          this.shareService.sendClickEvent();
-
-        }
+        window.location.reload();
       }
       , error => {
         console.log(error);
         this.isLoggedIn = false;
         this.errorMessage = 'Tài khoản hoặc mật khẩu không đúng';
+      }, () => {
+        // if (this.role.indexOf('ROLE_ADMIN') !== -1) {
+        //   this.router.navigate(['/appuser/create']);
+        //   this.shareService.sendClickEvent();
+        //
+        // } else {
+        //   this.router.navigate(['/customer/list']);
+        //   this.shareService.sendClickEvent();
+        //
+        // }
       });
   }
 
-  private loadRemberInfo() {
-    if (this.tokenStorageService.getUser()) {
-      this.role = this.tokenStorageService.getUser().roles[0];
-      console.log(this.role);
-      this.username = this.tokenStorageService.getUser().username;
-      console.log(this.username);
-      this.urlImg = this.tokenStorageService.getUser().urlImg;
-    } else {
-      this.role = null;
-      this.username = null;
-      this.urlImg = null;
-      this.idEmployee = null;
-    }
-    this.isLoggedIn = this.username != null;
-  }
 }

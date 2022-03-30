@@ -1,1 +1,146 @@
-<p>header works!</p>
+<!-- <button routerLink="/security/login"><a (click)="logout() " >Đăng xuất</a></button>-->
+<div class="container-fluid header">
+  <!--    Header-top____________________________________________________________________________________________________________-->
+  <div class="row header-top">
+    <div class="col-6 ">
+    </div>
+    <div class="col-6 header-right" style="color: #ffd11a" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+           class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+      </svg>
+      C0821G1 295 NGUYỄN TẤT THÀNH - HẢI CHÂU - ĐÀ NẴNG |
+      <a style="color: #ffd11a" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-telephone-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+        </svg>
+      </a>0801.23.45.67
+      | <a>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+           viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </svg>
+    </a>
+    </div>
+  </div>
+  <!--    header-bottom____________________________________________________________________________________________________________-->
+  <div class="row header-bottom">
+    <div class="col-2 text-center">
+      <a routerLink=""> <img src="../../../assets/images/logo header (1).PNG" alt="" style="height: 80px; width: 100px" class="logo "></a>
+    </div>
+    <div class="col-8 menu text-center">
+      <div class="link me-5">
+        <a >TRANG CHỦ</a>
+      </div>
+      <div class=" link me-5">
+        <a routerLink="/floors/introduce" >GIỚI THIỆU</a>
+      </div>
+      <div class=" link me-5">
+        <div class="dropdown">
+          <a class="dropbtn dropdown-toggle dropdown-toggle-split" >KHAI THÁC-VẬN HÀNH</a>
+          <div class="dropdown-content">
+            <a class="dropdown-item" routerLink="/floors/list">Quản lý tầng lầu</a>
+            <a class="dropdown-item" routerLink="/customer/list">Quản lý khách hàng</a>
+            <a class="dropdown-item" routerLink="/employee/list">Quản lý nhân viên</a>
+            <a class="dropdown-item" routerLink="/contract/list">Quản lý hợp đồng</a>
+            <a class="dropdown-item" routerLink="/spaces/list">Quản lý mặt bằng</a>
+          </div>
+        </div>
+      </div>
+      <div class="link me-5">
+        <a routerLink="/floors/news"  >TIN TỨC</a>
+      </div>
+    </div>
+
+    <div class="col-2 link">
+
+      <div>
+        <div *ngIf="this.isLoggedIn then right else wrong"></div>
+        <ul class="d-flex navbar-nav mb-2 mb-lg-0 fw-bold me-5">
+          <ng-template #right>
+            <li class="nav-item dropdown " style="list-style: none">
+              <a class="navbar-brand trans-nav" href="#" id="user" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <div *ngIf="this.urlImg then is"></div>
+                <ng-template #is>
+                  <img class="rounded-circle" width="40px" height="40px" [src]="this.urlImg">
+                </ng-template>
+                <span class="mx-2" style="font-size: 80%;color: #ffd11a">{{this.username}}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-content  border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
+                <div *ngIf="this.role === 'ROLE_ADMIN' then admin"></div>
+                <li  >
+
+                  <ng-template #admin>
+                    <a class="dropdown-item" [routerLink]="['/floors/list']" >
+                      <i class="fas fa-bars me-2"></i>
+                      <span  style="font-size: 85%;">Quản lý Tầng lầu</span>
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['/employee/list']">
+                      <i class="fas fa-bars me-2"></i>
+                      <span style="font-size: 85%;">Quản lý nhân viên</span>
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['/spaces/list']">
+                      <i class="fas fa-bars me-2"></i>
+                      <span style="font-size: 85%">Quản lý mặt bằng</span>
+                    </a>
+
+
+
+                  </ng-template>
+                </li>
+
+                <a class="dropdown-item" [routerLink]="['/contract/list']">
+                  <i class="fas fa-bars me-2"></i>
+                  <span style="font-size: 85%">Quản lý hợp đồng</span>
+                </a>
+
+                <!--                <a class="dropdown-item" [routerLink]="['/employee/list']">-->
+                <!--                  <i class="fas fa-bars me-2"></i>-->
+                <!--                  <span style="font-size: 85%">Xem Thông Tin nhân viên</span>-->
+                <!--                </a>-->
+
+
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/appuser/create']">
+                    <i class="fas fa-bars me-2"></i>
+                    <span style="font-size: 85%">Đăng ký tài khoản</span>
+                  </a>
+                </li>
+
+
+                <li class="w-100">
+                  <a class="dropdown-item" [routerLink]="['/employee/update', idEmployee]">
+                    <!--            <a class="dropdown-item" [routerLink]="['/employee/detail/ ' , idEmployee]">-->
+
+                    <i class="fas fa-user me-2"></i>
+                    <span style="font-size: 85%">Chỉnh sửa thông tin cá nhân</span>
+                  </a>
+                </li>
+
+                <li class="w-100">
+                  <a class="dropdown-item  " (click)="logout()">
+                    <i class="fas fa-sign-out-alt me-2 "></i>
+                    <span style="font-size: 85%">Đăng xuất</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ng-template>
+          <ng-template #wrong>
+            <li class="nav-item d-flex ">
+              <a class="navbar-brand  fw-bold" style="cursor: pointer;" [routerLink]="['/security/login']" >Đăng
+                nhập</a>
+            </li>
+            <span class="reline me-3"></span>
+          </ng-template>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
