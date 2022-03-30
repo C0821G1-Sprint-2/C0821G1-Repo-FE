@@ -1,1 +1,135 @@
-<p>employee-edit works!</p>
+<div>
+  <section class="vh-100">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8">
+          <div class="card text-black">
+
+            <div class="form-personal card-body p-md-5">
+
+              <p class="title-page text-center mb-5 mx-1 mx-md-4 mt-4">Chỉnh sửa nhân viên</p>
+
+              <div class="row justify-content-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+
+                  <form class="mx-1 mx-md-4">
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label fw-bold" for="accountName">Mã nhân viên<span class="error">(*)</span></label>
+                        <input type="text" id="accountName" class="form-control"
+                               value="NV-001"/>
+                      </div>
+                    </div>
+                    <span>Mã nhân viên không được để trống.</span>
+
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label fw-bold" for="fullName">Họ và tên<span class="error">(*)</span></label>
+                        <input type="text" id="fullName" class="form-control"
+                               value="Nguyễn Thị Anh"/>
+                      </div>
+                    </div>
+                    <span>Họ và tên không được để trống.</span>
+
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label fw-bold" for="address">Ngày sinh<span class="error">(*)</span></label>
+                        <input type="text" id="address" class="form-control"
+                               value="20/10/1999"/>
+                      </div>
+                    </div>
+                    <span>Ngày sinh không được để trống.</span>
+
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <label class="form-label fw-bold mb-0 me-4">Giới tính</label>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="femaleGender"
+                            value="option1"
+                          />
+                          <label class="form-check-label" for="femaleGender">Nam</label>
+                        </div>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="maleGender"
+                            value="option2"
+                            checked
+                          />
+                          <label class="form-check-label" for="maleGender">Nữ</label>
+                        </div>
+                      </div>
+                    </div>
+                    <span>Giới tính không được để trống.</span>
+
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label fw-bold" for="phoneNumber">Số điện
+                          thoại<span class="error">(*)</span></label>
+                        <input type="text" id="phoneNumber" class="form-control"
+                               value="090501192"/>
+                      </div>
+                    </div>
+                    <span>Số điện thoại không được để trống.</span>
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label fw-bold" for="birthDay">Địa chỉ<span class="error">(*)</span></label>
+                        <input type="text" id="birthDay" class="form-control"
+                               value="Quảng Nam">
+                      </div>
+                    </div>
+                    <span>Địa chỉ không được để trống.</span>
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label fw-bold" for="position">Chức vụ<span class="error">(*)</span></label>
+                      <div class="form-personal">
+                        <select class="form-select" id="position" aria-label="Default select example" style="width: 320px">
+                          <option selected>Chức vụ</option>
+                          <option value="1">Quản lý</option>
+                          <option value="2">Nhân viên</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <span>Chức vụ không được để trống.</span>
+                  </form>
+
+                </div>
+
+                <div class="col-lg-6 d-flex align-items-stretch justify-content-center order-1 order-lg-2">
+                  <div class="row">
+                    <div class="col-12">
+                      <img src="a.gif" style="width: 300px; height: 300px; margin-bottom: 20px">
+                      <input type="file" id="image" class="form-control form-control-lg"
+                             style="width: 300px" />
+                      <!--                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
+                      <!--                                             class="img-fluid" alt="Sample image" />-->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
+                <button type="button" class="btn btn-primary text-white">
+                  Chỉnh sửa
+                </button>
+                <button type="button" class="btn btn-secondary ms-lg-3">
+                  Hủy bỏ
+
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
