@@ -93,38 +93,6 @@ export class EquipmentListComponent implements OnInit {
   searchEquipment(value: any) {
     console.log('hello    '+value);
     this.keywordForm.controls.keyword.patchValue(value);
-    if (this.keywordForm.controls.keyword.value){
-      this.ngOnInit()
-      // this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
-      //   console.log(data);
-      //   if (data === null) {
-      //     this.message = 'Not found !!!';
-      //     console.log(this.message);
-      //   } else {
-      //     this.equipment = data.content;
-      //     this.totalPages = data.totalPages;
-      //     this.pageNumber = data.pageable.pageNumber;
-      //     this.size = data.size;
-      //     this.page = data.pageable.pageNumber;
-      //     this.message = '';
-      //   }
-      // })
-    } else {
-      this.ngOnInit()
-      // this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
-      //   console.log(data);
-      //   if (data === null) {
-      //     this.message = 'Not found !!!';
-      //     console.log(this.message);
-      //   } else {
-      //     this.equipment = data.content;
-      //     this.totalPages = data.totalPages;
-      //     this.pageNumber = data.pageable.pageNumber;
-      //     this.size = data.size;
-      //     this.page = data.pageable.pageNumber;
-      //     this.message = '';
-      //   }
-      // })
-    }
+    this.ngOnInit()
   }
 }
