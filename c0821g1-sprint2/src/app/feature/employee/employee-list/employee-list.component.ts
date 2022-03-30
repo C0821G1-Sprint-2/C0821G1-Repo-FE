@@ -9,15 +9,70 @@ import {Employee} from '../../../model/employee';
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[];
+  page = 0;
+  totalPages: number;
+  pageNumber: number;
+  size = 0;
+  flag = false;
+  checkDeleteFlag = false;
+  message: string;
+  keyword = '';
 
   constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
+    this.flag = false;
     this.employeeService.findAllEmployee().subscribe(value => {
-      this.employees = value;
-      console.log(this.employees);
+      if (value === null) {
+        this.message = 'Not found !!!';
+        console.log(this.message);
+      } else {
+        this.employees = value['content'];
+        this.totalPages = value['totalPages'];
+        console.log('totalPage' + this.totalPages);
+        this.size = value['size'];
+        console.log('Size' + this.size);
+        this.page = value['pageable']['pageNumber'];
+        console.log('Page' + this.page);
+        this.message = '';
+        console.log(value);
+      }
     });
+    // this.employeeService.findAllEmployeeByKeyword(this.page, this.keyword).subscribe(value => {
+    //   if (value === null) {
+    //     this.message = 'Not found !!!';
+    //     console.log(this.message);
+    //   } else {
+    //     this.employees = value['content'];
+    //     this.totalPages = value['totalPages'];
+    //     console.log('totalPage' + this.totalPages);
+    //     this.size = value['size'];
+    //     console.log('Size' + this.size);
+    //     this.page = value['pageable']['pageNumber'];
+    //     console.log('Page' + this.page);
+    //     this.message = '';
+    //     console.log(value);
+    //   }
+    // });
+  }
+  previousClick(index) {
+    this.page = this.page - index;
+    this.ngOnInit();
+  }
+
+  findPaginnation(value: number) {
+    if (value === this.totalPages) {
+      this.page = value - 1;
+    }
+    this.ngOnInit();
+
+  }
+
+  nextClick(index) {
+    this.page = this.page + index;
+    console.log('next pay ' + this.page);
+    this.ngOnInit();
   }
 
 }

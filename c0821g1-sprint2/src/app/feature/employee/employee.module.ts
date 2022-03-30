@@ -7,6 +7,7 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
 import { EmployeeCreateAcountComponent } from './employee-create-acount/employee-create-acount.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EmployeeCreateAcountComponent } from './employee-create-acount/employee
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    FormsModule
   ]
 })
 export class EmployeeModule { }
