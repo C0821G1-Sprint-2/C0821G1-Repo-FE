@@ -16,4 +16,10 @@ export class EquipmentService {
   saveNewEquipment(equipment: Equipment): Observable<void> {
     return this.http.post<void>(this.API_URL + '/add', equipment);
   }
+  editEquipment(equipmentEdit: Equipment): Observable<void> {
+    return this.http.patch<void>(this.API_URL + '/edit/' + equipmentEdit.id, equipmentEdit);
+  }
+  getEquipmentById(equipmentId): Observable<any> {
+    return this.http.get(this.API_URL + '/find/' + equipmentId);
+  }
 }
