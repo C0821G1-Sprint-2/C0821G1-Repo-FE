@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: '',
     component: EquipmentListBodyComponent
-  }
+  },
+  {
     path: 'customer',
     loadChildren: () => import('./feature/customer/customer.module').then(module => module.CustomerModule)
   }
