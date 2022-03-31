@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./equipment-list.component.css']
 })
 export class EquipmentListComponent implements OnInit {
-   page = 0;
+  page = 0;
   name = '';
   code = '';
   start = '';
@@ -91,12 +91,9 @@ export class EquipmentListComponent implements OnInit {
 
 
   searchEquipment(value: any) {
-    var node = document.getElementsByTagName('h1');
-    console.log(node);
-
+    console.log('hello    ' + value);
     this.keywordForm.controls.keyword.patchValue(value);
-    this.ngOnInit()
-  }
+    this.ngOnInit();
 
-  //Lanh
+  }
 }
