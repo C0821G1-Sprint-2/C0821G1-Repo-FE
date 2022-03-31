@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import {EmployeeModule} from './feature/employee/employee.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    EmployeeModule
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [],

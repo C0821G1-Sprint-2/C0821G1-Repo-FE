@@ -22,6 +22,14 @@ const routes: Routes = [
     path: '',
     component: EquipmentListBodyComponent
   }
+    path: 'customer',
+    loadChildren: () => import('./feature/customer/customer.module').then(module => module.CustomerModule)
+  }
+  , {
+    // path: employee,
+    path: 'employee',
+    loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
+  }
 ];
 
 @NgModule({

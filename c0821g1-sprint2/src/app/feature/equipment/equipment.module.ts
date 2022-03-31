@@ -10,13 +10,15 @@ import { EquipmentListComponent } from './equipment-list/equipment-list.componen
 import { EquipmentListBodyComponent } from './equipment-list-body/equipment-list-body.component';
 import {FormsModule} from '@angular/forms';
 
-
 @NgModule({
-  declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent, EquipmentListBodyComponent],
-    imports: [
-        CommonModule,
-        EquipmentRoutingModule,
-        FormsModule
-    ]
+  declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent],
+  imports: [
+    CommonModule,
+    EquipmentRoutingModule,
+    RouterModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
+]
 })
 export class EquipmentModule { }

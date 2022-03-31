@@ -8,6 +8,7 @@ export class Cart {
   quantity: number;
   totalMoney: number;
   equipment: Equipment;
+  image: string
   customer: Customer;
 
   constructor() {
