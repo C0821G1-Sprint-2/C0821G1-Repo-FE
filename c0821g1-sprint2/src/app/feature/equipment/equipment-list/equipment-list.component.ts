@@ -91,8 +91,12 @@ export class EquipmentListComponent implements OnInit {
 
 
   searchEquipment(value: any) {
-    console.log('hello    '+value);
+    var node = document.getElementsByTagName('h1');
+    console.log(node);
+
     this.keywordForm.controls.keyword.patchValue(value);
     this.ngOnInit()
   }
+
+  //Lanh
 }

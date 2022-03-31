@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "c0821g1-sprint2"
+  "defaultProject": "c0821g1-sprint2",
+  "cli": {
+    "analytics": false
+  }
 }
