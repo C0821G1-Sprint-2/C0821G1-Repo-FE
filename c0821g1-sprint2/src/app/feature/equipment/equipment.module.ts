@@ -8,17 +8,19 @@ import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.co
 import { EquipmentDeleteComponent } from './equipment-delete/equipment-delete.component';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 import { EquipmentListBodyComponent } from './equipment-list-body/equipment-list-body.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from "@angular/material/dialog";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     EquipmentRoutingModule,
     RouterModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule
+    MatDialogModule
 ]
 })
 export class EquipmentModule { }
