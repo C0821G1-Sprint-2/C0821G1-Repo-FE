@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import {EmployeeModule} from './feature/employee/employee.module';
 
 @NgModule({
@@ -16,6 +17,7 @@ import {EmployeeModule} from './feature/employee/employee.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

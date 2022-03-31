@@ -15,6 +15,9 @@ export class EquipmentService {
     return this.httpClient.get<Equipment>(this.API_URL + '/equipment/find-by-id/' + id);
   }
 
+  equipmentListBody(page: number): Observable<any>{
+    return this.httpClient.get<any>(this.API_URL + '/equipment/list?&page=' + page);
+    
   findAllEquipment(page, equipment): Observable<any> {
     return this.httpClient.get(this.API_URL + '/equipment/equipment-list/?page=' + page + '&keyword=' + equipment);
   }
