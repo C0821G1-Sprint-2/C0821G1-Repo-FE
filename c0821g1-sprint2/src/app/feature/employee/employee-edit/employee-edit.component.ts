@@ -8,6 +8,7 @@ import {EmployeeService} from '../../../service/employee.service';
 import {EmployeePositionService} from '../../../service/employee-position.service';
 import Swal from 'sweetalert2';
 import {finalize} from 'rxjs/operators';
+import {UploadService} from '../../../service/upload.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -37,7 +38,8 @@ export class EmployeeEditComponent implements OnInit {
               private router: Router,
               private employeePositionService: EmployeePositionService,
               private activatedRoute: ActivatedRoute,
-              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+              @Inject(UploadService) private uploadService: UploadService) {
   }
 
   ngOnInit(): void {

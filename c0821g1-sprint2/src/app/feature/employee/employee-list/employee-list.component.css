@@ -1,8 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
-body {
-  background-image: url('src/assets/images/gãy.PNG');
-  font-family: "Roboto", sans-serif;
-}
 
 .main-content {
   padding-top: 50px;

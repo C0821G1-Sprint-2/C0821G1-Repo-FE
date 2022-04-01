@@ -7,7 +7,7 @@ import {EmployeePosition} from '../model/employee-position';
   providedIn: 'root'
 })
 export class EmployeePositionService {
-  API_URL = 'http://localhost:8080/employee-position/list';
+  API_URL = 'http://localhost:8080/api/employee-position/list';
 
   constructor(private httpClient: HttpClient) { }
   findAllEmployeePosition(): Observable<EmployeePosition[]>{

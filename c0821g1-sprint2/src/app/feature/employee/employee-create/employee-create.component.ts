@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import Swal from 'sweetalert2';
+import {UploadService} from '../../../service/upload.service';
 
 
 @Component({
@@ -22,10 +23,13 @@ export class EmployeeCreateComponent implements OnInit {
   id: string;
   file: string;
   employeeList: Array<Employee>;
+  loading = false;
+  employee: Employee;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
-              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+              @Inject(UploadService) private uploadService: UploadService) {
     this.employeeCreateForm = new FormGroup({
       employeeCode: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
       employeeName: new FormControl('', [Validators.required, Validators.maxLength(40)]),
@@ -62,8 +66,8 @@ export class EmployeeCreateComponent implements OnInit {
             console.log(value);
           }, error => {
           }, () => {
-            this.callToast(),
-              this.router.navigateByUrl('/employee/list');
+            this.callToast();
+            this.router.navigateByUrl('/api/employee/list');
           });
         });
       })
@@ -71,6 +75,11 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.uploadService.getImageDetailList();
+  }
+
+  get employeeImage() {
+    return this.employeeCreateForm.get('employeeImage');
   }
 
   private callToast() {
@@ -81,5 +90,17 @@ export class EmployeeCreateComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000
     });
+  }
+
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
+    }
   }
 }

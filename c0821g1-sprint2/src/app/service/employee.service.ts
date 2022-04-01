@@ -8,28 +8,31 @@ import {Employee} from '../model/employee';
 })
 export class EmployeeService {
 
-  API_URL = 'http://localhost:8080/employee';
+  API_URL = 'http://localhost:8080/api/employee';
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
   findById(id: number): Observable<Employee> {
-    return this.http.get<Employee>(this.API_URL + '/detail/' + id);
+    return this.httpClient.get<Employee>(this.API_URL + '/detail/' + id);
   }
 
   getEmployee(id: number): Observable<any> {
-    return this.http.get(this.API_URL + '/detail/' + id);
+    return this.httpClient.get(this.API_URL + '/detail/' + id);
   }
 
   saveNewEmployee(newEmployee: Employee): Observable<void> {
-    return this.http.post<void>(this.API_URL + '/create', newEmployee);
+    return this.httpClient.post<void>(this.API_URL + '/create', newEmployee);
   }
 
   editEmployee(employeeEdit: Employee): Observable<void> {
-    return this.http.patch<void>(this.API_URL + '/update/' + employeeEdit.id, employeeEdit);
+    return this.httpClient.patch<void>(this.API_URL + '/update/' + employeeEdit.id, employeeEdit);
   }
 
   findAllEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.API_URL + '/list');
+    return this.httpClient.get<Employee[]>(this.API_URL + '/list');
+  }
+  findAllEmployeeByKeyword(page, keyword): Observable<any> {
+    return this.httpClient.get(this.API_URL + '/-list/?page=' + page + '&keyword=' + keyword);
   }
 }
