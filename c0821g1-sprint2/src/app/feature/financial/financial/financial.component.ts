@@ -1,9 +1,10 @@
 // @ts-ignore
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {Financial} from "../../../model/financial";
 import {FinancialService} from "../../../service/financial.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as Chart from 'chart.js';
+import * as XLSX from "xlsx";
 
 
 // @ts-ignore
@@ -13,6 +14,9 @@ import * as Chart from 'chart.js';
   styleUrls: ['./financial.component.css']
 })
 export class FinancialComponent implements OnInit {
+  @ViewChild('table') table: ElementRef;
+  fileName = 'Financial.xlsx';
+
   title = 'chartjsangular';
   canvas: any;
   ctx: any;
@@ -145,5 +149,18 @@ export class FinancialComponent implements OnInit {
         this.cancel = 0;
       })
     }
+  }
+
+  export() {
+    /* pass here the table id */
+    // let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(this.table.nativeElement);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 }
