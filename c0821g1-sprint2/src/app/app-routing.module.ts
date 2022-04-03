@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'security',
     loadChildren: () => import('./feature/security/security.module').then(module => module.SecurityModule)
+  },
+  {
+    path: 'employee',
+    loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
   }
 ];
 

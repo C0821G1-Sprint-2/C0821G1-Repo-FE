@@ -3,4 +3,5 @@ export interface AppUser {
   password: string;
   deleted: boolean;
   username: string;
+  employeeCode: string;
 }

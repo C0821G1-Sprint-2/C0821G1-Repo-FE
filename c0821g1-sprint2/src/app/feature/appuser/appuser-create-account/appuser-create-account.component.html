@@ -29,20 +29,18 @@
 
               <div class="col-lg-8 order-2 order-lg-1">
 
-                <form  [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+                <form  [formGroup]="accountForm" (ngSubmit)="saveAppUser()">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-solid fa-user-tie fa-lg me-3 fa-fw mt-lg-4"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <label class="form-label  fw-bold" for="employeeCode">Mã nhân viên</label>
+                      <label class="form-label  fw-bold" for="exampleDataList1">Mã nhân viên</label>
 <!--                      <input type="text" id="employeeCode" class="form-control" formControlName="employeeCode"-->
 <!--                             placeholder="Tài khoản"/>-->
-                      <select id="employeeCode" class="form-control" formControlName="employeeCode">
-                        <option></option>
-                        <option>NV-1234</option>
-                        <option>NV-1235</option>
-                        <option>NV-1236</option>
-                      </select>
+                      <input  class="form-control form-control-lg " [(ngModel)]="code"
+                              [ngModelOptions]="{standalone: true}"
+                            id="exampleDataList1" placeholder="--Chọn--" (change)="name()">
+<!--                      <datalist ngDefaultControl id="datalistOptions1" formControlName="employeeId">-->
                     </div>
                   </div>
 
@@ -53,6 +51,9 @@
                       <span class="text-danger">(*)</span>
                       <input type="text" id="currentPass" class="form-control" formControlName="username"
                              placeholder="Tài khoản"/>
+                      <small style="color: red"
+                             *ngIf="accountForm.controls.username.hasError('required') && accountForm.controls.username.touched">
+                        Tên tài khoản không được để trống.</small>
                     </div>
                   </div>
 
@@ -63,11 +64,14 @@
                       <span class="text-danger">(*)</span>
                       <input type="password" id="newPass" class="form-control" formControlName="password"
                              placeholder="Mật khẩu"/>
+                      <small style="color: red"
+                             *ngIf="accountForm.controls. password.hasError('required') && accountForm.controls. password.touched">
+                        Mật khẩu không được để trống.</small>
                     </div>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="button"
+                    <button type="submit"  [disabled]="!accountForm.valid"
                             class="btn btn-info text-white btn-outline-success ms-lg-3">
                       Đăng ký
                     </button>
