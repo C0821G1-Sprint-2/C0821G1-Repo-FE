@@ -5,5 +5,6 @@ export interface Customer {
   email: string;
   phone: string;
   address: string;
+  addressHome: string;
   deleteFlag: string;
 }

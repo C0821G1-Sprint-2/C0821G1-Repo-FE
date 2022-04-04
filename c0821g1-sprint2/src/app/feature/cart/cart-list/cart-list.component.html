@@ -1,10 +1,9 @@
 <div class="container">
   <section class="shopping-cart">
     <h1 class="heading">GIỎ HÀNG</h1>
-
     <table>
       <thead>
-<!--      <th>Ảnh sản phẩm</th>-->
+      <th>Ảnh sản phẩm</th>
       <th>Tên sản phẩm</th>
       <th>Giá sản phẩm</th>
       <th>Số lượng</th>
@@ -12,32 +11,39 @@
       <th>Chức năng</th>
       </thead>
       <tbody>
-      <tr *ngFor="let supplies of cartList ; index as i">
-        <input type="hidden" value="{{supplies.id}}">
-<!--        <td><img-->
-<!--          src="{{supplies.equipment.image}}"-->
-<!--          height="100px" width="100px" alt=""/></td>-->
-        <td>{{supplies.code}}</td>
-        <td>{{supplies.totalMoney|number}}</td>
+      <tr *ngFor="let cart of cartList ; index as i">
+        <input type="hidden" value="{{cart.id}}">
+        <td><img
+          src="{{cart.image}}"
+          height="100px" width="100px" alt=""/></td>
+        <td>{{cart.code}}</td>
+        <td>{{cart.totalMoney|number}}</td>
         <td>
           <label>
-            <input type="number" name="update_quantity" min="1" value="2">
-            <input [min]="0" type="number" [(ngModel)]="supplies.quantity" class="form-control" (change)="getTotalMoney(supplies.id,supplies.quantity)" >
+            <input [min]="0" type="number" [(ngModel)]="cart.quantity" class="form-control">
           </label>
         </td>
-        <td>{{supplies.quantity*supplies.totalMoney| number}}</td>
-        <td><a href="#" class="delete-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelId" (click)="addIdToDelete(supplies.id,supplies.code)">Xóa</a></td>
+        <td>{{cart.quantity * cart.totalMoney|number}}</td>
+
+        <td>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn delete-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                  (click)="addIdToDelete(cart.id,cart.code)">
+            Xóa
+          </button>
+        </td>
       </tr>
       <tr class="table-bottom">
         <td><a href="#" class="option-btn">Cửa hàng</a></td>
         <td colspan="3">Tổng hóa đơn</td>
-        <td><span class="totalMoney" [(ngModel)]="totalMoney">{{totalMoney|number}}</span></td>
+        <td><span>{{totalMoneyAll|number}}</span></td>
         <td>
           <div class="dropdown">
             <a class="dropbtn dropdown-toggle dropdown-toggle-split option-btn" style="color: white">Thanh Toán</a>
             <div class="dropdown-content">
               <a class="dropdown-item" href="#">Thanh Toán Tiền Mặt</a>
-              <a class="dropdown-item"  [routerLink]="['/payment',totalMoney]" (click)="moveToPaymentPage()" id="thanhToan" >Thanh Toán PAYPAL</a>
+              <a class="dropdown-item" [routerLink]="['/payment',totalMoneyAll]" (click)="moveToPaymentPage()">Thanh
+                Toán PAYPAL</a>
               <a class="dropdown-item" href="#">Thanh Toán VNPAY</a>
               <a class="dropdown-item" href="#">Thanh Toán ZALOPAY</a>
               <a class="dropdown-item" href="#">Thanh Toán MOMO</a>
@@ -49,23 +55,37 @@
     </table>
   </section>
 </div>
-<!-- Modal delete cart -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5  class="text-danger modal-title">Xóa Sản Phẩm </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Bạn có muốn xóa sản phẩm <strong>{{nameDeleteCart}}</strong> ra khỏi đơn hàng không ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        <button (click)="deleteCart(this.idDeleteCart)" data-dismiss="modal" type="button" class="btn btn-danger">Xóa</button>
+<!-- Modal -->
+<div class="row">
+  <div class="col-12 text-center">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content row">
+          <div class="col-12">
+            <br>
+            <h1 class="text-danger text-center">Xóa Sản Phẩm </h1>
+            <br>
+            <br>
+            <p class="text-start">
+              Bạn có muốn xóa sản phẩm <strong>{{nameDeleteCart}}</strong> ra khỏi đơn hàng không ?
+            </p>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-4">
+              <button type="button" style="margin-top: 1px" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+            <div class="col-4 ms-1">
+              <button type="button" style="margin-top: 1px" class="btn delete-btn" (click)="deleteCart(this.idDeleteCart)">Xóa</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+

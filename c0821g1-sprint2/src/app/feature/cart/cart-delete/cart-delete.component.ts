@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-cart-delete',
@@ -6,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart-delete.component.css']
 })
 export class CartDeleteComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
