@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import {EmployeeModule} from './feature/employee/employee.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
@@ -18,6 +19,7 @@ import {environment} from '../environments/environment';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

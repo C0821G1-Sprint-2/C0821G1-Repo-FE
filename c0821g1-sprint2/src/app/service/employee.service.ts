@@ -14,7 +14,7 @@ export class EmployeeService {
   }
 
   findById(id: number): Observable<Employee> {
-    return this.httpClient.get<Employee>(this.API_URL + '/detail/' + id);
+    return this.httpClient.get<Employee>(this.API_URL + '/' + id);
   }
 
   getEmployee(id: number): Observable<any> {
@@ -25,14 +25,15 @@ export class EmployeeService {
     return this.httpClient.post<void>(this.API_URL + '/create', newEmployee);
   }
 
-  editEmployee(employeeEdit: Employee): Observable<void> {
-    return this.httpClient.patch<void>(this.API_URL + '/update/' + employeeEdit.id, employeeEdit);
+  editEmployee(id: number, employeeEdit: Employee): Observable<void> {
+    return this.httpClient.patch<void>(this.API_URL + '/update/' + id, employeeEdit);
   }
 
   findAllEmployee(): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(this.API_URL + '/list');
   }
+
   findAllEmployeeByKeyword(page, keyword): Observable<any> {
-    return this.httpClient.get(this.API_URL + '/-list/?page=' + page + '&keyword=' + keyword);
+    return this.httpClient.get(this.API_URL + '/list/?page=' + page + '&keyword=' + keyword);
   }
 }

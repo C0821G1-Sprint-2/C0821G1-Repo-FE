@@ -3,12 +3,13 @@ import {Employee} from '../../../model/employee';
 import {EmployeePosition} from '../../../model/employee-position';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../../service/employee.service';
 import {EmployeePositionService} from '../../../service/employee-position.service';
 import Swal from 'sweetalert2';
 import {finalize} from 'rxjs/operators';
 import {UploadService} from '../../../service/upload.service';
+import {NgxSpinnerService} from 'ngx-bootstrap-spinner';
 
 @Component({
   selector: 'app-employee-edit',
@@ -23,57 +24,69 @@ export class EmployeeEditComponent implements OnInit {
   private selectedImage: any;
   loading = false;
   employee: Employee;
-  employeeEditForm = new FormGroup({
-    employeeCode: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
-    employeeName: new FormControl(''),
-    employeeDateOfBirth: new FormControl('', [Validators.required]),
-    employeeAddress: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    employeePhone: new FormControl('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
-    employeeGender: new FormControl(),
-    employeePosition: new FormControl('', Validators.required),
-    employeeImage: new FormControl('')
-  });
+  idEdit: number;
+  employeeEditForm: FormGroup;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
               private employeePositionService: EmployeePositionService,
               private activatedRoute: ActivatedRoute,
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
-              @Inject(UploadService) private uploadService: UploadService) {
+              @Inject(UploadService) private uploadService: UploadService,
+              private snipper: NgxSpinnerService) {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.idEdit = +paramMap.get('id');
+      const employee = this.getEmployee(this.idEdit);
+    });
   }
 
   ngOnInit(): void {
-    this.employeePositionService.findAllEmployeePosition().subscribe(value => {
-      this.employeePositionList = value;
-      console.log(this.employeePositionList);
+    this.getAllEmployeePosition();
+  }
 
-      const employeeEditId = this.activatedRoute.snapshot.params.id;
-      this.employeeService.findById(employeeEditId).subscribe(value2 => {
-        this.employeeEdit = value2;
-        console.log(this.employeeEdit);
-        this.employeeEditForm.patchValue(
-          this.employeeEdit
-        );
-      });
-    });
+  getEmployee(id: number) {
+    return this.employeeService.findById(id).subscribe(employee => {
+      this.employeeEditForm = new FormGroup({
+        id: new FormControl(employee.id),
+        code: new FormControl(employee.code, [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
+        name: new FormControl(employee.name, [Validators.required, Validators.maxLength(40)]),
+        dateOfBirth: new FormControl(employee.dateOfBirth, [Validators.required, this.checkMinAge]),
+        gender: new FormControl(employee.gender),
+        address: new FormControl(employee.address, [Validators.required, Validators.maxLength(40)]),
+        phone: new FormControl(employee.phone, [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+        image: new FormControl(employee.image),
+        employeePosition: new FormGroup({
+          id: new FormControl(employee.employeePosition.id,[Validators.required])
+        })
+      })
+    })
+  }
+
+  getAllEmployeePosition() {
+    this.employeePositionService.findAllEmployeePosition().subscribe(value => {
+        this.employeePositionList = value;
+      }
+    );
   }
 
   get employeeImage() {
     return this.employeeEditForm.get('employeeImage');
   }
-  editEmployee() {
-    const editEmployee = Object.assign({}, this.employeeEditForm.value);
-    editEmployee.employeeId = this.employeeEdit.id;
-    editEmployee.employeeDeleteFlag = this.employeeEdit.deleteFlag;
-    this.employeeService.editEmployee(editEmployee).subscribe(value => {
-        this.callToast();
-      },
-      error => {
-        console.log(error);
-        this.validateCode = error.error.code;
-        alert(this.validateCode);
-      }, () => {
-        this.router.navigateByUrl('/employee/list');
+
+  updateEmployee(id: number) {
+    const employee = this.employeeEditForm.value;
+    this.employeeService.editEmployee(id, employee).subscribe(() => {
+      this.snipper.show()
+      this.router.navigate(['/employee/list']);
+      this.callToast();
+    }, error => {
+
+    },
+      () => {
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.snipper.hide();
+        }, 10000)
       });
   }
 
@@ -95,7 +108,7 @@ export class EmployeeEditComponent implements OnInit {
     this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
-          this.employeeEditForm.patchValue({employeeImage: url});
+          this.employeeEditForm.patchValue({image: url});
           this.employee.image = url;
           this.loading = false;
         });

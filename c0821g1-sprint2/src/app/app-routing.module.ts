@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {EquipmentListBodyComponent} from './feature/equipment/equipment-list-body/equipment-list-body.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./feature/payment/payment.module').then(module => module.PaymentModule)
   },
   {
-
+    path: '',
+    component: EquipmentListBodyComponent
+  },
+  {
     path: 'customer',
     loadChildren: () => import('./feature/customer/customer.module').then(module => module.CustomerModule)
   }
@@ -27,7 +31,6 @@ const routes: Routes = [
     path: 'employee',
     loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
   }
-
 ];
 
 @NgModule({

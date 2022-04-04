@@ -9,10 +9,14 @@ import {Equipment} from '../model/equipment';
 })
 export class EquipmentService {
 
-  API_URL = 'http://localhost:8080';
+  API_URL = 'http://localhost:8080/api';
   constructor(private httpClient: HttpClient) { }
   findById(id: number): Observable<Equipment> {
     return this.httpClient.get<Equipment>(this.API_URL + '/equipment/find-by-id/' + id);
+  }
+
+  equipmentListBody(page: number): Observable<any>{
+    return this.httpClient.get<any>(this.API_URL + '/equipment/list?page=' + page);
   }
 
   findAllEquipment(page, equipment): Observable<any> {

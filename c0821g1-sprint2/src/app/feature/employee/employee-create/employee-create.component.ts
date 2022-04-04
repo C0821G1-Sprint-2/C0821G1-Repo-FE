@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../../../model/employee';
 import {EmployeePosition} from '../../../model/employee-position';
 import {EmployeeService} from '../../../service/employee.service';
@@ -8,6 +8,7 @@ import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import Swal from 'sweetalert2';
 import {UploadService} from '../../../service/upload.service';
+import {EmployeePositionService} from '../../../service/employee-position.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import {UploadService} from '../../../service/upload.service';
 })
 export class EmployeeCreateComponent implements OnInit {
   employeeCreateForm: FormGroup;
-  employeePositionList: Employee[];
+  employeePositionList: EmployeePosition[];
   selectedImage: any = null;
   url: string;
   id: string;
@@ -29,26 +30,54 @@ export class EmployeeCreateComponent implements OnInit {
   constructor(private employeeService: EmployeeService,
               private router: Router,
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
-              @Inject(UploadService) private uploadService: UploadService) {
+              @Inject(UploadService) private uploadService: UploadService,
+              private employeePositionService: EmployeePositionService) {
     this.employeeCreateForm = new FormGroup({
-      employeeCode: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
-      employeeName: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-      employeeDateOfBirth: new FormControl('', [Validators.required]),
-      employeeGender: new FormControl('Nam'),
-      employeeAddress: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-      employeePhone: new FormControl('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
-      employeeImage: new FormControl(''),
-      employeePosition: new FormControl('', Validators.required)
+      code: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
+      dateOfBirth: new FormControl('', [Validators.required, this.checkMinAge]),
+      gender: new FormControl('Nam'),
+      address: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
+      phone: new FormControl('', [Validators.required, Validators.pattern('^(090|091)[0-9]+$'), Validators.maxLength(12), Validators.minLength(10)]),
+      image: new FormControl(''),
+      employeePosition: new FormGroup({
+        id: new FormControl('', [Validators.required])
+      })
     });
     this.employeeService.findAllEmployee().subscribe(value => {
-      this.employeePositionList = value;
-      console.log(this.employeePositionList);
+      this.employeeList = value;
     });
     this.employeeService.findAllEmployee().subscribe(value => {
       this.employeeList = value;
       console.log(this.employeeList);
     });
   }
+
+
+  get idPosition() {
+    return this.employeeCreateForm.get('idPosition');
+  }
+
+  get code() {
+    return this.employeeCreateForm.get('code');
+  }
+
+  get dateOfBirth() {
+    return this.employeeCreateForm.get('dateOfBirth');
+  }
+
+  get gender() {
+    return this.employeeCreateForm.get('gender');
+  }
+
+  get address() {
+    return this.employeeCreateForm.get('address');
+  }
+
+  get phone() {
+    return this.employeeCreateForm.get('phone');
+  }
+
 
   saveNewEmployee() {
     const name = this.selectedImage.name;
@@ -57,7 +86,7 @@ export class EmployeeCreateComponent implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           console.log(url);
-          this.employeeCreateForm.patchValue({employeeImage: url});
+          this.employeeCreateForm.patchValue({image: url});
           const newEmployee = Object.assign({}, this.employeeCreateForm.value);
           console.log(newEmployee);
           this.employeeService.saveNewEmployee(newEmployee).subscribe(value => {
@@ -67,7 +96,7 @@ export class EmployeeCreateComponent implements OnInit {
           }, error => {
           }, () => {
             this.callToast();
-            this.router.navigateByUrl('/api/employee/list');
+            this.router.navigateByUrl('/employee/list');
           });
         });
       })
@@ -76,10 +105,11 @@ export class EmployeeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.uploadService.getImageDetailList();
+    this.getAllEmployeePosition();
   }
 
-  get employeeImage() {
-    return this.employeeCreateForm.get('employeeImage');
+  get image() {
+    return this.employeeCreateForm.get('image');
   }
 
   private callToast() {
@@ -102,5 +132,20 @@ export class EmployeeCreateComponent implements OnInit {
         this.url = event.target.result;
       };
     }
+  }
+
+  getAllEmployeePosition() {
+    this.employeePositionService.findAllEmployeePosition().subscribe(value => {
+        this.employeePositionList = value;
+        console.log(this.employeePositionList);
+      }
+    );
+  }
+
+  checkMinAge(abstractControl: AbstractControl): any {
+    const dateOfBirth = abstractControl.value;
+    const yearOfBirth = dateOfBirth.substr(0, 4);
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth >= 18 ? null : {under18: true};
   }
 }

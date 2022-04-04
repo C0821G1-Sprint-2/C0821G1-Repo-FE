@@ -10,8 +10,9 @@
 }
 
 .form-personal {
-  background-image: url('src/assets/images/gãy.PNG');
+  background-image: url('src/assets/images/pngtree-medical-security-technology-sense-blue-banner-image_261139.jpg');
   background-size: cover;
+  width: 100%;
 }
 
 body {
