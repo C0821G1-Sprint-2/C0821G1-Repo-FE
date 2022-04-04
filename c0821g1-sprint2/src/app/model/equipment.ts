@@ -1,9 +1,9 @@
 import {EquipmentType} from './equipment-type';
+import {Supplier} from './supplier';
 import {Introduce} from './introduce';
 import {TechnicalInformation} from './technical-information';
-import {Description} from './description';
 import {Certifications} from './certifications';
-import {Supplier} from './supplier';
+import {Description} from './description';
 
 export interface Equipment {
   id ?: number;

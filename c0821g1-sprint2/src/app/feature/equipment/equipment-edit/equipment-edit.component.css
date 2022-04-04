@@ -1,0 +1,18 @@
+.title-page{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 50px;
+  font-weight: bolder;
+  color: royalblue;
+}
+
+.form-personal {
+  background-image: url('src/assets/gãy.PNG');
+  background-size: cover;
+}
+
+body{
+  background-color: #7adfff;
+}
+.error{
+  color: #ff3e21;
+}

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {EquipmentService} from "../../../service/equipment.service";
-import {Equipment} from "../../../model/equipment";
-import {MatDialog} from "@angular/material/dialog";
-import {EquipmentDeleteComponent} from "../equipment-delete/equipment-delete.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
+
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {EquipmentDeleteComponent} from '../equipment-delete/equipment-delete.component';
+import {Equipment} from '../../../model/equipment';
+import {EquipmentService} from '../../../service/equipment.service';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-equipment-list',
@@ -29,14 +32,15 @@ export class EquipmentListComponent implements OnInit {
 
   constructor(private equipmentService: EquipmentService,
               private dialog: MatDialog,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private router: Router) {
       this.keywordForm = this.fb.group({
         keyword: ''
-      })
+      });
   }
 
   ngOnInit(): void {
-    this.equipmentService.findAllEquipment(this.page,this.keywordForm.controls.keyword.value).subscribe(data => {
+    this.equipmentService.findAllEquipment(this.page, this.keywordForm.controls.keyword.value).subscribe(data => {
       console.log(data);
       if (data === null) {
         this.message = 'Not found !!!';
@@ -49,7 +53,7 @@ export class EquipmentListComponent implements OnInit {
         this.page = data.pageable.pageNumber;
         this.message = '';
       }
-    })
+    });
   }
 
   openDialog(id: number) {
@@ -61,13 +65,13 @@ export class EquipmentListComponent implements OnInit {
         disableClose: true
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result == 'delete'){
-          this.ngOnInit()
+        if (result === 'delete'){
+          this.ngOnInit();
         }
       });
     }, error => {
       alert('Vật tư không tồn tại !');
-      this.ngOnInit()
+      this.ngOnInit();
     });
   }
 
@@ -95,5 +99,8 @@ export class EquipmentListComponent implements OnInit {
     this.keywordForm.controls.keyword.patchValue(value);
     this.ngOnInit();
 
+  }
+  editEquipment(id: number){
+    this.router.navigate(['/edit/' + id]);
   }
 }
