@@ -90,8 +90,7 @@
                 <div class="row">
                   <div class="col-12">
                     <label class="form-label fw-bold">Hình ảnh<span class="error">(*)</span></label>
-                    <input type="file" (change)="showPreview($event)" accept="*.png.jpg*" id="image"
-                           class="form-control form-control-lg" autocomplete="off" style="width: 250px"/>
+                    <input type="file" (change)="showPreview($event)" style="width: 250px"/>
                     <img [src] = "equipmentForm.controls.image.value"  style="width: 250px; height: 230px">
                   </div>
                 </div>

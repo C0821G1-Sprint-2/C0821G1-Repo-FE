@@ -54,7 +54,7 @@ export class EquipmentEditComponent implements OnInit {
         this.supplierList = value1;
         console.log(this.supplierList + 'dsdsdsđs22222');
         const equipmentEditId = this.activatedRoute.snapshot.params.id;
-        this.equipmentService.getEquipmentById(equipmentEditId).subscribe(value2 => {
+        this.equipmentService.findById(equipmentEditId).subscribe(value2 => {
           this.equipmentEdit = value2;
           console.log('ddddd=>' + value2);
           this.equipmentForm.patchValue(this.equipmentEdit);
@@ -96,7 +96,7 @@ export class EquipmentEditComponent implements OnInit {
     this.storage.upload(nameImg, this.selectImage).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
-          this.equipmentForm.patchValue({employeeImage: url});
+          this.equipmentForm.patchValue({image: url});
           this.equipment.image = url;
           this.loading = false;
         });

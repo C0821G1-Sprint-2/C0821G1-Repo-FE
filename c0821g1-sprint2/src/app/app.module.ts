@@ -8,12 +8,17 @@ import { FooterComponent } from './shared/footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EquipmentModule} from './feature/equipment/equipment.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import {EmployeeModule} from './feature/employee/employee.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,8 +26,12 @@ import {EquipmentModule} from './feature/equipment/equipment.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EquipmentModule
+    EquipmentModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    EmployeeModule
   ],
+  // providers: [authInterceptorProviders, CookieService],
   providers: [],
   bootstrap: [AppComponent]
 })
