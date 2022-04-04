@@ -9,12 +9,14 @@ import {EquipmentDetailComponent} from './equipment-detail/equipment-detail.comp
 import {EquipmentDeleteComponent} from './equipment-delete/equipment-delete.component';
 import {EquipmentListComponent} from './equipment-list/equipment-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import {RouterModule} from '@angular/router';
 // @ts-ignore
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment.prod';
 import {EquipmentListBodyComponent} from './equipment-list-body/equipment-list-body.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {NgxSpinnerModule} from 'ngx-bootstrap-spinner';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     RouterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
   ]
 })
 
