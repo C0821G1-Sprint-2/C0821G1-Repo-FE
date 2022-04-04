@@ -13,14 +13,14 @@
     </div>
     <div class="row">
       <div class="col-4">
-        <button type="button" class="btn btn-outline-success">+ Thêm mới</button>
+        <button type="submit" class="btn btn-outline-success" routerLink='/create'>+ Thêm mới</button>
 
       </div>
       <div class="col-8">
         <div class="uk-margin" style="display: flex; justify-content: end">
           <form>
-<!--            <input type="search" (ngModelChange)="searchEquipment(key.value)" #key="ngModel" ngModel-->
-<!--                   name="key" id="searchName" class="form-control mr-sm-2" placeholder="Tìm kiếm...">-->
+            <input type="search" (ngModelChange)="searchEquipment(key.value)" #key="ngModel" ngModel
+                   name="key" id="searchName" class="form-control mr-sm-2" placeholder="Tìm kiếm...">
           </form>
         </div>
       </div>
@@ -122,7 +122,7 @@
                   <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu1">
-                  <li><a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i>ChỉnhSửa</a></li>
+                  <li><a class="dropdown-item" (click)="editEquipment(s.id)"><i class="fa fa-pencil mr-1"></i>ChỉnhSửa</a></li>
                   <li> <a style="cursor: pointer" (click)="openDialog(s.id)" class="dropdown-item text-danger">
                     <i class="fa fa-trash mr-1"></i>Xóa</a></li>
                 </ul>

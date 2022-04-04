@@ -1,4 +1,4 @@
 export interface EquipmentType {
-  id: number;
-  name: string;
+  id ?: number;
+  name ?: string;
 }

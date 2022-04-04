@@ -7,6 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EquipmentModule} from './feature/equipment/equipment.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -17,14 +18,14 @@ import {EmployeeModule} from './feature/employee/employee.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
-  ],
+    SidebarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EquipmentModule,
     BrowserAnimationsModule,
     MatButtonModule,
     EmployeeModule
