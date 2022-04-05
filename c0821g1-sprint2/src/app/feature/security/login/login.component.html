@@ -19,8 +19,8 @@
 <section class="vh-100">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-8">
-        <div class="card text-black" style="border-radius: 25px;">
+      <div class="col-lg-8 mx-1">
+        <div class="card text-black" style="border-radius: 25px; width: 85% ; margin-left: 60px">
           <div class="card-body p-md-5 form-personal">
 
             <div class="row justify-content-center">
@@ -29,7 +29,7 @@
 
               <div class="col-lg-8 order-2 order-lg-1">
 
-                <form  [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
+                <form  class="" [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw mt-lg-4"></i>
@@ -38,6 +38,7 @@
                       <span class="text-danger">(*)</span>
                       <input type="text" id="currentPass" class="form-control" formControlName="username"
                              placeholder="Tài khoản"/>
+
                     </div>
                   </div>
 
@@ -57,6 +58,7 @@
                       <!--                                                   class="form-check-input" id="exampleCheck1">-->
                       <input type="checkbox" id="exampleCheck1" class="form-check-input" formControlName="remember_me"/>
                       <label class="form-check-label" for="exampleCheck1" >Ghi nhớ đăng nhập</label>
+                      <p class="fs-6" style="color: red" *ngIf="errorMessage">Tên Đăng nhập hoặc mật khẩu không đúng</p>
                     </div>
                   </div>
 
@@ -64,6 +66,7 @@
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit"
                             class="btn btn-info text-white btn-outline-success ms-lg-3">
+<!--                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
                       Đăng nhập
                     </button>
                     <button type="button" class="btn btn-light btn-outline-success ms-lg-3">

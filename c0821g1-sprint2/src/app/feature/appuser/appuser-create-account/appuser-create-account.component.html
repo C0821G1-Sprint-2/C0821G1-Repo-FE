@@ -41,6 +41,12 @@
                               [ngModelOptions]="{standalone: true}"
                             id="exampleDataList1" placeholder="--Chọn--" (change)="name()">
 <!--                      <datalist ngDefaultControl id="datalistOptions1" formControlName="employeeId">-->
+                      <small style="color: red"
+                             *ngIf="errorMessageCodeExist">
+                        Mã Nhân Viên không tồn tại.</small>
+                      <small style="color: red"
+                             *ngIf="errorMessageAppUserExist">
+                        Nhân viên này đã có tài khoản.</small>
                     </div>
                   </div>
 
@@ -54,6 +60,9 @@
                       <small style="color: red"
                              *ngIf="accountForm.controls.username.hasError('required') && accountForm.controls.username.touched">
                         Tên tài khoản không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="errorMessageUsernameExist">
+                        Tên tài khoản đã tồn tại.</small>
                     </div>
                   </div>
 

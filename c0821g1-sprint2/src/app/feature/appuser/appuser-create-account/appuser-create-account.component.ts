@@ -16,6 +16,10 @@ export class AppuserCreateAccountComponent implements OnInit {
   id: string;
   code: string;
   validateCode: string;
+  errorMessageCodeExist: string;
+  errorMessageAppUserExist: string;
+  errorMessageUsernameExist: string;
+
 
   constructor(private employeeService: EmployeeService,
               private appuserService: AppuserService,
@@ -42,12 +46,25 @@ export class AppuserCreateAccountComponent implements OnInit {
   saveAppUser() {
     const newAppUser = Object.assign({}, this.accountForm.value);
     this.appuserService.saveAppUser(newAppUser, this.code).subscribe(value => {
-      alert('tạo thành công');
-      console.log(this.code);
-      this.router.navigateByUrl('/employee/list');
-    }, error => {
-      this.validateCode = error.error.code;
-      alert(this.validateCode);
-    });
+        alert('tạo thành công');
+        console.log(this.code);
+        this.router.navigateByUrl('/employee/list');
+      }, error => {
+        this.validateCode = error.error.code;
+        if (this.validateCode === 'Mã nhân viên không tồn tại') {
+          this.errorMessageAppUserExist = '';
+          this.errorMessageUsernameExist = '';
+          this.errorMessageCodeExist = this.validateCode;
+        } else if (this.validateCode === 'Nhân viên này đã có tài khoản') {
+          this.errorMessageCodeExist = '';
+          this.errorMessageUsernameExist = '';
+          this.errorMessageAppUserExist = this.validateCode;
+        } else if (this.validateCode === 'Tên tài khoản đã tồn tại') {
+          this.errorMessageCodeExist = '';
+          this.errorMessageAppUserExist = '';
+          this.errorMessageUsernameExist = this.validateCode;
+        }
+      }
+    );
   }
 }
