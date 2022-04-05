@@ -7,12 +7,12 @@ import {Observable} from 'rxjs';
 })
 export class CustomerService {
 
-  API_URL = 'http://localhost:8080';
+  API_URL = 'http://localhost:8080/api';
   constructor(private httpClient: HttpClient) { }
 
 
   findAllCustomer(page, customer): Observable<any> {
-    return this.httpClient.get(this.API_URL + '/customer/customer-list/?page=' + page + '&keyword=' + customer);
+    return this.httpClient.get(this.API_URL + '/customer/list/?page=' + page + '&keyword=' + customer);
   }
 
   getCustomerById(id): Observable<any> {
