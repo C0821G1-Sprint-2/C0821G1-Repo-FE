@@ -1,10 +1,11 @@
 // @ts-ignore
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'chart.js'
+// import {Chart} from 'chart.js'
 import {Supplies} from "../../../model/supplies";
 import {SuppliesService} from "../../../service/supplies.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as XLSX from 'xlsx';
+import {Chart} from "../../../../assets/chart.js";
 // @ts-ignore
 @Component({
   selector: 'app-supplies',
@@ -84,16 +85,38 @@ export class SuppliesComponent implements OnInit {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
+    // @ts-ignore
     new Chart(this.ctx, {
       type: 'line',
       data: {
         datasets: [{
-          label: 'Current Vallue',
+          label: 'imported materials',
           data: [0, 20, 40, 50],
           backgroundColor: "rgb(115 185 243 / 65%)",
           borderColor: "#007ee7",
           fill: true,
         },
+          {
+            label: 'salable materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            label: 'inventory materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "yellow",
+            fill: true,
+          },
+          {
+            label: 'damaged materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "Violet",
+            fill: true,
+          },
           {
             label: 'Invested Amount',
             data: [0, 20, 40, 60, 80],
@@ -101,7 +124,7 @@ export class SuppliesComponent implements OnInit {
             borderColor: "#007ee7",
             fill: true,
           }],
-        labels: ['January 2019', 'February 2019', 'March 2019', 'April 2019']
+        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials', 'damaged materials']
       },
     });
   }
