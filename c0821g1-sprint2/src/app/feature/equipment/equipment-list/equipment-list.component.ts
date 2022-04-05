@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Equipment} from "../../../model/equipment";
 import {EquipmentDeleteComponent} from "../equipment-delete/equipment-delete.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
 import Swal from "sweetalert2";
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {EquipmentService} from '../../../service/equipment.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -67,6 +67,7 @@ export class EquipmentListComponent implements OnInit {
         if (result == 'delete'){
           this.callToast();
           this.ngOnInit()
+
         }
       });
     }, error => {
@@ -114,4 +115,5 @@ export class EquipmentListComponent implements OnInit {
       timer: 2000
     })
   }
+
 }

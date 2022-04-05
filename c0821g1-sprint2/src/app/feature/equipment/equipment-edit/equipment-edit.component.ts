@@ -8,6 +8,7 @@ import {ActivatedRoute, Router, Routes} from '@angular/router';
 import {EquipmentTypeService} from '../../../service/equipment-type.service';
 import {SupplierService} from '../../../service/supplier.service';
 // @ts-ignore
+
 import {AngularFireStorage} from '@angular/fire/storage';
 import Swal from 'sweetalert2';
 import {finalize} from 'rxjs/operators';
