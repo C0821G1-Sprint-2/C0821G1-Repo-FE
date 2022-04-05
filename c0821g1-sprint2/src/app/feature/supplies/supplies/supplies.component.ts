@@ -124,7 +124,7 @@ export class SuppliesComponent implements OnInit {
             borderColor: "#007ee7",
             fill: true,
           }],
-        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials', 'damaged materials']
+        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials','damaged materials']
       },
     });
   }
