@@ -9,6 +9,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import Swal from 'sweetalert2';
 import {UploadService} from '../../../service/upload.service';
 import {EmployeePositionService} from '../../../service/employee-position.service';
+import set = Reflect.set;
 
 
 @Component({
@@ -26,16 +27,20 @@ export class EmployeeCreateComponent implements OnInit {
   employeeList: Array<Employee>;
   loading = false;
   employee: Employee;
+  checkCode: boolean;
 
+  flagCode: boolean;
   constructor(private employeeService: EmployeeService,
               private router: Router,
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
               @Inject(UploadService) private uploadService: UploadService,
               private employeePositionService: EmployeePositionService) {
+    this.checkCode = false;
+
     this.employeeCreateForm = new FormGroup({
       code: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
       name: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
-      dateOfBirth: new FormControl('', [Validators.required, this.checkMinAge]),
+      dateOfBirth: new FormControl('', [Validators.required, this.checkMinAge, this.checkMaxAge]),
       gender: new FormControl('Nam'),
       address: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
       phone: new FormControl('', [Validators.required, Validators.pattern('^(090|091)[0-9]+$'), Validators.maxLength(12), Validators.minLength(10)]),
@@ -46,6 +51,7 @@ export class EmployeeCreateComponent implements OnInit {
     });
     this.employeeService.findAllEmployee().subscribe(value => {
       this.employeeList = value;
+
     });
     this.employeeService.findAllEmployee().subscribe(value => {
       this.employeeList = value;
@@ -80,6 +86,12 @@ export class EmployeeCreateComponent implements OnInit {
 
 
   saveNewEmployee() {
+
+    setTimeout(() => {
+      this.callToast();
+      this.router.navigateByUrl('/employee/list');
+    },30)
+
     const name = this.selectedImage.name;
     const fileRef = this.storage.ref(name);
     this.storage.upload(name, this.selectedImage).snapshotChanges().pipe(
@@ -90,13 +102,10 @@ export class EmployeeCreateComponent implements OnInit {
           const newEmployee = Object.assign({}, this.employeeCreateForm.value);
           console.log(newEmployee);
           this.employeeService.saveNewEmployee(newEmployee).subscribe(value => {
-            this.callToast();
-            console.log('them moi thanh cong');
-            console.log(value);
-          }, error => {
-          }, () => {
-            this.callToast();
-            this.router.navigateByUrl('/employee/list');
+            // this.callToast();
+            // console.log('them moi thanh cong');
+            // console.log(value);
+          }, error => {;
           });
         });
       })
@@ -123,6 +132,11 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   showPreview(event: any) {
+
+    if (event == null){
+      this.url = '';
+    }
+
     this.selectedImage = event.target.files[0];
     if (event.target.files) {
       const reader = new FileReader();
@@ -147,5 +161,23 @@ export class EmployeeCreateComponent implements OnInit {
     const yearOfBirth = dateOfBirth.substr(0, 4);
     const currentYear = new Date().getFullYear();
     return currentYear - yearOfBirth >= 18 ? null : {under18: true};
+  }
+
+  checkMaxAge(abstractControl: AbstractControl): any {
+    const dateOfBirth = abstractControl.value;
+    const yearOfBirth = dateOfBirth.substr(0, 4);
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth < 100 ? null : {under100: true};
+  }
+
+  checkCode1(code){
+    console.log(code);
+    this.employeeService.checkCode(code).subscribe( data => {
+      // this.flagCode = data;
+
+      console.log(data);
+      data ? this.flagCode = true :this.flagCode = false;
+
+    })
   }
 }

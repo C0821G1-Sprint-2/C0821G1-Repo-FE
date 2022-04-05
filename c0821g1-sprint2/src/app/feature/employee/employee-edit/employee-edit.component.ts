@@ -49,11 +49,11 @@ export class EmployeeEditComponent implements OnInit {
       this.employeeEditForm = new FormGroup({
         id: new FormControl(employee.id),
         code: new FormControl(employee.code, [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
-        name: new FormControl(employee.name, [Validators.required, Validators.maxLength(40)]),
-        dateOfBirth: new FormControl(employee.dateOfBirth, [Validators.required, this.checkMinAge]),
+        name: new FormControl(employee.name, [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
+        dateOfBirth: new FormControl(employee.dateOfBirth, [Validators.required, this.checkMinAge, this.checkMaxAge]),
         gender: new FormControl(employee.gender),
         address: new FormControl(employee.address, [Validators.required, Validators.maxLength(40)]),
-        phone: new FormControl(employee.phone, [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+        phone: new FormControl(employee.phone, [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$'), Validators.minLength(10), Validators.maxLength(12)]),
         image: new FormControl(employee.image),
         employeePosition: new FormGroup({
           id: new FormControl(employee.employeePosition.id,[Validators.required])
@@ -121,5 +121,11 @@ export class EmployeeEditComponent implements OnInit {
     const yearOfBirth = dateOfBirth.substr(0, 4);
     const currentYear = new Date().getFullYear();
     return currentYear - yearOfBirth >= 18 ? null : {under18: true};
+  }
+  checkMaxAge(abstractControl: AbstractControl): any {
+    const dateOfBirth = abstractControl.value;
+    const yearOfBirth = dateOfBirth.substr(0, 4);
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth < 100 ? null : {under100: true};
   }
 }

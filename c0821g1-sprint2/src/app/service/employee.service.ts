@@ -36,4 +36,8 @@ export class EmployeeService {
   findAllEmployeeByKeyword(page, keyword): Observable<any> {
     return this.httpClient.get(this.API_URL + '/list/?page=' + page + '&keyword=' + keyword);
   }
+
+  checkCode(code): Observable<any> {
+    return this.httpClient.get(this.API_URL + '/check/' + code);
+  }
 }
