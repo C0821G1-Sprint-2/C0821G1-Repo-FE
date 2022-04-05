@@ -496,7 +496,7 @@ export declare class Chart<
   data: ChartData<TType, TData, TLabel>;
   options: ChartOptions<TType>;
 
-  constructor(item: ChartItem, config: ChartConfiguration<TType, TData, TLabel>);
+  constructor(item: ChartItem, config: { data: { datasets: { backgroundColor: string[]; data: number[]; borderWidth: number; label: string }[]; labels: string[] }; options: { responsive: boolean; display: boolean }; type: string });
 
   clear(): this;
   stop(): this;

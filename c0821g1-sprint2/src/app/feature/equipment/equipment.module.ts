@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-
 import {EquipmentRoutingModule} from './equipment-routing.module';
 import {EquipmentCreateComponent} from './equipment-create/equipment-create.component';
 import {EquipmentEditComponent} from './equipment-edit/equipment-edit.component';
@@ -15,6 +13,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment.prod';
 import {EquipmentListBodyComponent} from './equipment-list-body/equipment-list-body.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {NgxSpinnerModule} from 'ngx-bootstrap-spinner';
 
 
 @NgModule({
@@ -28,7 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     RouterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
   ]
 })
 
