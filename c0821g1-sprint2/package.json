@@ -29,7 +29,6 @@
     "creditcardpayments": "^1.0.3",
     "firebase": "^8.10.0",
     "ng-bootstrap-pagination": "^0.2.3",
-    "ng2-charts": "^3.0.8",
     "ngx-bootstrap-spinner": "^10.0.5",
     "rxjs": "~6.5.4",
     "sweetalert2": "^11.4.4",

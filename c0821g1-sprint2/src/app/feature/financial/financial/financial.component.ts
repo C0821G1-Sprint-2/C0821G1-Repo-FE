@@ -3,8 +3,8 @@ import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/
 import {Financial} from "../../../model/financial";
 import {FinancialService} from "../../../service/financial.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import * as Chart from 'chart.js';
 import * as XLSX from "xlsx";
+import {Chart} from "../../../../assets/chart.js";
 
 
 // @ts-ignore
@@ -81,14 +81,14 @@ export class FinancialComponent implements OnInit {
     // chart
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
-    // @ts-ignore
+
     let myChart = new Chart(this.ctx, {
       type: 'pie',
       data: {
         labels: ["New", "In Progress", "On Hold"],
         datasets: [{
           label: '# of Votes',
-          data: [1,2,3],
+          data: [1, 2, 3],
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
@@ -99,8 +99,9 @@ export class FinancialComponent implements OnInit {
       },
       options: {
         responsive: false,
-        display:true
+        display: true
       }
+
     }
     );
     console.log("aaaaaaaaaaaaaaaaaa" + myChart);

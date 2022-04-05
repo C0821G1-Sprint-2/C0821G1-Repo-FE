@@ -1,10 +1,11 @@
 // @ts-ignore
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'chart.js'
+// import {Chart} from 'chart.js'
 import {Supplies} from "../../../model/supplies";
 import {SuppliesService} from "../../../service/supplies.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as XLSX from 'xlsx';
+import {Chart} from "../../../../assets/chart.js";
 // @ts-ignore
 @Component({
   selector: 'app-supplies',
@@ -84,6 +85,7 @@ export class SuppliesComponent implements OnInit {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
+    // @ts-ignore
     new Chart(this.ctx, {
       type: 'line',
       data: {
