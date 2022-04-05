@@ -41,7 +41,10 @@
                       <small style="color: red"
                              *ngIf="employeeEditForm.controls.name.hasError('maxlength')">
                         Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
-
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.name.hasError('pattern') && employeeEditForm.controls.name.dirty">
+                        Họ và tên phải là ký tự.
+                      </small>
                       <div class="d-flex flex-row align-items-center mb-1">
                         <div class="form-outline flex-fill mb-0">
                           <label class="form-label fw-bold" for="address">Ngày sinh<span
@@ -56,6 +59,9 @@
                       <small style="color: red"
                              *ngIf="employeeEditForm.controls.dateOfBirth.hasError('under18') ">
                         Tuổi phải lớn hơn 18.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.dateOfBirth.hasError('under100') && employeeEditForm.controls.dateOfBirth.dirty">
+                        Tuổi phải nhỏ hơn 100.</small>
                       <div class="d-flex flex-row align-items-center mb-1">
                         <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
                           <label class="form-label fw-bold mb-0 me-4">Giới tính</label>
@@ -96,7 +102,11 @@
                              *ngIf="employeeEditForm.controls.phone.hasError('required') && employeeEditForm.controls.phone.touched">
                         Số điện thoại không được để trống.</small>
                       <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('pattern') ">
-                        Số điện thoại phaỉ có từ 10 đến 12 số
+                        Số điện thoại phải theo định dạng 090xxxxxxx hoặc 091xxxxxxx.</small>
+                      <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('minlength')">
+                        Số điện thoại phải từ 10 đến 12 số.</small>
+                      <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('maxlength')">
+                        Số điện thoại phải từ 10 đến 12 số.
                         .</small>
                       <div class="d-flex flex-row align-items-center mb-1">
                         <div class="form-outline flex-fill mb-0">
@@ -130,19 +140,20 @@
                     <div class="col-lg-6 d-flex align-items-stretch justify-content-center order-1 order-lg-2">
                       <div class="row">
                         <div class="col-12">
-                          <img style="width: 200px; height: 200px; margin-bottom: 20px"
-                               [src]="employeeEditForm.controls.image.value" alt="">
+                          <label class="form-label fw-bold" for="image">Hình ảnh<span class="error ">(*)</span></label>
                           <input type="file" id="image" class="form-control form-control-lg"
                                  (change)="showPreview($event)"
                                  style="width: 200px; font-size: 14px"/>
+                          <img style="width: 200px; height: 200px; margin-bottom: 20px"
+                               [src]="employeeEditForm.controls.image.value" alt="">
                           <!--                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
                           <!--                                             class="img-fluid" alt="Sample image" />-->
                         </div>
                       </div>
                     </div>
-                    <small style="color: red"
-                           *ngIf="employeeEditForm.controls.image.hasError('required') && employeeEditForm.controls.image.dirty">
-                      Ảnh không được để trống.</small>
+                    <small class="error" *ngIf="employeeEditForm.get('image')
+                        .hasError('required')&& employeeEditForm.get('image').touched">Hình ảnh phải được
+                      chọn</small>
                   </div>
 
                   <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">

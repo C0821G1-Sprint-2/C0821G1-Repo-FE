@@ -17,16 +17,17 @@
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label fw-bold" for="accountName">Mã nhân viên<span
                           class="error">(*)</span></label>
-                        <input type="text" id="accountName" class="form-control"
+                        <input (change)="checkCode1(this.employeeCreateForm.controls.code.value)"  type="text" id="accountName" class="form-control"
                                formControlName="code"/>
                       </div>
                     </div>
                     <small style="color: red"
-                           *ngIf="employeeCreateForm.controls.code.hasError('required') && employeeCreateForm.controls.code.touched">
+                           *ngIf="employeeCreateForm.controls.code.hasError('required') && employeeCreateForm.controls.code.touched && employeeCreateForm.controls.code.dirty">
                       Mã nhân viên không được để trống.</small>
                     <small style="color: red"
                            *ngIf="employeeCreateForm.controls.code.hasError('pattern')">
                       Mã nhân viên phải có định dạng NV-XXXX.</small>
+                    <small class="error" *ngIf="flagCode == true">Mã nhân viên đã tồn tại</small>
 
                     <div class="d-flex flex-row align-items-center mb-1">
                       <div class="form-outline flex-fill mb-0">
@@ -36,14 +37,14 @@
                       </div>
                     </div>
                     <small style="color: red"
-                           *ngIf="employeeCreateForm.controls.name.hasError('required') && employeeCreateForm.controls.name.dirty">
+                           *ngIf="employeeCreateForm.controls.name.hasError('required') && employeeCreateForm.controls.name.touched  ">
                       Họ và tên không được để trống.</small>
                     <small style="color: red"
-                           *ngIf="employeeCreateForm.controls.name.hasError('maxlength') && employeeCreateForm.controls.name.dirty" >
+                           *ngIf="employeeCreateForm.controls.name.hasError('maxlength') && employeeCreateForm.controls.name.dirty " >
                       Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
                     <small style="color: red"
-                           *ngIf="employeeCreateForm.controls.name.hasError('pattern') && employeeCreateForm.controls.name.dirty && employeeCreateForm.controls.name.touched ">
-                      Họ và tên phải là ký tự và không chứa khoảng trống.
+                           *ngIf="employeeCreateForm.controls.name.hasError('pattern') && employeeCreateForm.controls.name.dirty ">
+                      Họ và tên phải là ký tự.
                     </small>
                   <div class="d-flex flex-row align-items-center mb-1">
                     <div class="form-outline flex-fill mb-0">
@@ -58,6 +59,9 @@
                     <small style="color: red"
                            *ngIf="employeeCreateForm.controls.dateOfBirth.hasError('under18') ">
                       Tuổi phải lớn hơn 18.</small>
+                    <small style="color: red"
+                           *ngIf="employeeCreateForm.controls.dateOfBirth.hasError('under100') && employeeCreateForm.controls.dateOfBirth.dirty">
+                      Tuổi phải nhỏ hơn 100.</small>
                   <div class="d-flex flex-row align-items-center mb-1">
                     <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
                       <label class="form-label fw-bold mb-0 me-4">Giới tính</label>
@@ -99,15 +103,13 @@
                   <small style="color: red"
                          *ngIf="employeeCreateForm.controls.phone.hasError('required') && employeeCreateForm.controls.phone.touched">
                     Số điện thoại không được để trống.</small>
-                  <small style="color: red" *ngIf="employeeCreateForm.controls.phone.hasError('pattern') ">
+                  <small style="color: red" *ngIf="employeeCreateForm.controls.phone.hasError('pattern') && employeeCreateForm.controls.phone.touched">
                     Số điện thoại phải theo định dạng 090xxxxxxx hoặc 091xxxxxxx.
-                    .</small>
+                    </small>
                     <small style="color: red" *ngIf="employeeCreateForm.controls.phone.hasError('minlength')">
-                      Số điện thoại phải từ 10 đến 12 số
-                      .</small>
+                      Số điện thoại phải từ 10 đến 12 số.</small>
                     <small style="color: red" *ngIf="employeeCreateForm.controls.phone.hasError('maxlength')">
-                      Số điện thoại phải từ 10 đến 12 số
-                      .</small>
+                      Số điện thoại phải từ 10 đến 12 số.</small>
                   <div class="d-flex flex-row align-items-center mb-1">
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label fw-bold" for="birthDay">Địa chỉ<span class="error">(*)</span></label>
@@ -121,9 +123,6 @@
                   <small style="color: red"
                          *ngIf="employeeCreateForm.controls.address.hasError('maxlength') && employeeCreateForm.controls.address.touched">
                     Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
-                    <small style="color: red"
-                           *ngIf="employeeCreateForm.controls.address.hasError('pattern') && employeeCreateForm.controls.address.touched">
-                      Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
                   <div class="form-outline flex-fill mb-0" formGroupName="employeePosition">
                     <label class="form-label fw-bold" for="position">Chức vụ<span class="error ">(*)</span></label>
                     <div class="form-personal">
@@ -140,16 +139,16 @@
                          *ngIf="employeeCreateForm.controls.employeePosition.hasError('required') && employeeCreateForm.controls.employeePosition.dirty">
                     Vị trí không được để trống.</small>
 
-
                 </div>
 
                 <div class="col-lg-6 d-flex align-items-stretch justify-content-center order-1 order-lg-2">
                   <div class="row">
                     <div class="col-12">
-                      <img [src]="url" style="width: 200px; height: 200px; margin-bottom: 20px">
+                      <label class="form-label fw-bold" for="image">Hình ảnh<span class="error ">(*)</span></label>
                       <input accept="*.png.jpg" type="file" (change)="showPreview($event)" id="image"
                              class="form-control form-control-lg"
                              style="width: 200px; font-size: 14px"/>
+                      <img  [src]="url" style="width: 200px; height: 200px;" alt="">
                       <!--                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
                       <!--                                             class="img-fluid" alt="Sample image" />-->
                     </div>
