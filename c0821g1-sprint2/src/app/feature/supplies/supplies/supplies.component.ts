@@ -88,12 +88,33 @@ export class SuppliesComponent implements OnInit {
       type: 'line',
       data: {
         datasets: [{
-          label: 'Current Vallue',
+          label: 'imported materials',
           data: [0, 20, 40, 50],
           backgroundColor: "rgb(115 185 243 / 65%)",
           borderColor: "#007ee7",
           fill: true,
         },
+          {
+            label: 'salable materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            label: 'inventory materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "yellow",
+            fill: true,
+          },
+          {
+            label: 'damaged materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "Violet",
+            fill: true,
+          },
           {
             label: 'Invested Amount',
             data: [0, 20, 40, 60, 80],
@@ -101,7 +122,7 @@ export class SuppliesComponent implements OnInit {
             borderColor: "#007ee7",
             fill: true,
           }],
-        labels: ['January 2019', 'February 2019', 'March 2019', 'April 2019']
+        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials','damaged materials']
       },
     });
   }

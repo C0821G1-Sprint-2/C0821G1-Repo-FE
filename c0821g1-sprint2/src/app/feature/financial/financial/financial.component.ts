@@ -101,8 +101,9 @@ export class FinancialComponent implements OnInit {
         responsive: false,
         display:true
       }
-    });
-
+    }
+    );
+    console.log("aaaaaaaaaaaaaaaaaa" + myChart);
   }
 
   searchEquipment(value: any) {
