@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Equipment} from "../../../model/equipment";
+import {EquipmentDeleteComponent} from "../equipment-delete/equipment-delete.component";
+import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {EquipmentDeleteComponent} from '../equipment-delete/equipment-delete.component';
-import {Equipment} from '../../../model/equipment';
 import {EquipmentService} from '../../../service/equipment.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -26,7 +26,6 @@ export class EquipmentListComponent implements OnInit {
   message: string;
   equipment: Equipment[];
 
-  // keyword = '';
 
   keywordForm: FormGroup;
 
@@ -65,8 +64,10 @@ export class EquipmentListComponent implements OnInit {
         disableClose: true
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result === 'delete'){
-          this.ngOnInit();
+        if (result == 'delete'){
+          this.callToast();
+          this.ngOnInit()
+
         }
       });
     }, error => {
@@ -100,7 +101,19 @@ export class EquipmentListComponent implements OnInit {
     this.ngOnInit();
 
   }
+
   editEquipment(id: number){
     this.router.navigate(['/edit/' + id]);
   }
+
+  callToast() {
+    Swal.fire({
+      position: 'top',
+      icon: 'warning',
+      title: 'Xóa thành công',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
+
 }
