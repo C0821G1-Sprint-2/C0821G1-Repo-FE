@@ -12,13 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import {EmployeeModule} from './feature/employee/employee.module';
+import { BodyComponent } from './shared/body/body.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent],
+    SidebarComponent,
+    BodyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

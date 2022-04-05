@@ -42,7 +42,7 @@
           <th>Hạn sử dụng</th>
           <th>Nhà cung cấp</th>
           <th>Hình ảnh</th>
-          <th>Tình trạng</th>
+<!--          <th>Tình trạng</th>-->
           <th></th>
         </tr>
         </thead>
@@ -104,16 +104,16 @@
               </div>
             </div>
           </td>
-          <td *ngIf="s.status == 1">
-            <span class="badge rounded-pill badge-warning">New</span> Hàng mới
-          </td>
-          <td *ngIf="s.status == 2">
-            <span class="active-circle bg-success"></span> Còn hàng
-          </td>
+<!--          <td *ngIf="s.status == 1">-->
+<!--            <span class="badge rounded-pill badge-warning">New</span> Hàng mới-->
+<!--          </td>-->
+<!--          <td *ngIf="s.status == 2">-->
+<!--            <span class="active-circle bg-success"></span> Còn hàng-->
+<!--          </td>-->
 
-          <td *ngIf="s.status == 3">
-            <span class="active-circle bg-danger"></span> Hết hàng
-          </td>
+<!--          <td *ngIf="s.status == 3">-->
+<!--            <span class="active-circle bg-danger"></span> Hết hàng-->
+<!--          </td>-->
           <td>
 
               <li class="dropdown"  style="list-style-type: none">
@@ -122,7 +122,7 @@
                   <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu1">
-                  <li><a class="dropdown-item" (click)="editEquipment(s.id)"><i class="fa fa-pencil mr-1"></i>ChỉnhSửa</a></li>
+                  <li><a class="dropdown-item" (click)="editEquipment(s.id)"><i class="fa fa-pencil mr-1"></i>Sửa</a></li>
                   <li> <a style="cursor: pointer" (click)="openDialog(s.id)" class="dropdown-item text-danger">
                     <i class="fa fa-trash mr-1"></i>Xóa</a></li>
                 </ul>

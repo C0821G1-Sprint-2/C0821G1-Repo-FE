@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {EquipmentListBodyComponent} from './feature/equipment/equipment-list-body/equipment-list-body.component';
+import {BodyComponent} from "./shared/body/body.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,9 @@ const routes: Routes = [
     // path: employee,
     path: 'employee',
     loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
+  },
+  {
+    path: 'body', component:BodyComponent
   }
 ];
 
