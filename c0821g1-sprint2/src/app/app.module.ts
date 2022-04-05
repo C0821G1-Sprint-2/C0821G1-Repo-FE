@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/header/header.component';
@@ -12,14 +11,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import {EmployeeModule} from './feature/employee/employee.module';
+import { BodyComponent } from './shared/body/body.component';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
-  ],
+    SidebarComponent,
+    BodyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +31,8 @@ import {EmployeeModule} from './feature/employee/employee.module';
     EquipmentModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    EmployeeModule
+    EmployeeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [],
