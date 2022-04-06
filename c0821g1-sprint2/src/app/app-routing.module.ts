@@ -31,7 +31,8 @@ const routes: Routes = [
   {
     path: 'employee',
     loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
-
+  },
+  {
     path: 'financial',
     loadChildren: () => import('./feature/financial/financial.module').then(module => module.FinancialModule)
   },

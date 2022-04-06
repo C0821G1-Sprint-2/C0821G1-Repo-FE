@@ -254,7 +254,7 @@
                     <span style="font-size: 85%">Đăng ký tài khoản</span>
                   </a>
 
-                  <a class="dropdown-item" [routerLink]="['/floors/list']" >
+                  <a class="dropdown-item" routerLink="customer/list">
                     <i class="fas fa-bars me-2"></i>
                     <span  style="font-size: 85%;">Quản lý khách hàng</span>
                   </a>
@@ -264,17 +264,14 @@
                     <span style="font-size: 85%;">Quản lý nhân viên</span>
                   </a>
 
-                  <a class="dropdown-item" [routerLink]="['/spaces/list']">
-                    <i class="fas fa-bars me-2"></i>
-                    <span style="font-size: 85%">Quản lý lương</span>
-                  </a>
+
 
 
 
                 </ng-template>
               </li>
 
-              <a class="dropdown-item" [routerLink]="['/contract/list']">
+              <a class="dropdown-item" routerLink="equipment/list">
                 <i class="fas fa-bars me-2"></i>
                 <span style="font-size: 85%">Quản lý vật tư</span>
               </a>
@@ -363,83 +360,83 @@
 <!--</div>-->
 
 
-  <div class="container-fluid">
-    <div class="row header-top container-fluid ">
-      <div class="col-6 ">
-      </div>
-      <div class="col-6 header-right" style="color: #ffd11a">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-             class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-        </svg>
-        C0821G1 295 NGUYỄN TẤT THÀNH - HẢI CHÂU - ĐÀ NẴNG |
-        <a style="color: #ffd11a">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-               class="bi bi-telephone-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-          </svg>
-        </a>0801.23.45.67
-        | <a>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-             viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-      </a>
-      </div>
-    </div>
+<!--  <div class="container-fluid">-->
+<!--    <div class="row header-top container-fluid ">-->
+<!--      <div class="col-6 ">-->
+<!--      </div>-->
+<!--      <div class="col-6 header-right" style="color: #ffd11a">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--             class="bi bi-geo-alt-fill" viewBox="0 0 16 16">-->
+<!--          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>-->
+<!--        </svg>-->
+<!--        C0821G1 295 NGUYỄN TẤT THÀNH - HẢI CHÂU - ĐÀ NẴNG |-->
+<!--        <a style="color: #ffd11a">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--               class="bi bi-telephone-fill" viewBox="0 0 16 16">-->
+<!--            <path fill-rule="evenodd"-->
+<!--                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>-->
+<!--          </svg>-->
+<!--        </a>0801.23.45.67-->
+<!--        | <a>-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"-->
+<!--             viewBox="0 0 16 16">-->
+<!--          <path-->
+<!--            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>-->
+<!--        </svg>-->
+<!--      </a>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class=" row navbar navbar-expand-lg ">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="col-2 container-fluid">
-        <a routerLink="body" class="navbar-brand logo_h" href=""><img src="../../../assets/images/Medical%20Logo.png" width="50px"
-                                                    height="48px"
-                                                    alt="">C0821G1</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div id="navbarSupportedContent" class="col-8">
-        <ul class="nav navbar-nav menu_nav ">
-          <li class="nav-item active "><a class="nav-link" routerLink="body">Trang Chủ</a></li>
-          <li class="nav-item "><a class="nav-link " href="#">Giới Thiệu</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Sản Phẩm</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Chứng Chỉ Chất Lượng</a></li>
-          <li class="nav-item submenu dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">Hoạt Động Công Ty</a>
-            <ul class="dropdown-menu">
-              <li class="nav-item"><a class="nav-link" routerLink="equipment/list">Quản lý vật tư</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="employee/list">Quản lý nhân viên</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="customer/list">Quản lý khách hàng</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="financial/list">Thống kê tài chính</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="supplies/list">Thống kê vật tư</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Blog CỦa Công Ty</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">Đối Tác</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Liên Hệ</a></li>
-        </ul>
-      </div>
+<!--    <div class=" row navbar navbar-expand-lg ">-->
+<!--      &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+<!--      <div class="col-2 container-fluid">-->
+<!--        <a routerLink="body" class="navbar-brand logo_h" href=""><img src="../../../assets/images/Medical%20Logo.png" width="50px"-->
+<!--                                                    height="48px"-->
+<!--                                                    alt="">C0821G1</a>-->
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse"-->
+<!--                data-target="#navbarSupportedContent"-->
+<!--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="icon-bar"></span>-->
+<!--          <span class="icon-bar"></span>-->
+<!--          <span class="icon-bar"></span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+<!--      <div id="navbarSupportedContent" class="col-8">-->
+<!--        <ul class="nav navbar-nav menu_nav ">-->
+<!--          <li class="nav-item active "><a class="nav-link" routerLink="body">Trang Chủ</a></li>-->
+<!--          <li class="nav-item "><a class="nav-link " href="#">Giới Thiệu</a></li>-->
+<!--          <li class="nav-item"><a class="nav-link" href="#">Sản Phẩm</a></li>-->
+<!--          <li class="nav-item"><a class="nav-link" href="#">Chứng Chỉ Chất Lượng</a></li>-->
+<!--          <li class="nav-item submenu dropdown">-->
+<!--            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"-->
+<!--               aria-haspopup="true" aria-expanded="false">Hoạt Động Công Ty</a>-->
+<!--            <ul class="dropdown-menu">-->
+<!--              <li class="nav-item"><a class="nav-link" routerLink="equipment/list">Quản lý vật tư</a></li>-->
+<!--              <li class="nav-item"><a class="nav-link" routerLink="employee/list">Quản lý nhân viên</a></li>-->
+<!--              <li class="nav-item"><a class="nav-link" routerLink="customer/list">Quản lý khách hàng</a></li>-->
+<!--              <li class="nav-item"><a class="nav-link" routerLink="financial/list">Thống kê tài chính</a></li>-->
+<!--              <li class="nav-item"><a class="nav-link" routerLink="supplies/list">Thống kê vật tư</a></li>-->
+<!--              <li class="nav-item"><a class="nav-link" href="#">Blog CỦa Công Ty</a></li>-->
+<!--            </ul>-->
+<!--          </li>-->
+<!--          <li class="nav-item"><a class="nav-link" href="#">Đối Tác</a></li>-->
+<!--          <li class="nav-item"><a class="nav-link" href="#">Liên Hệ</a></li>-->
+<!--        </ul>-->
+<!--      </div>-->
 
-      <div class="col-2">
-        <ul class="nav navbar-nav menu_nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa-solid fa-cart-arrow-down"></i>
-            </a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">Đăng Nhập</a></li>
-        </ul>
+<!--      <div class="col-2">-->
+<!--        <ul class="nav navbar-nav menu_nav ml-auto">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="#">-->
+<!--              <i class="fa-solid fa-cart-arrow-down"></i>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item"><a class="nav-link" href="#">Đăng Nhập</a></li>-->
+<!--        </ul>-->
 
-      </div>
+<!--      </div>-->
 
-    </div>
-  </div>
+<!--    </div>-->
+<!--  </div>-->
 
