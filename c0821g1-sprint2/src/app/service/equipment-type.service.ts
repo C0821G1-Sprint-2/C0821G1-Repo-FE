@@ -7,7 +7,7 @@ import {EquipmentType} from '../model/equipment-type';
   providedIn: 'root'
 })
 export class EquipmentTypeService {
-  API_URL = 'http://localhost:8080/equipmentType/list';
+  API_URL = 'http://localhost:8080/api/equipmentType/list';
   constructor(private httpClient: HttpClient) { }
   findAllEquipmentType(): Observable<EquipmentType[]>{
     return this.httpClient.get<EquipmentType[]>(this.API_URL);

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto+Condensed:wght@300&display=swap');
+
+.title-page{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 40px;
+  font-weight: bolder;
+  color: royalblue;
+}
+
+.form-personal {
+  /*background-image: url('gãy.PNG');*/
+  background-size: cover;
+}
+
+body{
+  background-color: #7adfff;
+  font-size: large;
+}

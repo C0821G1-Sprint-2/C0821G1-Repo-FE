@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class EquipmentService {
+
   API_URL = 'http://localhost:8080/api/equipment';
 
   constructor(private httpClient: HttpClient) {
@@ -16,6 +17,7 @@ export class EquipmentService {
   // findAll(): Observable<Equipment[]> {
   //   return this.httpClient.get<Equipment[]>(this.API_URL + '/list');
   // }
+
 
   saveNewEquipment(equipment: Equipment): Observable<void> {
     return this.httpClient.post<void>(this.API_URL + '/add', equipment);
