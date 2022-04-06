@@ -1,13 +1,11 @@
 // @ts-ignore
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit,ViewChild, ElementRef} from '@angular/core';
 import {Financial} from "../../../model/financial";
 import {FinancialService} from "../../../service/financial.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import * as Chart from 'chart.js';
 import * as XLSX from "xlsx";
+import {Chart} from "../../../../assets/chart.js";
 
-
-// @ts-ignore
 @Component({
   selector: 'app-financial',
   templateUrl: './financial.component.html',
@@ -40,7 +38,6 @@ export class FinancialComponent implements OnInit {
   flagg: boolean;
   totalExpenditure: number = 0;
   totalRevenue: number = 0;
-
   constructor(private financialService: FinancialService, private fb: FormBuilder) {
     this.flagg = false;
     this.date = this.fb.group(
@@ -50,15 +47,12 @@ export class FinancialComponent implements OnInit {
       }
     )
   }
-
   ngOnInit() {
-
     if (this.month == '' && this.year == '') {
       this.flag = false;
       this.financialService.search(this.page, this.date.controls.month.value, this.date.controls.year.value).subscribe(data => {
         if (data != null) {
           this.financial = data.content;
-
           for (let i = 0; i < this.financial.length; i++) {
             this.revenue = this.financial[i].revenue;
             this.sell = this.financial[i].sell;
@@ -78,30 +72,9 @@ export class FinancialComponent implements OnInit {
         }
       })
     }
+
     // chart
-    this.canvas = document.getElementById('myChart');
-    this.ctx = this.canvas.getContext('2d');
-    // @ts-ignore
-    let myChart = new Chart(this.ctx, {
-      type: 'pie',
-      data: {
-        labels: ["New", "In Progress", "On Hold"],
-        datasets: [{
-          label: '# of Votes',
-          data: [1,2,3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: false,
-        display:true
-      }
-    });
+
 
   }
 

@@ -496,7 +496,12 @@ export declare class Chart<
   data: ChartData<TType, TData, TLabel>;
   options: ChartOptions<TType>;
 
-  constructor(item: ChartItem, config: ChartConfiguration<TType, TData, TLabel>);
+  constructor(item: ChartItem, config: { data: { datasets: ({
+        backgroundColor: string;
+        borderColor: string;
+  data: number[];
+  label: string;
+  fill: boolean } | { backgroundColor: string; borderColor: string; data: number[]; label: string; fill: boolean } | { backgroundColor: string; borderColor: string; data: number[]; label: string; fill: boolean } | { backgroundColor: string; borderColor: string; data: number[]; label: string; fill: boolean } | { backgroundColor: string; borderColor: string; data: number[]; label: string; fill: boolean })[]; labels: string[] }; type: string });
 
   clear(): this;
   stop(): this;
