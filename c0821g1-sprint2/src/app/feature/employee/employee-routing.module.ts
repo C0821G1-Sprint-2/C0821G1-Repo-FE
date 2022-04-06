@@ -15,13 +15,16 @@ const routes: Routes = [
     data: {expectedRole: ['ROLE_ADMIN']}
   },
   {
-    path: 'create', component: EmployeeCreateComponent
+    path: 'create', component: EmployeeCreateComponent,canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN']}
   },
   {
-    path: 'update/:id', component: EmployeeEditComponent
+    path: 'update/:id', component: EmployeeEditComponent,canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN']}
   },
   {
-    path: 'list', component: EmployeeListComponent
+    path: 'list', component: EmployeeListComponent,canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN']}
   }
 ];
 
