@@ -1,4 +1,5 @@
 import {EmployeePosition} from './employee-position';
+
 import {AppUser} from './user/app-user';
 
 export interface Employee {

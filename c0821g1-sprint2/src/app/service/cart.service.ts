@@ -9,22 +9,13 @@ import {Address} from '../model/address';
   providedIn: 'root'
 })
 export class CartService {
-  httpOptions: any;
   totalMoney: number;
   cartList: Cart[] = [];
-
   API_URL = 'http://localhost:8080';
   constructor(private httpClient: HttpClient) { }
   payment(payment: Payment): Observable<any> {
     console.log(payment);
-    return this.httpClient.post<any>(this.API_URL + '/cart/home/payment', payment, this.httpOptions);
-  }
-
-  saveNewOrder(total: any): void {
-    this.totalMoney = total;
-  }
-  save(totalMoney: number): Observable<void> {
-    return this.httpClient.get<void>(this.API_URL + '/cart/save' + totalMoney);
+    return this.httpClient.post<any>(this.API_URL + '/cart/home/payment', payment);
   }
   saveCartListTemp(cartList: Cart[]) {
     this.cartList = cartList;
@@ -32,7 +23,11 @@ export class CartService {
   getCartList( ) {
     return this.cartList;
   }
-  getList(): Observable<Address[]> {
+  getListAddress(): Observable<Address[]> {
     return this.httpClient.get<Address[]>(this.API_URL + '/cart/address');
+  }
+
+  save(cart: Cart) {
+    return this.httpClient.post<any>(this.API_URL + '/cart/create', cart);
   }
 }

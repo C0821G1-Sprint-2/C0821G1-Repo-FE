@@ -1,3 +1,4 @@
+
 .header {
   position: fixed;
   width: 100%;
@@ -87,6 +88,51 @@
 .header-bottom .link a:hover{
   color: #eb4d4b;
 }
+=======
+/*----------------------------------------------------
+@File: Default Styles
+@Author: Rocky
+@URL: http://wethemez.com
+Author E-mail: rockybd1995@gmail.com
+
+This file contains the styling for the actual theme, this
+is the file you need to edit to change the look of the
+theme.
+---------------------------------------------------- */
+/*=====================================================================
+@Template Name: Royal Hotel
+@Author: Rocky
+@Developed By: Rocky
+@Developer URL: http://rocky.wethemez.com
+Author E-mail: rockybd1995@gmail.com
+
+@Default Styles
+
+Table of Content:
+01/ Variables
+02/ predefin
+03/ header
+04/ button
+05/ banner
+06/ breadcrumb
+07/ about
+08/ team
+09/ project
+10/ price
+11/ team
+12/ blog
+13/ video
+14/ features
+15/ career
+16/ contact
+17/ footer
+
+=====================================================================*/
+/*----------------------------------------------------*/
+/*font Variables*/
+/*Color Variables*/
+/*=================== fonts ====================*/
+
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 .col-md-offset-right-1, .col-lg-offset-right-1 {
   margin-right: 8.33333333%;
@@ -1299,3 +1345,10 @@ button:focus {
 .form-select .nice-select::after {
   right: 20px;
 }
+
+
+
+/*---------------------------------------------------- */
+
+/*# sourceMappingURL=style.css.map */
+
