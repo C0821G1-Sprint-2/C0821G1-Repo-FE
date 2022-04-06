@@ -27,7 +27,6 @@ import {environment} from '../environments/environment';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-
     AppuserCreateAccountComponent
   ],
   imports: [
@@ -39,12 +38,9 @@ import {environment} from '../environments/environment';
     EquipmentModule,
     BrowserAnimationsModule,
     MatButtonModule,
-
     SecurityModule,
-
     EmployeeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
-
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [
