@@ -496,6 +496,7 @@ export declare class Chart<
   data: ChartData<TType, TData, TLabel>;
   options: ChartOptions<TType>;
 
+
   constructor(item: ChartItem, config: { data: { datasets: ({
         backgroundColor: string;
         borderColor: string;

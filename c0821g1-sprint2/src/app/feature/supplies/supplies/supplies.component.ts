@@ -3,7 +3,8 @@ import {Supplies} from "../../../model/supplies";
 import {SuppliesService} from "../../../service/supplies.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as XLSX from 'xlsx';
-
+import {Chart} from "../../../../assets/chart.js";
+// @ts-ignore
 @Component({
   selector: 'app-supplies',
   templateUrl: './supplies.component.html',
@@ -79,6 +80,7 @@ export class SuppliesComponent implements OnInit {
   }
 
   // chart
+
   // canvas: any;
   // ctx: any;
   // @ViewChild('mychart') mychart:any;
@@ -128,6 +130,59 @@ export class SuppliesComponent implements OnInit {
   //     },
   //   });
   // }
+
+  canvas: any;
+  ctx: any;
+  @ViewChild('mychart') mychart:any;
+
+  ngAfterViewInit() {
+    this.canvas = this.mychart.nativeElement;
+    this.ctx = this.canvas.getContext('2d');
+
+    // @ts-ignore
+    new Chart(this.ctx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'imported materials',
+          data: [0, 20, 40, 50],
+          backgroundColor: "rgb(115 185 243 / 65%)",
+          borderColor: "#007ee7",
+          fill: true,
+        },
+          {
+            label: 'salable materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            label: 'inventory materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "yellow",
+            fill: true,
+          },
+          {
+            label: 'damaged materials',
+            data: [0, 20, 70, 80],
+            backgroundColor: "rgb(115 185 243 / 65%)",
+            borderColor: "Violet",
+            fill: true,
+          },
+          {
+            label: 'Invested Amount',
+            data: [0, 20, 40, 60, 80],
+            backgroundColor: "#47a0e8",
+            borderColor: "#007ee7",
+            fill: true,
+          }],
+        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials','damaged materials']
+      },
+    });
+  }
+
 
   submitDate(start: any, end: any) {
 
