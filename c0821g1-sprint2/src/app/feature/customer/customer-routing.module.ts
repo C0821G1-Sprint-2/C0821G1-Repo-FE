@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CustomerListComponent} from './customer-list/customer-list.component';
+import {AuthGuard} from '../../helpers/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: 'list', component: CustomerListComponent
+    path: 'list', component: CustomerListComponent,canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN']}
   }
 ];
 
