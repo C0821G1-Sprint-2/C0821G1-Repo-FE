@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class EquipmentService {
-  API_URL = 'http://localhost:8080/equipment';
+  API_URL = 'http://localhost:8080/api/equipment';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -30,7 +30,7 @@ export class EquipmentService {
   }
 
   findById(id: number): Observable<Equipment> {
-    return this.httpClient.get<Equipment>(this.API_URL + '/find-by-id/' + id);
+    return this.httpClient.get<Equipment>(this.API_URL + '/find/' + id);
   }
 
   equipmentListBody(page: number): Observable<any> {

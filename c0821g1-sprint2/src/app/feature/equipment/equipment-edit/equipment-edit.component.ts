@@ -26,6 +26,7 @@ export class EquipmentEditComponent implements OnInit {
   loading = false;
   equipmentEdit: Equipment;
   equipment: Equipment;
+  prices: any;
 
   equipmentForm = new FormGroup({
     code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{4}$')]),
