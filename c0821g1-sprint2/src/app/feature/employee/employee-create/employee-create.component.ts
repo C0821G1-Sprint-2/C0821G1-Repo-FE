@@ -38,7 +38,7 @@ export class EmployeeCreateComponent implements OnInit {
     this.checkCode = false;
 
     this.employeeCreateForm = new FormGroup({
-      code: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
+      code: new FormControl('', [Validators.required, Validators.pattern('[N][V][-]\\d{3}')]),
       name: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
       dateOfBirth: new FormControl('', [Validators.required, this.checkMinAge, this.checkMaxAge]),
       gender: new FormControl('Nam'),

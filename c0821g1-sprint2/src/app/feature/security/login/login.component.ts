@@ -61,7 +61,9 @@ export class LoginComponent implements OnInit {
         console.log('token: ' + this.tokenStorageService.getUser().jwtToken);
 
         this.loginFrom.reset();
-        window.location.reload();
+        window.location.replace('http://localhost:4200/body');
+        // setTimeout();
+
       }
       , error => {
         console.log(error);

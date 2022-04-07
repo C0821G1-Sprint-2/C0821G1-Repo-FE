@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.tokenStorageService.signOut();
     // this.loadHeader();
-    this.router.navigate(['']);
+    this.router.navigate(['/body']);
     window.location.reload();
   }
 }

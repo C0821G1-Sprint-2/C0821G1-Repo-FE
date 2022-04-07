@@ -17,7 +17,7 @@
              style="padding-right: 100px">
           <form class="uk-search uk-search-default">
             <a uk-search-icon></a>
-            <input [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" style="border-radius: 5px; width: 300px" class="uk-search-input" type="search"
+            <input  [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" style="border-radius: 5px; width: 300px" class="form-control mr-sm-2 " type="search"
                    placeholder="Nhập thông tin tìm kiếm">
           </form>
         </div>
@@ -40,7 +40,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let s of employees; index as i ">
-            <td>
+            <td >
               <div class="user-info">
                 <div class="user-info__basic">
                   <h5 class="mb-0">{{i + 1}}</h5>
@@ -68,21 +68,21 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td style="text-align: center">
               <div class="user-info">
                 <div class="user-info__basic">
                   <h5 class="mb-0">{{s.gender}}</h5>
                 </div>
               </div>
             </td>
-            <td>
+            <td style="text-align: center">
               <div class="user-info">
                 <div class="user-info__basic">
                   <h5 class="mb-0">{{s.address}}</h5>
                 </div>
               </div>
             </td>
-            <td>
+            <td style="text-align: center">
               <div class="user-info">
                 <div class="user-info__basic">
                   <h5 class="mb-0">{{s.phone}}</h5>
