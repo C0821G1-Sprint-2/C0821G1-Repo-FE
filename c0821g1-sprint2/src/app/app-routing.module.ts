@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'supplies',
     loadChildren: () => import('./feature/supplies/supplies.module').then(module => module.SuppliesModule)
-  },{
+  }, {
     path: '',
     component: EquipmentListBodyComponent
   },
@@ -53,8 +53,10 @@ const routes: Routes = [
     loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
   },
   {
-    path: 'body', component:BodyComponent
-
+    path: 'body', component: BodyComponent
+  },
+  {
+    path: '', component: BodyComponent
   }
 ];
 

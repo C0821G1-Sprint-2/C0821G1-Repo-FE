@@ -54,6 +54,6 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut();
     // this.loadHeader();
     this.router.navigate(['/body']);
-    window.location.reload();
+    window.location.replace('http://localhost:4200/body');
   }
 }

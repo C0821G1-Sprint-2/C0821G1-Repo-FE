@@ -20,14 +20,16 @@ export class EmployeeService {
   findByCode(code: string): Observable<Employee> {
     return this.httpClient.get<Employee>(this.API_URL + '/detail/' + code);
   }
-  
 
 
 
+
+  // findById(id: number): Observable<Employee> {
+  //   return this.httpClient.get<Employee>(this.API_URL + '/' + id);
+  // }
   findById(id: number): Observable<Employee> {
-    return this.httpClient.get<Employee>(this.API_URL + '/' + id);
+    return this.httpClient.get<Employee>(this.API_URL + '/find/' + id);
   }
-
   getEmployee(id: number): Observable<any> {
     return this.httpClient.get(this.API_URL + '/detail/' + id);
   }

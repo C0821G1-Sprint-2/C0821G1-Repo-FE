@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'update/:id', component: EmployeeEditComponent,canActivate: [AuthGuard],
-    data: {expectedRole: ['ROLE_ADMIN']}
+    data: {expectedRole: ['ROLE_ADMIN','ROLE_EMPLOYEE']}
   },
   {
     path: 'list', component: EmployeeListComponent,canActivate: [AuthGuard],

@@ -192,22 +192,15 @@ export class SuppliesComponent implements OnInit {
       }
       data ? this.checkDate = true : this.checkDate = false;
     })
-    //
-    // if (this.date.controls.startDay.value != '' && this.date.controls.endDay.value != ''){
-    //   this.flagLanhOk = false;
-    // } else {
-    //   this.flagLanhOk = true;
-    // }
+
     this.date.controls.startDay.value != '' && this.date.controls.endDay.value != '' ?
       this.flagLanhOk = false : this.flagLanhOk = true;
-
 
     if (start == '' || end == '') {
       this.flagPagination = false;
       return this.flagerroe = true;
     }
     this.flagerroe = false;
-
 
     if (start != '' && end != '') {
       this.suppliesService.search(this.page, start, end).subscribe(data => {
