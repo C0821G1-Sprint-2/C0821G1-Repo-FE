@@ -76,17 +76,17 @@
               </div>
             </div>
           </td>
-          <td>
-            <div class="user-info">
-              <div class="user-info__basic">
-                <h5 class="mb-0">{{s.price}}</h5>
+          <td >
+            <div class="user-info" >
+              <div class="user-info__basic" >
+                <h5 class="mb-0">{{s.price | currency : 'VND' : 'symbol'}}</h5>
               </div>
             </div>
           </td>
           <td>
             <div class="user-info">
               <div class="user-info__basic">
-                <h5 class="mb-0">{{s.expired}}</h5>
+                <h5 class="mb-0">{{s.expired | date : 'dd/MM/yyyy'}}</h5>
               </div>
             </div>
           </td>
