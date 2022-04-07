@@ -36,7 +36,9 @@ export class EmployeeEditComponent implements OnInit {
               private snipper: NgxSpinnerService) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.idEdit = +paramMap.get('id');
+      console.log('===>' + this.idEdit )
       const employee = this.getEmployee(this.idEdit);
+      console.log('===>' +employee)
     });
   }
 
@@ -72,6 +74,7 @@ export class EmployeeEditComponent implements OnInit {
   get employeeImage() {
     return this.employeeEditForm.get('employeeImage');
   }
+
 
   updateEmployee(id: number) {
     const employee = this.employeeEditForm.value;
