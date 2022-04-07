@@ -33,7 +33,7 @@ export class EquipmentEditComponent implements OnInit {
 
 
   equipmentForm = new FormGroup({
-    code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{4}$')]),
+    code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{3}$')]),
     name: new FormControl('', [Validators.required, Validators.maxLength(5)]),
     price: new FormControl('', [Validators.required, Validators.pattern('^\\d{4,9}$')]),
     expired: new FormControl('', Validators.required),

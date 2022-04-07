@@ -23,7 +23,7 @@
                         Mã vật tư khômg được để trống.
                       </small>
                       <small style="color: red" *ngIf="equipmentForm.controls.code.hasError('pattern')">
-                        Mã vật tư không đúng định dạng(VT-0001).
+                        Mã vật tư không đúng định dạng(VT-001).
                       </small>
                       <small style="color: red" *ngIf="validateCode == false">
                         Mã vật tư đã tồn tại.
@@ -105,7 +105,7 @@
 
                   <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
                     <button type="submit" class="btn btn-primary text-white" (click)="saveNewEquipment()"
-                            [disabled]="equipmentForm.invalid">
+                            [disabled]="equipmentForm.invalid || checkDay == false">
                       Thêm mới
                     </button>
                     <button type="reset" class="btn btn-secondary ms-lg-3" routerLink="/equipment/list">
