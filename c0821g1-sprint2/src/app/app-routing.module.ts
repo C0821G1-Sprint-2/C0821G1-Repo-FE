@@ -20,6 +20,19 @@ const routes: Routes = [
     loadChildren: () => import('./feature/payment/payment.module').then(module => module.PaymentModule)
   },
   {
+
+    path: 'appuser',
+    loadChildren: () => import('./feature/appuser/appuser.module').then(module => module.AppuserModule)
+  },
+  {
+    path: 'security',
+    loadChildren: () => import('./feature/security/security.module').then(module => module.SecurityModule)
+  },
+  {
+    path: 'employee',
+    loadChildren: () => import('./feature/employee/employee.module').then(module => module.EmployeeModule)
+  },
+  {
     path: 'financial',
     loadChildren: () => import('./feature/financial/financial.module').then(module => module.FinancialModule)
   },
@@ -41,6 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'body', component:BodyComponent
+
   }
 ];
 

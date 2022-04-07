@@ -7,11 +7,22 @@ import {Employee} from '../model/employee';
   providedIn: 'root'
 })
 export class EmployeeService {
+  private API_URL = 'http://localhost:8080/api/employee';
 
-  API_URL = 'http://localhost:8080/api/employee';
 
   constructor(private httpClient: HttpClient) {
   }
+
+  getAllEmployee(): Observable<Employee[]> {
+    return this.httpClient.get<Employee[]>(this.API_URL + '/list-select');
+  }
+
+  findByCode(code: string): Observable<Employee> {
+    return this.httpClient.get<Employee>(this.API_URL + '/detail/' + code);
+  }
+  
+
+
 
   findById(id: number): Observable<Employee> {
     return this.httpClient.get<Employee>(this.API_URL + '/' + id);

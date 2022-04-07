@@ -31,6 +31,7 @@ export class EquipmentCreateComponent implements OnInit {
   equipmentForm: FormGroup;
   selectImage: any;
   validateCode: boolean;
+  prices: any;
 
   constructor(private equipmentService: EquipmentService,
               private router: Router,
