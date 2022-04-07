@@ -1,10 +1,10 @@
 <div  class="container-fluid ">
-<div class="content-container form-personal">
+<div class="content-container ">
   <section class="" >
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-8">
-          <div class="card text-black">
+          <div class="form-personal card text-black">
 
             <div class=" card-body p-md-5">
 
@@ -26,7 +26,7 @@
                       Mã nhân viên không được để trống.</small>
                     <small style="color: red"
                            *ngIf="employeeCreateForm.controls.code.hasError('pattern')">
-                      Mã nhân viên phải có định dạng NV-XXXX.</small>
+                      Mã nhân viên phải có định dạng NV-XXX.</small>
                     <small class="error" *ngIf="flagCode == true">Mã nhân viên đã tồn tại</small>
 
                     <div class="d-flex flex-row align-items-center mb-1">

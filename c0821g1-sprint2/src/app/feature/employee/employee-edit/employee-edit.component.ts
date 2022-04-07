@@ -48,7 +48,7 @@ export class EmployeeEditComponent implements OnInit {
     return this.employeeService.findById(id).subscribe(employee => {
       this.employeeEditForm = new FormGroup({
         id: new FormControl(employee.id),
-        code: new FormControl(employee.code, [Validators.required, Validators.pattern('[N][V][-]\\d{4}')]),
+        code: new FormControl(employee.code, [Validators.required, Validators.pattern('[N][V][-]\\d{3}')]),
         name: new FormControl(employee.name, [Validators.required, Validators.maxLength(40), Validators.pattern('^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*$')]),
         dateOfBirth: new FormControl(employee.dateOfBirth, [Validators.required, this.checkMinAge, this.checkMaxAge]),
         gender: new FormControl(employee.gender),
