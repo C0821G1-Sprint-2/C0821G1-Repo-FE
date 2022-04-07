@@ -24,31 +24,30 @@
         </tr>
         <tr>
           <td>Bán Hàng</td>
-          <td>{{this.sell}}</td>
+          <td>{{this.sell | number:'1.0':'en-US'}}</td>
         </tr>
         <tr>
           <td>Nhập Từ NCC</td>
-          <td>{{this.manufacture}}</td>
+          <td>{{this.manufacture | number:'1.0':'en-US'}}</td>
         </tr>
         <tr>
           <td>Nhập Hàng</td>
-          <td>{{this.importGoods}}</td>
+          <td>{{this.importGoods | number:'1.0':'en-US'}}</td>
         </tr>
         <tr>
           <td>Trả Khách Hàng</td>
-          <td>{{this.payCustomer}}</td>
+          <td>{{this.payCustomer | number:'1.0':'en-US'}}</td>
         </tr>
         <tr>
           <td>Hủy Hàng</td>
-          <td>{{this.cancel}}</td>
+          <td>{{this.cancel | number:'1.0':'en-US'}}</td>
         </tr>
       </table >
     </div>
     <div class="col-6">
       <div class="row">
 
-        <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-5">
           <form [formGroup]="date">
             <label for="exampleDataList" class="form-label">Tháng</label>
             <input (change)="code()" formControlName="month"  class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Tháng...">
@@ -66,6 +65,11 @@
               <option (change)="code()" [value]="11">
               <option (change)="code()" [value]="12">
             </datalist>
+          </form>
+          <p style="color: red" *ngIf="flagg == true">Không có dữ liệu trong tháng này !</p>
+        </div>
+        <div class="col-5">
+          <form [formGroup]="date">
             <label for="exampleDataList1" class="form-label">Năm</label>
             <input (change)="code()" formControlName="year"  class="form-control" list="datalistOptions1" id="exampleDataList1" placeholder="Năm...">
             <datalist ngDefaultControl  formControlName="year" id="datalistOptions1">
@@ -76,25 +80,30 @@
               <option (change)="code()" [value]="2018">
             </datalist>
           </form>
-          <p style="color: red" *ngIf="flagg == true">Không có dữ liệu trong tháng này !</p>
         </div>
+
+                <div class="col-2"></div>
+
+        <h3 style="margin-top: 73px;padding-left: 200px ">Tổng doanh thu</h3>
+
         <div class="col-4">
         </div>
 
         <h3 style="margin-top: 50px;padding-left: 200px ">Tổng doanh thu</h3>
+
         <div class="col-12" style="margin-top: 5px">
           <table class="table table-hover">
             <tr>
               <td>Tổng thu</td>
-              <td>{{revenue}}</td>
+              <td>{{revenue | number:'1.0':'en-US'}}</td>
             </tr>
             <tr>
               <td>Tổng chi</td>
-              <td>{{totalExpenditure}}</td>
+              <td>{{totalExpenditure | number:'1.0':'en-US'}}</td>
             </tr>
             <tr>
               <td>Doanh thu</td>
-              <td>{{totalRevenue}}</td>
+              <td>{{totalRevenue | number:'1.0':'en-US'}}</td>
             </tr>
           </table>
 
@@ -110,7 +119,7 @@
             In
           </button>
 
-          <button style="margin-left: 30px;background-color: #cccccc; border-radius: 10px" type="button"
+          <button routerLink="" style="margin-left: 30px;background-color: #cccccc; border-radius: 10px" type="button"
                   class="btn btn-outline-secondary"><i
             class="fa-solid fa-rotate-left"></i> Trở Về
           </button>
@@ -140,7 +149,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </body>
 
 

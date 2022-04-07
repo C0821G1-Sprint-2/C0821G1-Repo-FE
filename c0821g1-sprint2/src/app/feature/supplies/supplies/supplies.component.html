@@ -34,6 +34,8 @@
           </div>
           <p  style="color:red;text-align: center;margin-top: 20px" *ngIf="checkDate == true">Ngày bắt đầu phải trước ngày kết thúc!</p>
         </div>
+
+          <p *ngIf="flagLanhOk == true" style="color: red ; text-align: center;">Nhập đầy đủ ngày bắt đầu và kết thúc !</p>
         </form>
       </fieldset>
 
@@ -64,7 +66,7 @@
         </table>
       </ng-template>
 
-<div class="row">
+<div *ngIf="flagPagination == true" class="row">
   <div style="display: flex;justify-content: center">
     <div class="align-content-center">
       <div class="me-5 pe-4 ">
@@ -110,7 +112,7 @@
             In
           </button>
 
-          <button  style="margin-left: 30px;background-color: #cccccc; border-radius: 10px" type="button"
+          <button routerLink="" style="margin-left: 30px;background-color: #cccccc; border-radius: 10px" type="button"
                   class="btn btn-outline-secondary"><i
             class="fa-solid fa-rotate-left"></i> Trở Về
           </button>
