@@ -301,15 +301,11 @@
           </li>
         </ng-template>
         <ng-template #wrong>
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" href="#">-->
-<!--              <i class="fa-solid fa-cart-arrow-down"></i>-->
-<!--            </a>-->
-<!--          </li>-->
-          <li class="nav-item ">
+            <a class="nav-link" [routerLink]="['/cart/list']" style="float: left">
+              <i class="fa-solid fa-cart-arrow-down"></i>
+            </a>
             <a class="nav-link" style="cursor: pointer;" [routerLink]="['/security/login']" >Đăng
               nhập</a>
-          </li>
           <span class="reline me-3"></span>
         </ng-template>
       </ul>

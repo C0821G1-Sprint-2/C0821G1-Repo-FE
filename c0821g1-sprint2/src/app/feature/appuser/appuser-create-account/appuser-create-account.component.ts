@@ -4,6 +4,7 @@ import {EmployeeService} from '../../../service/employee.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AppuserService} from '../../../service/appuser.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-appuser-create-account',
@@ -39,14 +40,20 @@ export class AppuserCreateAccountComponent implements OnInit {
   }
 
 
-  name() {
-
+  private callToast() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Đăng kí thành công!',
+      showConfirmButton: false,
+      timer: 2000
+    });
   }
 
   saveAppUser() {
     const newAppUser = Object.assign({}, this.accountForm.value);
     this.appuserService.saveAppUser(newAppUser, this.code).subscribe(value => {
-        alert('tạo thành công');
+        this.callToast();
         console.log(this.code);
         this.router.navigateByUrl('/employee/list');
       }, error => {

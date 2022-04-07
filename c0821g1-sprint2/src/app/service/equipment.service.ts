@@ -32,7 +32,7 @@ export class EquipmentService {
   }
 
   findById(id: number): Observable<Equipment> {
-    return this.httpClient.get<Equipment>(this.API_URL + '/find-by-id/' + id);
+    return this.httpClient.get<Equipment>(this.API_URL + '/find/' + id);
   }
 
   equipmentListBody(page: number): Observable<any> {
