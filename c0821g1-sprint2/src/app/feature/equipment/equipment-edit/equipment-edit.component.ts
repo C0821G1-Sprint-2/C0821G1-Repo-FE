@@ -29,6 +29,8 @@ export class EquipmentEditComponent implements OnInit {
   equipmentEdit: Equipment;
   equipment: Equipment;
   prices: any;
+  checkDay: boolean;
+
 
   equipmentForm = new FormGroup({
     code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{4}$')]),
@@ -89,6 +91,16 @@ export class EquipmentEditComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000
     });
+  }
+
+  check(expired){
+    this.equipmentService.checkDate(expired).subscribe(value => {
+      if (value){
+        this.checkDay = true;
+      }else{
+        this.checkDay = false;
+      }
+    })
   }
 
   showPreview(event: any) {

@@ -80,10 +80,11 @@
                       <label for="expiredEquipment" class="form-label fw-bold">Hạn sử dụng <span
                         class="error">(*)</span></label>
                       <input type="date" id="expiredEquipment" class="form-control " style=""
-                             formControlName="expired"/>
+                             formControlName="expired" (change)="check(equipmentForm.controls.expired.value)"/>
                       <small style="color: red"
                              *ngIf="equipmentForm.controls.expired.hasError('required') && equipmentForm.controls.expired.touched">
                         Hạn sử dụng không được để trống.</small>
+                      <small style="color: red" *ngIf=" checkDay == false">Hạn sử dụng phải lớn hơn ngày hiện tại.</small>
                     </div>
                   </div>
 
@@ -107,7 +108,7 @@
                             [disabled]="equipmentForm.invalid">
                       Thêm mới
                     </button>
-                    <button type="button" class="btn btn-secondary ms-lg-3" routerLink="/equipment/list">
+                    <button type="reset" class="btn btn-secondary ms-lg-3" routerLink="/equipment/list">
                       Đặt lại
                     </button>
                   </div>
@@ -126,16 +127,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
-              <button type="submit"
-                      class="btn btn-success text-white btn-outline-success" (click)="saveNewEquipment()">Thêm mới
-              </button>
-              <button type="reset" class="btn btn-light btn-outline-success ms-lg-3">
-                Đặt lại
-              </button>
-            </div>
-
           </div>
 
         </div>
