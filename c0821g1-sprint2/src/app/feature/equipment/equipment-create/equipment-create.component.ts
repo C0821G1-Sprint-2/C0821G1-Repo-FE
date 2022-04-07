@@ -31,7 +31,9 @@ export class EquipmentCreateComponent implements OnInit {
   equipmentForm: FormGroup;
   selectImage: any;
   validateCode: boolean;
+  validateDay: boolean;
   prices: any;
+  checkDay: boolean;
 
   constructor(private equipmentService: EquipmentService,
               private router: Router,
@@ -87,6 +89,23 @@ export class EquipmentCreateComponent implements OnInit {
           console.log('==========>' + newEquipment);
           this.equipmentService.saveNewEquipment(newEquipment).subscribe(value => {
             this.callToast();
+            // for (const equip of this.equipmentList) {
+            //   // @ts-ignore
+            //   const dateEnd = new Date(equip.expired);
+            //   // @ts-ignore
+            //   const today = new Date();
+            //   // @ts-ignore
+            //   const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate());
+            //   // @ts-ignore
+            //   const check = endDate1 - today;
+            //   // @ts-ignore
+            //   equip.status = Math.round(check);
+            //   if (check > 0){
+            //     this.checkDay = true;
+            //   }else{
+            //     this.checkDay = false;
+            //   }
+            // }
           }, error => {
             // console.log(error);
             this.validateCode = false;
@@ -109,6 +128,14 @@ export class EquipmentCreateComponent implements OnInit {
     });
   }
 
+  check(expired){
+    this.equipmentService.checkDate(expired).subscribe(value => {
+
+      console.log('Dong' + value);
+
+      this.checkDay = !!value;
+    })
+  }
   showPreview(event: any) {
     this.selectImage = event.target.files[0];
     if (event.target.files) {
