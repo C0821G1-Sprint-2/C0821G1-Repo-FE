@@ -1,5 +1,5 @@
 <app-header></app-header>
-<a routerLink="equipment/list-equipment">List</a>
-<a routerLink="equipment/detail">Detail</a>
+<p><a routerLink="cart/list">Cart List</a></p>
+<p> <a class="dropdown-item" [routerLink]="['/equipment/detail',1]">Detail Equipment</a></p>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

@@ -6,7 +6,7 @@ import {EquipmentListComponent} from "./equipment-list/equipment-list.component"
 
 const routes: Routes = [
   {
-    path: 'detail', component: EquipmentDetailComponent
+    path: 'detail/:id', component: EquipmentDetailComponent
   },
   {
     path: 'list-equipment', component:EquipmentListComponent

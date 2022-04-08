@@ -1,3 +1,4 @@
+
 <div class="container">
   <section class="shopping-cart">
     <h1 class="heading">GIỎ HÀNG</h1>
@@ -20,7 +21,7 @@
         <td>{{cart.totalMoney|number}}</td>
         <td>
           <label>
-            <input [min]="0" type="number" [(ngModel)]="cart.quantity" class="form-control">
+            <input [min]="0" type="number" [(ngModel)]="cart.quantity" class="form-control" (change)="getTotalMoney(cart.id,cart.quantity)" >
           </label>
         </td>
         <td>{{cart.quantity * cart.totalMoney|number}}</td>
@@ -36,7 +37,7 @@
       <tr class="table-bottom">
         <td><a href="#" class="option-btn">Cửa hàng</a></td>
         <td colspan="3">Tổng hóa đơn</td>
-        <td><span>{{totalMoneyAll|number}}</span></td>
+        <td> <span class="totalMoney" [(ngModel)]="totalMoneyAll">{{totalMoneyAll|number}}</span></td>
         <td>
           <div class="dropdown">
             <a class="dropbtn dropdown-toggle dropdown-toggle-split option-btn" style="color: white">Thanh Toán</a>
@@ -58,10 +59,11 @@
 <!-- Modal -->
 <div class="row">
   <div class="col-12 text-center">
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!--    <center>-->
+    <div class="modal fade text-center" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content row">
+      <div class="modal-dialog text-center">
+        <div class="modal-content row text-center">
           <div class="col-12">
             <br>
             <h1 class="text-danger text-center">Xóa Sản Phẩm </h1>
@@ -85,7 +87,7 @@
         </div>
       </div>
     </div>
+<!--    </center>-->
   </div>
 </div>
-
 
