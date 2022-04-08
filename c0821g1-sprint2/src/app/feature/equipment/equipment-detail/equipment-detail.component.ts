@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Equipment} from '../../../model/equipment';
 import {EquipmentService} from '../../../service/equipment.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class EquipmentDetailComponent implements OnInit {
   equipment: Equipment;
   idSupplies: number;
+
   constructor(private equipmentService: EquipmentService, private activatedRoute: ActivatedRoute) {
     const id = this.activatedRoute.snapshot.params.id;
     this.equipmentService.findById(id).subscribe(value => {
@@ -20,16 +21,16 @@ export class EquipmentDetailComponent implements OnInit {
     }, () => {
     });
   }
+
   ngOnInit(): void {
   }
-  addToCart() {
-    this.idSupplies = 2;
+
+
+  addToCart(id: number) {
+    this.idSupplies = id;
     localStorage.setItem(String(this.idSupplies), String(1));
     this.callToastAdd();
   }
-  // moveToPaymentPage(id) {
-  //   this.id = id;
-  // }
 
   private callToastAdd() {
     Swal.fire({
@@ -40,4 +41,6 @@ export class EquipmentDetailComponent implements OnInit {
       timer: 2000
     });
   }
+
+
 }

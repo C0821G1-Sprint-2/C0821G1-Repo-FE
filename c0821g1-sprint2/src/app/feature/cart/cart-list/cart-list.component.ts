@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cart} from '../../../model/cart';
 import {EquipmentService} from '../../../service/equipment.service';
 import {CartService} from '../../../service/cart.service';
@@ -13,11 +13,13 @@ import {Router} from '@angular/router';
 export class CartListComponent implements OnInit {
   idDeleteCart = 0;
   nameDeleteCart = '';
+
   constructor(private equipmentService: EquipmentService, private router: Router, private cartService: CartService) {
     this.getCartList();
   }
+
   cartList: Cart[] = [];
-  totalMoneyAll = 0 ;
+  totalMoneyAll = 0;
   suppliesIdList: string[] = [];
 
   getCartList() {
@@ -40,6 +42,7 @@ export class CartListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   getTotalMoney(id: number, quantity: number) {
     // @ts-ignore
     localStorage.setItem(String(id), String(quantity));
@@ -49,6 +52,7 @@ export class CartListComponent implements OnInit {
       this.totalMoneyAll += this.cartList[i].quantity * this.cartList[i].totalMoney;
     }
   }
+
   moveToPaymentPage() {
     this.cartService.saveCartListTemp(this.cartList);
   }
@@ -69,6 +73,7 @@ export class CartListComponent implements OnInit {
     this.callToastDelete();
     window.location.reload();
   }
+
   private callToastDelete() {
     Swal.fire({
       position: 'top',
