@@ -31,7 +31,7 @@ export class CartListComponent implements OnInit {
           const cart = new Cart();
           cart.id = value.id;
           cart.code = value.name;
-          cart.totalMoney = value.price;
+          cart.totalMoney = Number(value.price);
           cart.image = value.image;
           cart.quantity = Number(localStorage.getItem(String(cart.id)));
           this.cartList.push(cart);

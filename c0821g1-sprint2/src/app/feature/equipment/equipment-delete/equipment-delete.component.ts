@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {EquipmentService} from "../../../service/equipment.service";
-import {Equipment} from "../../../model/equipment";
+import {Equipment} from '../../../model/equipment';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {EquipmentService} from '../../../service/equipment.service';
+
 
 @Component({
   selector: 'app-equipment-delete',
@@ -10,7 +11,7 @@ import {Equipment} from "../../../model/equipment";
 })
 export class EquipmentDeleteComponent implements OnInit {
 
-  equipment:Equipment;
+  equipment: Equipment;
   constructor(public  dialogRef: MatDialogRef<EquipmentDeleteComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private equipmentService: EquipmentService) { }

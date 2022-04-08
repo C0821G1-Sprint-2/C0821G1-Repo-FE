@@ -1,4 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, inject, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {EquipmentType} from '../../../model/equipment-type';
+import {Supplier} from '../../../model/supplier';
+import {Equipment} from '../../../model/equipment';
+import {EquipmentService} from '../../../service/equipment.service';
+import {Router} from '@angular/router';
+import {EquipmentTypeService} from '../../../service/equipment-type.service';
+import {SupplierService} from '../../../service/supplier.service';
+import Swal from 'sweetalert2';
+import {finalize} from 'rxjs/operators';
+// @ts-ignore
+import {AngularFireStorage} from '@angular/fire/storage';
+import {UploadFireService} from '../../../service/upload-file-image/upload-fire.service';
+import validate = WebAssembly.validate;
+
 
 @Component({
   selector: 'app-equipment-create',
@@ -7,9 +22,131 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquipmentCreateComponent implements OnInit {
 
-  constructor() { }
+  equipmentList: Array<Equipment>;
+  equipmentTypeList: Array<EquipmentType>;
+  supplierList: Array<Supplier>;
+  url: string;
+  id: string;
+  file: string;
+  equipmentForm: FormGroup;
+  selectImage: any;
+  validateCode: boolean;
+  validateDay: boolean;
+  prices: any;
+  checkDay: boolean;
 
-  ngOnInit(): void {
+  constructor(private equipmentService: EquipmentService,
+              private router: Router,
+              private equipmentTypeService: EquipmentTypeService,
+              private supplierService: SupplierService,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+              @Inject(UploadFireService) private uploadFileService: UploadFireService) {
+    this.equipmentForm = new FormGroup({
+      code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{3}$')]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+      price: new FormControl('', [Validators.required, Validators.pattern('^\\d{4,9}$')]),
+      expired: new FormControl('', Validators.required),
+      image: new FormControl(),
+      equipmentType: new FormControl('', [Validators.required]),
+      supplier: new FormControl('', [Validators.required]),
+    });
+    this.supplierService.findAllSupplier().subscribe(value => {
+      this.supplierList = value;
+      console.log(this.supplierList);
+    });
+    this.equipmentTypeService.findAllEquipmentType().subscribe(value => {
+      this.equipmentTypeList = value;
+      console.log(this.equipmentTypeList);
+    });
   }
 
+  ngOnInit(): void {
+    this.uploadFileService.getImageDetailList();
+  }
+
+  get equipmentImage() {
+    return this.equipmentForm.get('equipmentImage');
+  }
+
+  saveNewEquipment() {
+
+    // setTimeout(() => {
+    //   this.callToast(),
+    //     this.router.navigateByUrl('/equipment/list');
+    // }, 10);
+    //
+    // this.callToast(),
+    //   this.router.navigateByUrl('/equipment/list');
+
+    const name = this.selectImage.name;
+    const fileRef = this.storage.ref(name);
+    this.storage.upload(name, this.selectImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.equipmentForm.patchValue({image: url});
+          const newEquipment = Object.assign({}, this.equipmentForm.value);
+          console.log('==========>' + newEquipment);
+          this.equipmentService.saveNewEquipment(newEquipment).subscribe(value => {
+            this.callToast();
+            // for (const equip of this.equipmentList) {
+            //   // @ts-ignore
+            //   const dateEnd = new Date(equip.expired);
+            //   // @ts-ignore
+            //   const today = new Date();
+            //   // @ts-ignore
+            //   const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate());
+            //   // @ts-ignore
+            //   const check = endDate1 - today;
+            //   // @ts-ignore
+            //   equip.status = Math.round(check);
+            //   if (check > 0){
+            //     this.checkDay = true;
+            //   }else{
+            //     this.checkDay = false;
+            //   }
+            // }
+          }, error => {
+            // console.log(error);
+            this.validateCode = false;
+          }, () => {
+            this.callToast(),
+            this.router.navigateByUrl('/equipment/list');
+          });
+        });
+      })
+    ).subscribe();
+  }
+
+  private callToast() {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Thêm mới thành công!',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
+
+  check(expired){
+    this.equipmentService.checkDate(expired).subscribe(value => {
+
+      console.log('Dong' + value);
+
+      this.checkDay = !!value;
+    })
+  }
+  showPreview(event: any) {
+    this.selectImage = event.target.files[0];
+    if (event.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
+    }
+  }
 }
+
+

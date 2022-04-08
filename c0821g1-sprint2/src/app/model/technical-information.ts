@@ -1,4 +1,5 @@
 export interface TechnicalInformation {
+
   id: number;
   content1: string;
   content2: string;
