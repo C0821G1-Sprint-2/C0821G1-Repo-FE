@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Equipment} from '../../../model/equipment';
 import {EquipmentService} from '../../../service/equipment.service';
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
