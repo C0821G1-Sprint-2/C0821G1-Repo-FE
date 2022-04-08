@@ -12,7 +12,7 @@ export class CustomerService {
 
 
   findAllCustomer(page, customer): Observable<any> {
-    return this.httpClient.get(this.API_URL + '/customer/list/?page=' + page + '&keyword=' + customer);
+    return this.httpClient.get(this.API_URL + '/customer/customer-list/?page=' + page + '&keyword=' + customer);
   }
 
   getCustomerById(id): Observable<any> {

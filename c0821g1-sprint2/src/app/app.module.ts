@@ -15,11 +15,11 @@ import {APP_BASE_HREF} from '@angular/common';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 import { AppuserCreateAccountComponent } from './feature/appuser/appuser-create-account/appuser-create-account.component';
 import {EquipmentModule} from './feature/equipment/equipment.module';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import {EmployeeModule} from './feature/employee/employee.module';
-import { BodyComponent } from './shared/body/body.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+import {ChartModule} from "@syncfusion/ej2-angular-charts";
+
 
 
 @NgModule({
@@ -40,7 +40,9 @@ import {environment} from '../environments/environment';
     MatButtonModule,
     SecurityModule,
     EmployeeModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    ChartModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [

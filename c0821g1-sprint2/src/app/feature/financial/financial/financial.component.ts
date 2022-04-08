@@ -3,17 +3,22 @@ import {Financial} from "../../../model/financial";
 import {FinancialService} from "../../../service/financial.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as XLSX from "xlsx";
-import {Chart} from "../../../../assets/chart.js";
+
 @Component({
   selector: 'app-financial',
   templateUrl: './financial.component.html',
   styleUrls: ['./financial.component.css']
 })
 export class FinancialComponent implements OnInit {
+  public data: Object[];
+  public chartTilte: string;
+  public chartLabel: Object;
+  public legend: Object;
+  public tooltipSettings: Object;
+
+  public title: string;
   @ViewChild('table') table: ElementRef;
   fileName = 'Financial.xlsx';
-
-  title = 'chartjsangular';
   canvas: any;
   ctx: any;
 
@@ -36,6 +41,7 @@ export class FinancialComponent implements OnInit {
   flagg: boolean;
   totalExpenditure: number = 0;
   totalRevenue: number = 0;
+   flagChart = true;
   constructor(private financialService: FinancialService, private fb: FormBuilder) {
     this.flagg = false;
     this.date = this.fb.group(
@@ -44,7 +50,71 @@ export class FinancialComponent implements OnInit {
         year: ''
       }
     )
+
+    if (this.revenue == 0){
+      this.flagChart = false;
+    }
+
+    // chart
+    this.chartTilte = 'Fruits Chart';
+    this.data = [
+      { name : 'Tổng thu' , value: this.revenue },
+      { name : 'Tổng chi' , value: this.totalExpenditure },
+      { name : 'Doanh thu' , value: this.totalRevenue }
+    ];
+    console.log("aaaaaaaa" + this.revenue);
+    this.chartLabel = {
+      visible : true,
+      position: 'Inside',
+      name: 'text'
+    };
+    this.legend = {
+      visible: true,
+      position: 'Bottom',
+      height: '8%',
+      width: '35%'
+    };
+    this.tooltipSettings = {
+      enable: true,
+      format: '${point.x} : <b>${point.y}%</b>'
+    }
   }
+
+  chart123(){
+    // chart
+
+    if (this.revenue != 0){
+      console.log('Lanh LV')
+      this.flagChart = true;
+    }else {
+      this.flagChart = false;
+
+    }
+
+    this.chartTilte = 'Thông kê tài chính';
+    this.data = [
+      { name : 'Tổng thu' , value: this.revenue },
+      { name : 'Tổng chi' , value: this.totalExpenditure },
+      { name : 'Doanh thu' , value: this.totalRevenue }
+    ];
+    console.log("aaaaaaaa" + this.revenue);
+    this.chartLabel = {
+      visible : true,
+      position: 'Inside',
+      name: 'text'
+    };
+    this.legend = {
+      visible: true,
+      position: 'Bottom',
+      height: '8%',
+      width: '35%'
+    };
+    this.tooltipSettings = {
+      enable: true,
+      format: '${point.x} : <b>${point.y}%</b>'
+    }
+  }
+
   ngOnInit() {
     if (this.month == '' && this.year == '') {
       this.flag = false;
@@ -60,6 +130,8 @@ export class FinancialComponent implements OnInit {
             this.cancel = this.financial[i].cancel;
             this.totalExpenditure = this.financial[i].totalExpenditure;
             this.totalRevenue = this.revenue - this.totalExpenditure;
+
+            this.chart123()
           }
           this.totalPages = data.totalPages;
           this.size = data.size;
@@ -71,7 +143,6 @@ export class FinancialComponent implements OnInit {
       })
     }
 
-    // chart
 
   }
 
@@ -103,6 +174,8 @@ export class FinancialComponent implements OnInit {
           this.size = data.size;
           this.page = data.pageable.pageNumber;
           this.message = '';
+
+          this.chart123()
         } else {
           this.message = 'không tìm thấy !!!  ';
         }
@@ -119,15 +192,9 @@ export class FinancialComponent implements OnInit {
   }
 
   export() {
-    /* pass here the table id */
-    // let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(this.table.nativeElement);
-
-    /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
     XLSX.writeFile(wb, this.fileName);
   }
 }

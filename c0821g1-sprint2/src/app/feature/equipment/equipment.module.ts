@@ -17,7 +17,9 @@ import {NgxSpinnerModule} from 'ngx-bootstrap-spinner';
 
 
 @NgModule({
-  declarations: [EquipmentCreateComponent, EquipmentEditComponent, EquipmentDetailComponent, EquipmentDeleteComponent, EquipmentListComponent],
+  declarations: [EquipmentCreateComponent
+    , EquipmentEditComponent, EquipmentDetailComponent
+    , EquipmentDeleteComponent, EquipmentListComponent,EquipmentListBodyComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -28,7 +30,8 @@ import {NgxSpinnerModule} from 'ngx-bootstrap-spinner';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     RouterModule,
     MatDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
   ]
 })
 
