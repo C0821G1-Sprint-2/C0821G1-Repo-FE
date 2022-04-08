@@ -1,15 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {EquipmentDetailComponent} from './equipment-detail/equipment-detail.component';
-import {EquipmentListComponent} from "./equipment-list/equipment-list.component";
+import {EquipmentCreateComponent} from './equipment-create/equipment-create.component';
+import {EquipmentEditComponent} from './equipment-edit/equipment-edit.component';
+import {EquipmentListComponent} from './equipment-list/equipment-list.component';
+import {AuthGuard} from '../../helpers/auth.guard';
+
 
 
 const routes: Routes = [
   {
-    path: 'detail/:id', component: EquipmentDetailComponent
+    path: 'detail/:id', component: EquipmentDetailComponent,
+    canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
+  },
+  // {
+  //   path: 'list', component: EquipmentListComponent
+  // },
+  {
+    path: 'create', component: EquipmentCreateComponent,
+    canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   },
   {
-    path: 'list-equipment', component:EquipmentListComponent
+    path: 'edit/:id', component: EquipmentEditComponent,
+    canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
+  },
+  {
+    path: 'list', component: EquipmentListComponent,
+    canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   }
 
 ];

@@ -1,7 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Customer} from "../../../model/customer";
+
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CustomerService} from "../../../service/customer.service";
+import {Customer} from '../../../model/customer';
+import {CustomerService} from '../../../service/customer.service';
+
 
 @Component({
   selector: 'app-customer-delete',

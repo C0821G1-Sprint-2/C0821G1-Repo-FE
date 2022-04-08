@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Customer} from "../../../model/customer";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {EquipmentService} from "../../../service/equipment.service";
-import {CustomerService} from "../../../service/customer.service";
-import {CustomerDeleteComponent} from "../customer-delete/customer-delete.component";
-import {MatDialog} from "@angular/material/dialog";
+
+import {Customer} from '../../../model/customer';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {CustomerService} from '../../../service/customer.service';
+import {CustomerDeleteComponent} from '../customer-delete/customer-delete.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-customer-list',
