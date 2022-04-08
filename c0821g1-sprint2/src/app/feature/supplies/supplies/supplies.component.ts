@@ -3,7 +3,9 @@ import {Supplies} from "../../../model/supplies";
 import {SuppliesService} from "../../../service/supplies.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import * as XLSX from 'xlsx';
-import {Chart} from "../../../../assets/chart.js";
+import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+// @ts-ignore
+import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 // @ts-ignore
 @Component({
   selector: 'app-supplies',
@@ -27,6 +29,60 @@ export class SuppliesComponent implements OnInit {
   flagLanhOk: boolean = false;
   flagPagination: boolean = false;
 
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 10
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  };
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [
+    DataLabelsPlugin
+  ];
+
+  public barChartData: ChartData<'bar'> = {
+    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+    ]
+  };
+
+  // events
+  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public randomize(): void {
+    // Only Change 3 values
+    this.barChartData.datasets[0].data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      Math.round(Math.random() * 100),
+      56,
+      Math.round(Math.random() * 100),
+      40 ];
+
+
+  }
 
   constructor(private suppliesService: SuppliesService, private fb: FormBuilder) {
     this.date = this.fb.group({
@@ -78,112 +134,6 @@ export class SuppliesComponent implements OnInit {
       })
     }
   }
-
-  // chart
-
-  // canvas: any;
-  // ctx: any;
-  // @ViewChild('mychart') mychart:any;
-  //
-  // ngAfterViewInit() {
-  //   this.canvas = this.mychart.nativeElement;
-  //   this.ctx = this.canvas.getContext('2d');
-  //   new Chart(this.ctx, {
-  //     type: 'line',
-  //     data: {
-  //       datasets: [{
-  //         label: 'imported materials',
-  //         data: [0, 20, 40, 50],
-  //         backgroundColor: "rgb(115 185 243 / 65%)",
-  //         borderColor: "#007ee7",
-  //         fill: true,
-  //       },
-  //         {
-  //           label: 'salable materials',
-  //           data: [0, 20, 70, 80],
-  //           backgroundColor: "rgb(115 185 243 / 65%)",
-  //           borderColor: "red",
-  //           fill: true,
-  //         },
-  //         {
-  //           label: 'inventory materials',
-  //           data: [0, 20, 70, 80],
-  //           backgroundColor: "rgb(115 185 243 / 65%)",
-  //           borderColor: "yellow",
-  //           fill: true,
-  //         },
-  //         {
-  //           label: 'damaged materials',
-  //           data: [0, 20, 70, 80],
-  //           backgroundColor: "rgb(115 185 243 / 65%)",
-  //           borderColor: "Violet",
-  //           fill: true,
-  //         },
-  //         {
-  //           label: 'Invested Amount',
-  //           data: [0, 20, 40, 60, 80],
-  //           backgroundColor: "#47a0e8",
-  //           borderColor: "#007ee7",
-  //           fill: true,
-  //         }],
-  //       labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials','damaged materials']
-  //     },
-  //   });
-  // }
-
-  canvas: any;
-  ctx: any;
-  @ViewChild('mychart') mychart:any;
-
-  ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement;
-    this.ctx = this.canvas.getContext('2d');
-
-    // @ts-ignore
-    new Chart(this.ctx, {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'imported materials',
-          data: [0, 20, 40, 50],
-          backgroundColor: "rgb(115 185 243 / 65%)",
-          borderColor: "#007ee7",
-          fill: true,
-        },
-          {
-            label: 'salable materials',
-            data: [0, 20, 70, 80],
-            backgroundColor: "rgb(115 185 243 / 65%)",
-            borderColor: "red",
-            fill: true,
-          },
-          {
-            label: 'inventory materials',
-            data: [0, 20, 70, 80],
-            backgroundColor: "rgb(115 185 243 / 65%)",
-            borderColor: "yellow",
-            fill: true,
-          },
-          {
-            label: 'damaged materials',
-            data: [0, 20, 70, 80],
-            backgroundColor: "rgb(115 185 243 / 65%)",
-            borderColor: "Violet",
-            fill: true,
-          },
-          {
-            label: 'Invested Amount',
-            data: [0, 20, 40, 60, 80],
-            backgroundColor: "#47a0e8",
-            borderColor: "#007ee7",
-            fill: true,
-          }],
-        labels: ['January 2022', 'imported materials', 'salable materials', 'inventory materials','damaged materials']
-      },
-    });
-  }
-
-
   submitDate(start: any, end: any) {
 
     this.suppliesService.check(start, end).subscribe(data => {

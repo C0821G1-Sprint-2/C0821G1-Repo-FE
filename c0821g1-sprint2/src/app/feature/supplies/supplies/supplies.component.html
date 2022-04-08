@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"/>
-  <!--  <link rel="stylesheet" href="css/uikit-rtl.min.css">-->
-  <!--  <link rel="stylesheet" href="css/uikit.min.css">-->
+
 </head>
 <body>
 <div class="row">
@@ -19,23 +18,25 @@
       <fieldset class="scheduler-border">
         <legend class="scheduler-border"> Thời Gian</legend>
         <form [formGroup]="date">
-        <div class="row">
-          <div class="col-6">
-            <label style="margin-top: 10px; margin-left: 150px">Từ Ngày: &ensp;&ensp;
-              <input (change)="submitDate(date.controls.
+          <div class="row">
+            <div class="col-6">
+              <label style="margin-top: 10px; margin-left: 150px">Từ Ngày: &ensp;&ensp;
+                <input (change)="submitDate(date.controls.
               startDay.value,date.controls.endDay.value)" formControlName="startDay" class="form-control" type="date">
-            </label>
-          </div>
-          <div class="col-6">
-            <label style="margin-top: 10px">Đến Ngày: &ensp;&ensp;
-              <input (change)="submitDate(date.controls.
+              </label>
+            </div>
+            <div class="col-6">
+              <label style="margin-top: 10px">Đến Ngày: &ensp;&ensp;
+                <input (change)="submitDate(date.controls.
               startDay.value,date.controls.endDay.value)" formControlName="endDay" class="form-control" type="date">
-            </label>
+              </label>
+            </div>
+            <p style="color:red;text-align: center;margin-top: 20px" *ngIf="checkDate == true">Ngày bắt đầu phải trước
+              ngày kết thúc!</p>
           </div>
-          <p  style="color:red;text-align: center;margin-top: 20px" *ngIf="checkDate == true">Ngày bắt đầu phải trước ngày kết thúc!</p>
-        </div>
 
-          <p *ngIf="flagLanhOk == true" style="color: red ; text-align: center;">Nhập đầy đủ ngày bắt đầu và kết thúc !</p>
+          <p *ngIf="flagLanhOk == true" style="color: red ; text-align: center;">Nhập đầy đủ ngày bắt đầu và kết thúc
+            !</p>
         </form>
       </fieldset>
 
@@ -44,7 +45,7 @@
       </ng-container>
 
       <ng-template #elseBlock>
-        <table id="table" #table  class="table" style="margin-top: 70px">
+        <table id="table" #table class="table" style="margin-top: 70px">
           <tr>
             <th style="text-align: center">Mã VT</th>
             <th style="text-align: center">Tên Vật Tư</th>
@@ -66,39 +67,39 @@
         </table>
       </ng-template>
 
-<div *ngIf="flagPagination == true" class="row">
-  <div style="display: flex;justify-content: center">
-    <div class="align-content-center">
-      <div class="me-5 pe-4 ">
-        <ul class="pagination pagination-sm justify-content-end  pagination-lg" style="margin:20px 0">
-          <div *ngIf="this.page >0 then previous"></div>
-          <ng-template #previous>
-            <li class="page-item">
-              <button
-                (click)="previousClick(1)" class="page-link" type="button">Trang trước
-              </button>
-            </li>
-          </ng-template>
-          <li class="page-item">
-            <input class="page-link" type="number" value="1" min="1" [max]="totalPages"
-                   placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
-                   aria-describedby="basic-addon1"
-                   (change)="findPaginnation($event.target.value)">
-          </li>
-          <li class="page-item ">
-            <span class="input-group-text page-link">{{page + 1}}/{{totalPages}}</span>
-          </li>
-          <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
-          <ng-template #nexts>
-            <li class="page-item">
-              <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
-            </li>
-          </ng-template>
-        </ul>
+      <div *ngIf="flagPagination == true" class="row">
+        <div style="display: flex;justify-content: center">
+          <div class="align-content-center">
+            <div class="me-5 pe-4 ">
+              <ul class="pagination pagination-sm justify-content-end  pagination-lg" style="margin:20px 0">
+                <div *ngIf="this.page >0 then previous"></div>
+                <ng-template #previous>
+                  <li class="page-item">
+                    <button
+                      (click)="previousClick(1)" class="page-link" type="button">Trang trước
+                    </button>
+                  </li>
+                </ng-template>
+                <li class="page-item">
+                  <input class="page-link" type="number" value="1" min="1" [max]="totalPages"
+                         placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
+                         aria-describedby="basic-addon1"
+                         (change)="findPaginnation($event.target.value)">
+                </li>
+                <li class="page-item ">
+                  <span class="input-group-text page-link">{{page + 1}}/{{totalPages}}</span>
+                </li>
+                <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+                <ng-template #nexts>
+                  <li class="page-item">
+                    <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
+                  </li>
+                </ng-template>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
       <div class="row container">
         <div class="col-12" style="display: flex;justify-content: end">
@@ -112,7 +113,8 @@
             In
           </button>
 
-          <button routerLink="/body" style="margin-left: 30px;background-color: #cccccc; border-radius: 10px" type="button"
+          <button routerLink="/body" style="margin-left: 30px;background-color: #cccccc; border-radius: 10px"
+                  type="button"
                   class="btn btn-outline-secondary"><i
             class="fa-solid fa-rotate-left"></i> Trở Về
           </button>
@@ -121,12 +123,25 @@
     </div>
   </div>
 </div>
-<div style="width:100%;">
-  <canvas id="myChart" width="700" height="250" #mychart></canvas>
-</div>
-<div class="row">
 
-</div>
+<!--<div class="row">-->
+<!--  <div>-->
+<!--    <div>-->
+<!--      <div style="display: block">-->
+<!--        <canvas baseChart-->
+<!--                [data]="barChartData"-->
+<!--                [options]="barChartOptions"-->
+<!--                [plugins]="barChartPlugins"-->
+<!--                [type]="barChartType"-->
+<!--                (chartHover)="chartHovered($event)"-->
+<!--                (chartClick)="chartClicked($event)">-->
+<!--        </canvas>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
