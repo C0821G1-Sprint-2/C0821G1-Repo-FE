@@ -10,7 +10,7 @@ import {AuthGuard} from '../../helpers/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'detail', component: EquipmentDetailComponent,
+    path: 'detail/:id', component: EquipmentDetailComponent,
     canActivate: [AuthGuard],
     data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   },

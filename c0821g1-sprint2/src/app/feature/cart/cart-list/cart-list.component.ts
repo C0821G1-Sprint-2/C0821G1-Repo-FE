@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cart} from '../../../model/cart';
-import {Router} from '@angular/router';
 import {EquipmentService} from '../../../service/equipment.service';
 import {CartService} from '../../../service/cart.service';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart-list',
@@ -13,23 +13,24 @@ import Swal from 'sweetalert2';
 export class CartListComponent implements OnInit {
   idDeleteCart = 0;
   nameDeleteCart = '';
+
   constructor(private equipmentService: EquipmentService, private router: Router, private cartService: CartService) {
     this.getCartList();
   }
 
   cartList: Cart[] = [];
-  totalMoneyAll = 0 ;
+  totalMoneyAll = 0;
   suppliesIdList: string[] = [];
 
   getCartList() {
     this.suppliesIdList = Object.keys(localStorage);
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.suppliesIdList.length; i++) {
-      this.equipmentService.findById(Number(1)).subscribe(
+    for (let i = 1; i < this.suppliesIdList.length; i++) {
+      this.equipmentService.findById(Number(this.suppliesIdList[i])).subscribe(
         value => {
           const cart = new Cart();
           cart.id = value.id;
-          cart.code = value.code;
+          cart.code = value.name;
           cart.totalMoney = Number(value.price);
           cart.image = value.image;
           cart.quantity = Number(localStorage.getItem(String(cart.id)));
@@ -41,6 +42,7 @@ export class CartListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   getTotalMoney(id: number, quantity: number) {
     // @ts-ignore
     localStorage.setItem(String(id), String(quantity));
@@ -50,9 +52,11 @@ export class CartListComponent implements OnInit {
       this.totalMoneyAll += this.cartList[i].quantity * this.cartList[i].totalMoney;
     }
   }
+
   moveToPaymentPage() {
     this.cartService.saveCartListTemp(this.cartList);
   }
+
 
   addIdToDelete(id: number, code: string) {
     this.idDeleteCart = id;
@@ -61,18 +65,20 @@ export class CartListComponent implements OnInit {
 
   deleteCart(id: number) {
     localStorage.removeItem(String(id));
-    this.router.navigateByUrl('').then(e => {
+    this.router.navigateByUrl('/equipment/detail').then(e => {
       if (e) {
         this.router.navigateByUrl('/cart/list');
-        this.callToastDelete();
       }
     });
+    this.callToastDelete();
+    window.location.reload();
   }
+
   private callToastDelete() {
     Swal.fire({
       position: 'top',
       icon: 'success',
-      title: 'Xóa đơn hàng thành công !',
+      title: 'Xóa sản phẩm thành công!',
       showConfirmButton: false,
       timer: 2000
     });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Equipment} from '../../../model/equipment';
 import {EquipmentService} from '../../../service/equipment.service';
+import Swal from "sweetalert2";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-equipment-detail',
@@ -9,16 +11,36 @@ import {EquipmentService} from '../../../service/equipment.service';
 })
 export class EquipmentDetailComponent implements OnInit {
   equipment: Equipment;
-  id: number;
+  idSupplies: number;
 
-  constructor(private equipmentService: EquipmentService) {
-  }
-  ngOnInit(): void {
-    this.id = 1;
-    this.equipmentService.findById(this.id).subscribe(value => {
+  constructor(private equipmentService: EquipmentService, private activatedRoute: ActivatedRoute) {
+    const id = this.activatedRoute.snapshot.params.id;
+    this.equipmentService.findById(id).subscribe(value => {
       this.equipment = value;
     }, error => {
     }, () => {
     });
   }
+
+  ngOnInit(): void {
+  }
+
+
+  addToCart(id: number) {
+    this.idSupplies = id;
+    localStorage.setItem(String(this.idSupplies), String(1));
+    this.callToastAdd();
+  }
+
+  private callToastAdd() {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Thêm sản phẩm thành công!',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
+
+
 }

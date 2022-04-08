@@ -30,13 +30,12 @@
           <li>
             <p>{{equipment.descriptions.content3}}</p>
           </li>
-          <li>
-            <p>{{equipment.descriptions.content4}}</p>
-          </li>
-          <li>
-            <p>{{equipment.descriptions.content5}}</p>
-          </li>
         </ul>
+      </div>
+      <div class="mid-content" style="margin-bottom: 20px">
+        <a (click)="addToCart(equipment.id)" class="btn btn-primary btn-block text-light"
+           style="text-decoration: none; font-size: 20px;display: inline">
+          Thêm vào giỏ hàng </a>
       </div>
       <div class="social-icons share-icons share-row relative">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
