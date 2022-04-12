@@ -18,7 +18,7 @@ import {EquipmentModule} from './feature/equipment/equipment.module';
 import {EmployeeModule} from './feature/employee/employee.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {ChartModule} from "@syncfusion/ej2-angular-charts";
+import {ChartModule, ColumnSeriesService} from "@syncfusion/ej2-angular-charts";
 
 
 
