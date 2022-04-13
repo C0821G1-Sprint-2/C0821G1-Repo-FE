@@ -39,7 +39,7 @@ const routes: Routes = [
     path: 'supplies',
     loadChildren: () => import('./feature/supplies/supplies.module').then(module => module.SuppliesModule)
   }, {
-    path: '',
+    path: 'list-body',
     component: EquipmentListBodyComponent
   },
   {

@@ -2,7 +2,7 @@
 
 <div class="container-fluid" style="padding: 25px">
   <form [formGroup]="bodyForm">
-    <div class="row">
+    <div class="row" style="margin-left: 400px">
       <div class="col-3" style="text-align: left">
         <input class="form-control" type="text" name="name"
                placeholder="Tìm Kiếm" formControlName="keyword">
@@ -16,10 +16,10 @@
 
 <div class="accomodation_area section_gap" style="background-color: #e5eaff; padding: 25px">
   <div class="container">
-    <div class="row mb_30" >
-      <div class="col-lg-4 col-sm-6" *ngFor="let equipment of equipmentList">
+    <div class="row mb_30">
+      <div class="col-4 col-lg-4 col-sm-6" *ngFor="let equipment of equipmentList">
         <div class="accomodation_item text-center">
-            <img src="{{equipment.image}}" width="300px" height="250px" alt="">
+          <img src="{{equipment.image}}" width="300px" height="250px" alt="">
           <a href="#" style="text-decoration: none"><h4 class="sec_h4">{{equipment.name}}</h4></a>
           <h5>{{equipment.price}} VND<small>/Sản Phẩm</small></h5>
         </div>

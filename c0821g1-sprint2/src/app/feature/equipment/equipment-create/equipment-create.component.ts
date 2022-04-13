@@ -70,13 +70,10 @@ export class EquipmentCreateComponent implements OnInit {
 
   saveNewEquipment() {
 
-    // setTimeout(() => {
-    //   this.callToast(),
-    //     this.router.navigateByUrl('/equipment/list');
-    // }, 10);
-    //
-    // this.callToast(),
-    //   this.router.navigateByUrl('/equipment/list');
+    setTimeout(() => {
+      this.callToast(),
+        this.router.navigateByUrl('/equipment/list');
+    }, 20);
 
     const name = this.selectImage.name;
     const fileRef = this.storage.ref(name);
@@ -88,34 +85,14 @@ export class EquipmentCreateComponent implements OnInit {
           const newEquipment = Object.assign({}, this.equipmentForm.value);
           console.log('==========>' + newEquipment);
           this.equipmentService.saveNewEquipment(newEquipment).subscribe(value => {
-            this.callToast();
-            // for (const equip of this.equipmentList) {
-            //   // @ts-ignore
-            //   const dateEnd = new Date(equip.expired);
-            //   // @ts-ignore
-            //   const today = new Date();
-            //   // @ts-ignore
-            //   const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate());
-            //   // @ts-ignore
-            //   const check = endDate1 - today;
-            //   // @ts-ignore
-            //   equip.status = Math.round(check);
-            //   if (check > 0){
-            //     this.checkDay = true;
-            //   }else{
-            //     this.checkDay = false;
-            //   }
-            // }
           }, error => {
             // console.log(error);
             this.validateCode = false;
-          }, () => {
-            this.callToast(),
-            this.router.navigateByUrl('/equipment/list');
           });
         });
       })
     ).subscribe();
+
   }
 
   private callToast() {
@@ -128,7 +105,7 @@ export class EquipmentCreateComponent implements OnInit {
     });
   }
 
-  check(expired){
+  check(expired) {
     this.equipmentService.checkDate(expired).subscribe(value => {
 
       console.log('Dong' + value);
@@ -136,6 +113,7 @@ export class EquipmentCreateComponent implements OnInit {
       this.checkDay = !!value;
     })
   }
+
   showPreview(event: any) {
     this.selectImage = event.target.files[0];
     if (event.target.files) {
