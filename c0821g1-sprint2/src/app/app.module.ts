@@ -22,6 +22,7 @@ import {ChartModule} from "@syncfusion/ej2-angular-charts";
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,6 @@ import {ChartModule} from "@syncfusion/ej2-angular-charts";
     EmployeeModule,
     ChartModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-
   ],
   // providers: [authInterceptorProviders, CookieService],
   providers: [
