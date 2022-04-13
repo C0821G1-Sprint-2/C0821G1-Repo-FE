@@ -1,12 +1,12 @@
-<section class="vh-100">
-  <div class="container h-100">
+<section style="margin-bottom: 20px;margin-top: 20px">
+  <div class="container ">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-8">
         <div class="card text-black">
 
           <div class="form-personal card-body p-md-5">
 
-            <p class="title-page text-center mb-5 mx-1 mx-md-4 mt-4">Tạo mới vật tư y tế</p>
+            <p class="title-page text-center mb-5 mx-1 mx-md-4 mt-4">Thêm mới vật tư y tế</p>
 
             <div class="row justify-content-center">
               <div class="col-lg-6 order-2 order-lg-1">
@@ -14,50 +14,77 @@
                 <form class="mx-1 mx-md-4" [formGroup]="equipmentForm" (ngSubmit)="saveNewEquipment()">
                   <div class="d-flex flex-row align-items-center mb-1">
                     <div class="form-outline flex-fill mb-0">
-                      <label class="form-label fw-bold" for="codeEquipment">Mã vật tư <span class="error">(*)</span></label>
-                      <input type="text" id="codeEquipment" class="form-control form-control-lg"
+                      <label class="form-label fw-bold" for="codeEquipment">Mã vật tư <span
+                        class="error">(*)</span></label>
+                      <input type="text" id="codeEquipment" class="form-control "
                              formControlName="code"/>
-                      <small style="color: red">Mã vật tư không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.code.hasError('required') && equipmentForm.controls.code.touched">
+                        Mã vật tư khômg được để trống.
+                      </small>
+                      <small style="color: red" *ngIf="equipmentForm.controls.code.hasError('pattern')">
+                        Mã vật tư không đúng định dạng(VT-001).
+                      </small>
+                      <small style="color: red" *ngIf="validateCode == false">
+                        Mã vật tư đã tồn tại.
+                      </small>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-1 mt-lg-3">
                     <div class="form-outline flex-fill mb-0">
-                      <label for="nameEquipment" class="form-label fw-bold">Tên vật tư <span class="error">(*)</span></label>
-                      <input type="text" id="nameEquipment" class="form-control form-control-lg"
+                      <label for="nameEquipment" class="form-label fw-bold">Tên vật tư <span
+                        class="error">(*)</span></label>
+                      <input type="text" id="nameEquipment" class="form-control"
                              formControlName="name"/>
-                      <small style="color: red">Tên vật tư không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.name.hasError('required') && equipmentForm.controls.name.touched">
+                        Tên vật tư không được để trống.</small>
+                      <small style="color: red" *ngIf="equipmentForm.controls.name.hasError('maxLength')">
+                        Tên vật tư quá dài
+                      </small>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-1 mt-lg-3">
                     <div class="form-outline flex-fill mb-0">
-                      <label class="form-label fw-bold select-label" >Loại vật tư <span
+                      <label class="form-label fw-bold select-label">Loại vật tư <span
                         class="error">(*)</span></label><br>
-                      <select class="select form-control-lg" style="width: 100%" formControlName="equipmentType">
-                        <option value="null"></option>
+                      <select class="form-select" style="width: 100%" formControlName="equipmentType">
+                        <option disabled value="" selected>Chọn loại vật tư</option>
                         <option *ngFor="let type of equipmentTypeList" [ngValue]="type">{{type.name}}</option>
                       </select>
-                      <small style="color: red">
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.equipmentType.hasError('required') && equipmentForm.controls.equipmentType.touched">
                         Loại vật tư không được để trống.</small>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-lg-3 mt-lg-3">
                     <div class="form-outline flex-fill mb-0">
-                      <label for="priceEquipment" class="form-label fw-bold">Đơn giá (VND) <span class="error">(*)</span></label>
-                      <input type="text" id="priceEquipment" class="form-control form-control-lg" formControlName="price"/>
-                      <small style="color: red">
+                      <label for="priceEquipment" class="form-label fw-bold">Đơn giá (VND) <span
+                        class="error">(*)</span></label>
+                      <input type="text" id="priceEquipment" class="form-control "
+                             formControlName="price" [(ngModel)]="prices"/>
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.price.hasError('required') && equipmentForm.controls.price.touched">
                         Đơn giá không được để trống.</small>
+                      <small style="color: red" *ngIf="equipmentForm.controls.price.hasError('pattern')">
+                        Nhập từ 1000 trở lên</small>
+                      <pre *ngIf="prices != null" class="d-flex justify-content-start" style="font-size: 15px">{{prices|number}}</pre>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-lg-3 mt-lg-3">
                     <div class="form-outline flex-fill mb-0">
-                      <label for="expiredEquipment" class="form-label fw-bold">Hạn sử dụng <span class="error">(*)</span></label>
-                      <input type="date" id="expiredEquipment" class="form-control form-control-lg" formControlName="expired"/>
-                      <small style="color: red">
+                      <label for="expiredEquipment" class="form-label fw-bold">Hạn sử dụng <span
+                        class="error">(*)</span></label>
+                      <input type="date" id="expiredEquipment" class="form-control " style=""
+                             formControlName="expired" (change)="check(equipmentForm.controls.expired.value)"/>
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.expired.hasError('required') && equipmentForm.controls.expired.touched">
                         Hạn sử dụng không được để trống.</small>
+                      <small style="color: red" *ngIf=" checkDay == false">Hạn sử dụng phải lớn hơn ngày hiện tại.</small>
                     </div>
                   </div>
 
@@ -65,13 +92,25 @@
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label fw-bold select-label">Nhà cung cấp <span
                         class="error">(*)</span></label><br>
-                      <select class="select form-control-lg" style="width: 100%" formControlName="supplier">
-                        <option value= null></option>
+                      <select class="form-select form-control-sm" style="width: 100%" formControlName="supplier">
+                        <option disabled value="" selected>Chọn nhà cung cấp</option>
                         <option *ngFor="let sup of supplierList" [ngValue]="sup">{{sup.name}}</option>
 
                       </select>
-                      <small style="color: red" >Nhà cung cấp không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="equipmentForm.controls.supplier.hasError('required') && equipmentForm.controls.supplier.touched">
+                        Nhà cung cấp không được để trống.</small>
                     </div>
+                  </div>
+
+                  <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
+                    <button type="submit" class="btn btn-primary text-white" (click)="saveNewEquipment()"
+                            [disabled]="equipmentForm.invalid || checkDay == false">
+                      Thêm mới
+                    </button>
+                    <button type="reset" class="btn btn-secondary ms-lg-3" >
+                      Đặt lại
+                    </button>
                   </div>
                 </form>
 
@@ -83,21 +122,11 @@
                     <label class="form-label fw-bold">Hình ảnh<span class="error">(*)</span></label>
                     <input type="file" (change)="showPreview($event)" accept="*.png.jpg*" id="image"
                            class="form-control form-control-lg" autocomplete="off" style="width: 250px"/>
-                    <img [src] = "url"  style="width: 250px; height: 230px">
+                    <img [src]="url" style="width: 250px; height: 230px">
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
-              <button type="submit"
-                      class="btn btn-success text-white btn-outline-success" (click)="saveNewEquipment()">Tạo mới
-              </button>
-              <button type="reset" class="btn btn-light btn-outline-success ms-lg-3">
-                Đặt lại
-              </button>
-            </div>
-
           </div>
 
         </div>

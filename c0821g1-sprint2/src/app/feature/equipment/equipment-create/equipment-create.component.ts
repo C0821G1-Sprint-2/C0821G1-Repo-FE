@@ -1,5 +1,5 @@
 import {Component, Inject, inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EquipmentType} from '../../../model/equipment-type';
 import {Supplier} from '../../../model/supplier';
 import {Equipment} from '../../../model/equipment';
@@ -9,8 +9,10 @@ import {EquipmentTypeService} from '../../../service/equipment-type.service';
 import {SupplierService} from '../../../service/supplier.service';
 import Swal from 'sweetalert2';
 import {finalize} from 'rxjs/operators';
+// @ts-ignore
 import {AngularFireStorage} from '@angular/fire/storage';
 import {UploadFireService} from '../../../service/upload-file-image/upload-fire.service';
+import validate = WebAssembly.validate;
 
 
 @Component({
@@ -28,6 +30,10 @@ export class EquipmentCreateComponent implements OnInit {
   file: string;
   equipmentForm: FormGroup;
   selectImage: any;
+  validateCode: boolean;
+  validateDay: boolean;
+  prices: any;
+  checkDay: boolean;
 
   constructor(private equipmentService: EquipmentService,
               private router: Router,
@@ -36,13 +42,13 @@ export class EquipmentCreateComponent implements OnInit {
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
               @Inject(UploadFireService) private uploadFileService: UploadFireService) {
     this.equipmentForm = new FormGroup({
-      code: new FormControl(),
-      name: new FormControl(),
-      price: new FormControl(),
-      expired: new FormControl(),
+      code: new FormControl('', [Validators.required, Validators.pattern('^[V][T][-]\\d{3}$')]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+      price: new FormControl('', [Validators.required, Validators.pattern('^\\d{4,9}$')]),
+      expired: new FormControl('', Validators.required),
       image: new FormControl(),
-      equipmentType: new FormControl(),
-      supplier: new FormControl(),
+      equipmentType: new FormControl('', [Validators.required]),
+      supplier: new FormControl('', [Validators.required]),
     });
     this.supplierService.findAllSupplier().subscribe(value => {
       this.supplierList = value;
@@ -63,14 +69,14 @@ export class EquipmentCreateComponent implements OnInit {
   }
 
   saveNewEquipment() {
-    //
+
     // setTimeout(() => {
     //   this.callToast(),
     //     this.router.navigateByUrl('/equipment/list');
     // }, 10);
-
-    this.callToast(),
-      this.router.navigateByUrl('/equipment/list');
+    //
+    // this.callToast(),
+    //   this.router.navigateByUrl('/equipment/list');
 
     const name = this.selectImage.name;
     const fileRef = this.storage.ref(name);
@@ -79,14 +85,33 @@ export class EquipmentCreateComponent implements OnInit {
         fileRef.getDownloadURL().subscribe((url) => {
           console.log(url);
           this.equipmentForm.patchValue({image: url});
-          // const newEquipment = Object.assign({}, this.equipmentForm.value);
-          const newEquipment = this.equipmentForm.value;
+          const newEquipment = Object.assign({}, this.equipmentForm.value);
           console.log('==========>' + newEquipment);
-
-
           this.equipmentService.saveNewEquipment(newEquipment).subscribe(value => {
+            this.callToast();
+            // for (const equip of this.equipmentList) {
+            //   // @ts-ignore
+            //   const dateEnd = new Date(equip.expired);
+            //   // @ts-ignore
+            //   const today = new Date();
+            //   // @ts-ignore
+            //   const endDate1 = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate());
+            //   // @ts-ignore
+            //   const check = endDate1 - today;
+            //   // @ts-ignore
+            //   equip.status = Math.round(check);
+            //   if (check > 0){
+            //     this.checkDay = true;
+            //   }else{
+            //     this.checkDay = false;
+            //   }
+            // }
           }, error => {
-            console.log('errorrrrrr');
+            // console.log(error);
+            this.validateCode = false;
+          }, () => {
+            this.callToast(),
+            this.router.navigateByUrl('/equipment/list');
           });
         });
       })
@@ -103,6 +128,14 @@ export class EquipmentCreateComponent implements OnInit {
     });
   }
 
+  check(expired){
+    this.equipmentService.checkDate(expired).subscribe(value => {
+
+      console.log('Dong' + value);
+
+      this.checkDay = !!value;
+    })
+  }
   showPreview(event: any) {
     this.selectImage = event.target.files[0];
     if (event.target.files) {

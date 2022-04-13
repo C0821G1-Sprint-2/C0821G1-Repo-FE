@@ -1,1 +1,176 @@
-<p>employee-edit works!</p>
+<div class="container-fluid">
+  <div class="content-container ">
+    <section class="">
+      <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-lg-8">
+            <div class=" form-personal card text-black">
+
+              <div class=" card-body p-md-5">
+
+                <p class="title-page text-center mb-5 mx-1 mx-md-4 mt-4">Chỉnh sửa nhân viên</p>
+                <form class="mx-1 mx-md-4 " [formGroup]="employeeEditForm" (ngSubmit)="updateEmployee(idEdit)"
+                      *ngIf="employeeEditForm">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-6 order-2 order-lg-1">
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label fw-bold" for="accountName">Mã nhân viên<span
+                            class="error">(*)</span></label>
+                          <input type="text" id="accountName" class="form-control"
+                                 formControlName="code" disabled/>
+                        </div>
+                      </div>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.code.hasError('required') && employeeEditForm.controls.code.touched">
+                        Mã nhân viên không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.code.hasError('pattern')">
+                        Mã nhân viên phải có định dạng NV-XXXX.</small>
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label fw-bold" for="fullName">Họ và tên<span
+                            class="error">(*)</span></label>
+                          <input type="text" id="fullName" class="form-control"
+                                 formControlName="name"/>
+                        </div>
+                      </div>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.name.hasError('required') && employeeEditForm.controls.name.touched">
+                        Họ và tên không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.name.hasError('maxlength')">
+                        Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.name.hasError('pattern') && employeeEditForm.controls.name.dirty">
+                        Họ và tên phải là ký tự.
+                      </small>
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label fw-bold" for="address">Ngày sinh<span
+                            class="error">(*)</span></label>
+                          <input type="date" id="address" class="form-control"
+                                 formControlName="dateOfBirth"/>
+                        </div>
+                      </div>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.dateOfBirth.hasError('required') && employeeEditForm.controls.dateOfBirth.touched">
+                        Ngày sinh không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.dateOfBirth.hasError('under18') ">
+                        Tuổi phải lớn hơn 18.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.dateOfBirth.hasError('under100') && employeeEditForm.controls.dateOfBirth.dirty">
+                        Tuổi phải nhỏ hơn 100.</small>
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                          <label class="form-label fw-bold mb-0 me-4">Giới tính</label>
+                          <div class="form-check form-check-inline mb-0 me-4">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="femaleGender"
+                              value="Nam"
+                              formControlName="gender"
+                            />
+                            <label class="form-check-label" for="femaleGender">Nam</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-0 me-4">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="maleGender"
+                              value="Nữ"
+                              formControlName="gender"
+                            />
+                            <label class="form-check-label" for="maleGender">Nữ</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label fw-bold" for="phoneNumber">Số điện
+                            thoại<span class="error">(*)</span></label>
+                          <input type="text" id="phoneNumber" class="form-control"
+                                 formControlName="phone"/>
+                        </div>
+                      </div>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.phone.hasError('required') && employeeEditForm.controls.phone.touched">
+                        Số điện thoại không được để trống.</small>
+                      <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('pattern') ">
+                        Số điện thoại phải theo định dạng 090xxxxxxx hoặc 091xxxxxxx.</small>
+                      <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('minlength')">
+                        Số điện thoại phải từ 10 đến 12 số.</small>
+                      <small style="color: red" *ngIf="employeeEditForm.controls.phone.hasError('maxlength')">
+                        Số điện thoại phải từ 10 đến 12 số.
+                        .</small>
+                      <div class="d-flex flex-row align-items-center mb-1">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label fw-bold" for="birthDay">Địa chỉ<span class="error">(*)</span></label>
+                          <input type="text" id="birthDay" class="form-control"
+                                 formControlName="address">
+                        </div>
+                      </div>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.address.hasError('required') && employeeEditForm.controls.address.touched">
+                        Địa chỉ không được để trống.</small>
+                      <small style="color: red"
+                             *ngIf="employeeEditForm.controls.address.hasError('maxlength')">
+                        Bạn đã nhập quá số kí tự cho phép(40 kí tự).</small>
+                      <div class="form-outline flex-fill mb-0" formGroupName="employeePosition">
+                        <label class="form-label fw-bold" for="position">Chức vụ<span class="error ">(*)</span></label>
+                        <div class="form-personal">
+                          <!--                        <input type="number" formControlName="id">-->
+                          <select class="form-select " id="position" formControlName="id">
+                            <option disabled value="" selected>Chọn chức vụ</option>
+                            <option *ngFor="let positionObj of employeePositionList"
+                                    [ngValue]="positionObj.id">{{positionObj.name}}</option>
+                          </select>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+                    <div class="col-lg-6 d-flex align-items-stretch justify-content-center order-1 order-lg-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <label class="form-label fw-bold" for="image">Hình ảnh<span class="error ">(*)</span></label>
+                          <input type="file" id="image" class="form-control form-control-lg"
+                                 (change)="showPreview($event)"
+                                 style="width: 200px; font-size: 14px"/>
+                          <img style="width: 200px; height: 200px; margin-bottom: 20px"
+                               [src]="employeeEditForm.controls.image.value" alt="">
+                          <!--                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
+                          <!--                                             class="img-fluid" alt="Sample image" />-->
+                        </div>
+                      </div>
+                    </div>
+                    <small class="error" *ngIf="employeeEditForm.get('image')
+                        .hasError('required')&& employeeEditForm.get('image').touched">Hình ảnh phải được
+                      chọn</small>
+                  </div>
+
+                  <div class="d-flex flex-row justify-content-center mx-4 mt-lg-4 mb-lg-1">
+                    <button type="submit" class="btn btn-primary text-white" [disabled]="!employeeEditForm.valid" >
+                      Chỉnh sửa
+                    </button>
+                    <button type="button" class="btn btn-secondary ms-lg-3" routerLink="/employee/list">
+                      Hủy bỏ
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

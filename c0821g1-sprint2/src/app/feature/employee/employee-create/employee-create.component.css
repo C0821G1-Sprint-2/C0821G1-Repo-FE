@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto+Condensed:wght@300&display=swap');
+
+.title-page {
+  font-family: 'Roboto Condensed', sans-serif;
+  /*font-family: IMPACT;*/
+  font-size: 50px;
+  font-weight: bolder;
+  color: royalblue;
+  padding-top: 0;
+}
+
+.form-personal {
+  background-image: url('src/assets/gãy.PNG');
+  background-size: cover;
+}
+
+body {
+  background-color: #94bed8;
+  width: 100%;
+}
+
+span {
+  color: red;
+}
+
+.error {
+  color: #ff3e21;
+}
+.header{
+  background-color: #94bed8;
+  width: auto;
+}
