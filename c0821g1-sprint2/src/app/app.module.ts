@@ -1,4 +1,3 @@
-
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import { NgModule } from '@angular/core';
@@ -18,7 +17,7 @@ import {EquipmentModule} from './feature/equipment/equipment.module';
 import {EmployeeModule} from './feature/employee/employee.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {ChartModule} from "@syncfusion/ej2-angular-charts";
+import {ChartModule, ColumnSeriesService} from "@syncfusion/ej2-angular-charts";
 
 
 
@@ -44,7 +43,6 @@ import {ChartModule} from "@syncfusion/ej2-angular-charts";
     ChartModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  // providers: [authInterceptorProviders, CookieService],
   providers: [
     authInterceptorProviders,
     JwtHelperService,
