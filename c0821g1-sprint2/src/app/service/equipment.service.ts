@@ -40,7 +40,7 @@ export class EquipmentService {
   }
 
   findAllEquipment(page, equipment): Observable<any> {
-    return this.httpClient.get(this.API_URL + '/equipment-list/?page=' + page + '&keyword=' + equipment);
+    return this.httpClient.get(this.API_URL + '/equipment-list-body/?page=' + page + '&keyword=' + equipment);
   }
 
   deleteEquipment(equipmentId): Observable<any> {
